@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Loader } from 'semantic-ui-react';
+import { Loader, Header } from 'semantic-ui-react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import BattleDetail from './BattleDetail';
 import SearchBar from './SearchBar';
@@ -59,6 +59,7 @@ const App = () => {
 					battleID: battleID,
 				}}
 			>
+				<Header inverted='true'>Killboard</Header>
 				<SearchBar SubmitFunction={onFormSubmit} />
 				<Switch>
 					<Route path={`/${battleID}`} exact component={BattleDetail} />
