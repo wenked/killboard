@@ -1,7 +1,7 @@
 import React from 'react';
 import './KillboardList.css';
 import { Table } from 'semantic-ui-react';
-import Battle from './Battle';
+import BattleInfoList from './BattleInfoList';
 
 const KillboardList = (props) => {
 	return (
@@ -22,7 +22,7 @@ const KillboardList = (props) => {
 				</Table.Header>
 				<Table.Body>
 					{props.Battles.map((battle) => {
-						return <Battle BattleInfo={battle} />;
+						return <BattleInfoList BattleInfo={battle} />;
 					})}
 				</Table.Body>
 			</Table>
