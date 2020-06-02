@@ -7,16 +7,17 @@ const WinnerPlayers = (props) => {
 	const WinnersPlayers = battleContext.selectBattle.winners.players;
 	return (
 		<Table color='grey' inverted='true' compact='very' size='small'>
-			<Table.Row>
-				<Table.Header>
+			<Table.Header>
+				<Table.Row>
 					<Table.HeaderCell>Alliance</Table.HeaderCell>
 					<Table.HeaderCell>Guild</Table.HeaderCell>
 					<Table.HeaderCell>Player</Table.HeaderCell>
 					<Table.HeaderCell>Kills</Table.HeaderCell>
 					<Table.HeaderCell>Deaths</Table.HeaderCell>
 					<Table.HeaderCell>Kill Fame</Table.HeaderCell>
-				</Table.Header>
-			</Table.Row>
+				</Table.Row>
+			</Table.Header>
+
 			<Table.Body>
 				{WinnersPlayers.map((player) => (
 					<React.Fragment>

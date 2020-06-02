@@ -1,6 +1,5 @@
 import React from 'react';
-import { Table, Header, Container, Tab } from 'semantic-ui-react';
-
+import { Table, Header, Container } from 'semantic-ui-react';
 import BattleContext from '../context/BattleContext';
 import WinnerPlayer from './WinnerPlayers';
 import LoserPlayers from './LoserPlayers';

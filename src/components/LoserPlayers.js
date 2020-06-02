@@ -8,16 +8,17 @@ const LoserPlayers = (props) => {
 
 	return (
 		<Table color='black' inverted='true' compact='very' size='small'>
-			<Table.Row>
-				<Table.Header>
+			<Table.Header>
+				<Table.Row>
 					<Table.HeaderCell>Alliance</Table.HeaderCell>
 					<Table.HeaderCell>Guild</Table.HeaderCell>
 					<Table.HeaderCell>Player</Table.HeaderCell>
 					<Table.HeaderCell>Kills</Table.HeaderCell>
 					<Table.HeaderCell>Deaths</Table.HeaderCell>
 					<Table.HeaderCell>Kill Fame</Table.HeaderCell>
-				</Table.Header>
-			</Table.Row>
+				</Table.Row>
+			</Table.Header>
+
 			<Table.Body>
 				{LosersPlayers.map((player) => (
 					<React.Fragment>
