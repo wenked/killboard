@@ -1,0 +1,11 @@
+table,
+th,
+td {
+	border: 1px solid black;
+	border-collapse: collapse;
+	table-layout: auto;
+}
+
+a {
+	color: white;
+}
