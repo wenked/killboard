@@ -65,7 +65,7 @@ const App = () => {
 					<Route path={`/${battleID}`} exact component={BattleDetail} />
 				</Switch>
 				{isLoading ? (
-					<Loader size='big' active='true'>
+					<Loader size='big' active='true' inverted='true'>
 						Loading...
 					</Loader>
 				) : showBattleList ? (

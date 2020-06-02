@@ -29,7 +29,9 @@ const BattleDetail = (props) => {
 			<br />
 			<br />
 			<Container>
-				<Header textAlign='left'> Winners </Header>
+				<Header textAlign='left' inverted='true'>
+					Winners
+				</Header>
 				<Table color='grey' inverted='true'>
 					<Table.Header>
 						<Table.Row>
