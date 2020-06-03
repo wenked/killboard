@@ -66,11 +66,9 @@ const App = () => {
 						<Header inverted='true'>Killboard</Header>
 					</Link>
 				</div>
-				<div>
-					<SearchBar SubmitFunction={onFormSubmit} />
-				</div>
+				<SearchBar SubmitFunction={onFormSubmit} />
 				<Switch>
-					<Route path='/' exact component={App} />
+					<Route path='/' exact component={KillboardList} />
 					<Route path={`/${battleID}`} exact component={BattleDetail} />
 				</Switch>
 				{isLoading ? (
