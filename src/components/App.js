@@ -1,7 +1,13 @@
 import React from 'react';
 import axios from 'axios';
 import { Loader, Header } from 'semantic-ui-react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+	Link,
+	withRouter,
+} from 'react-router-dom';
 import BattleDetail from './BattleDetail';
 import SearchBar from './SearchBar';
 import KillboardList from './KillboardList';

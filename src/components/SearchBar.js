@@ -1,6 +1,8 @@
 import React from 'react';
 import { Icon } from 'semantic-ui-react';
+import { withRouter } from 'react-router-dom';
 import './KillboardList.css';
+
 //import {Search} from 'semantic-ui-react';
 
 const SearchBar = (props) => {
@@ -13,6 +15,7 @@ const SearchBar = (props) => {
 	const onFormSubmit = (e) => {
 		e.preventDefault();
 		props.SubmitFunction(SearchTerm);
+		props.history.push('/killboard');
 	};
 
 	console.log(SearchTerm);
@@ -33,4 +36,4 @@ const SearchBar = (props) => {
 	);
 };
 
-export default SearchBar;
+export default withRouter(SearchBar);
