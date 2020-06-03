@@ -11,3 +11,37 @@ td {
 a {
 	color: white;
 }
+
+.killboardheader {
+	padding: 5px;
+	margin: 5px;
+}
+
+.wrapper {
+	position: relative;
+	display: flex;
+	min-width: 100px;
+}
+
+.search-icon {
+	position: absolute;
+	top: 6px;
+	left: 8px;
+	width: 14px;
+}
+
+.searchbar {
+	border: 1px solid black;
+	border-radius: 9px;
+	height: 20px;
+	width: 150%;
+	padding: 2px 23px 2px 30px;
+	outline: 0;
+	background-color: #f5f5f5;
+}
+
+.searchbar:hover,
+.searchbar:focus {
+	border: 1.5px solid lightblue;
+	background-color: white;
+}

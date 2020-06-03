@@ -2,11 +2,14 @@ import React from 'react';
 import './KillboardList.css';
 import { Table } from 'semantic-ui-react';
 import BattleInfoList from './BattleInfoList';
+import BattleContext from '../context/BattleContext';
 
 const KillboardList = (props) => {
+	const battleContext = React.useContext(BattleContext);
+
 	return (
 		<React.Fragment>
-			<Table celled color='grey' inverted='true' selectable='true'>
+			<Table celled color='grey' inverted='true' selectable='true' size='small'>
 				<Table.Header>
 					<Table.Row>
 						<Table.HeaderCell>ID</Table.HeaderCell>
@@ -21,7 +24,7 @@ const KillboardList = (props) => {
 					</Table.Row>
 				</Table.Header>
 				<Table.Body>
-					{props.Battles.map((battle) => {
+					{battleContext.battles.map((battle) => {
 						return <BattleInfoList BattleInfo={battle} />;
 					})}
 				</Table.Body>

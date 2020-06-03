@@ -9,10 +9,14 @@ const BattleDetail = (props) => {
 	const battleContext = React.useContext(BattleContext);
 	const Winners = battleContext.selectBattle.winners.guilds;
 	const Losers = battleContext.selectBattle.losers.guilds;
+	const mystyle = {
+		margin: '10px',
+		padding: '10px',
+	};
 
 	return (
 		<div>
-			<Container>
+			<Container style={mystyle}>
 				<Header color='white' floated='left' size='medium'>
 					ID:{battleContext.selectBattle.id}
 				</Header>
@@ -32,7 +36,7 @@ const BattleDetail = (props) => {
 				<Header textAlign='left' inverted='true'>
 					Winners
 				</Header>
-				<Table color='grey' inverted='true'>
+				<Table color='grey' inverted='true' size='small'>
 					<Table.Header>
 						<Table.Row>
 							<Table.HeaderCell>Alliance</Table.HeaderCell>
@@ -66,7 +70,7 @@ const BattleDetail = (props) => {
 			<br />
 			<Container>
 				<Header textAlign='left'> Losers </Header>
-				<Table color='black' inverted='true'>
+				<Table color='black' inverted='true' size='small'>
 					<Table.Header>
 						<Table.Row>
 							<Table.HeaderCell>Alliance</Table.HeaderCell>

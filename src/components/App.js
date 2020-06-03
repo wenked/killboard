@@ -6,6 +6,7 @@ import BattleDetail from './BattleDetail';
 import SearchBar from './SearchBar';
 import KillboardList from './KillboardList';
 import BattleContext from '../context/BattleContext';
+import './KillboardList.css';
 
 const App = () => {
 	const [Battles, setBattles] = React.useState([]);
@@ -57,11 +58,17 @@ const App = () => {
 					selectBattleHandler: selectBattleHandler,
 					selectBattle: selectedBattle,
 					battleID: battleID,
+					battles: Battles,
 				}}
 			>
-				<Header inverted='true'>Killboard</Header>
-				<SearchBar SubmitFunction={onFormSubmit} />
+				<div className='killboardheader'>
+					<Header inverted='true'>Killboard</Header>
+				</div>
+				<div>
+					<SearchBar SubmitFunction={onFormSubmit} />
+				</div>
 				<Switch>
+					<Route path='/killboards' component={KillboardList} />
 					<Route path={`/${battleID}`} exact component={BattleDetail} />
 				</Switch>
 				{isLoading ? (
@@ -69,7 +76,7 @@ const App = () => {
 						Loading...
 					</Loader>
 				) : showBattleList ? (
-					<KillboardList Battles={Battles} />
+					<KillboardList />
 				) : null}
 			</BattleContext.Provider>
 		</Router>

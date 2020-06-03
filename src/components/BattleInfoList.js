@@ -3,7 +3,7 @@ import { Table } from 'semantic-ui-react';
 import BattleContext from '../context/BattleContext';
 import { Link } from 'react-router-dom';
 
-const Battle = (props) => {
+const BattleInfoLIst = (props) => {
 	const battleContext = React.useContext(BattleContext);
 	const { BattleInfo } = props;
 
@@ -46,4 +46,4 @@ const Battle = (props) => {
 	);
 };
 
-export default Battle;
+export default BattleInfoLIst;

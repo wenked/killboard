@@ -1,4 +1,6 @@
 import React from 'react';
+import { Icon } from 'semantic-ui-react';
+import './KillboardList.css';
 //import {Search} from 'semantic-ui-react';
 
 const SearchBar = (props) => {
@@ -17,9 +19,15 @@ const SearchBar = (props) => {
 	//console.log(Loading);
 
 	return (
-		<div>
+		<div className='wrapper'>
 			<form onSubmit={onFormSubmit} className='ui search'>
-				<input type='text' value={SearchTerm} onChange={onChangeHandler} />
+				<Icon className='search-icon' name='search' size='small' />
+				<input
+					className='searchbar'
+					type='text'
+					value={SearchTerm}
+					onChange={onChangeHandler}
+				/>
 			</form>
 		</div>
 	);
