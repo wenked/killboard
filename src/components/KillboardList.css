@@ -6,10 +6,42 @@ td {
 	table-layout: auto;
 	padding: 0.5rem;
 	text-align: left;
+	background-color: #393f4d;
+	color: #d4d4dc;
+}
+a {
+	color: #d4d4dc;
 }
 
-a {
-	color: white;
+.tableList {
+	background-color: #393f4d;
+	color: #d4d4dc;
+}
+
+.headerWfont {
+	color: #d4d4dc;
+	font-size: x-large;
+	text-align: left;
+	font-weight: bold;
+}
+
+.headerLfont {
+	color: #8cbcd0;
+	font-size: x-large;
+	text-align: right;
+	font-weight: bold;
+}
+
+.headerInfoFont {
+	color: #d4d4dc;
+	font-size: larger;
+	text-align: center;
+	font-weight: bold;
+}
+
+.loserTable {
+	background-color: #8cbcd0;
+	color: #1d1e22;
 }
 
 .killboardheader {
@@ -44,4 +76,15 @@ a {
 .searchbar:focus {
 	border: 1.5px solid lightblue;
 	background-color: white;
+}
+
+.testegrid {
+	display: grid;
+	padding: 1% 1% 1% 1%;
+	margin: 1% 1% 1% 1%;
+	grid-template-columns: 3fr 3fr;
+}
+
+.gridheaders {
+	display: grid;
 }

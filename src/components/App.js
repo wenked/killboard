@@ -15,7 +15,7 @@ import BattleContext from '../context/BattleContext';
 import './KillboardList.css';
 
 const App = () => {
-	const [Battles, setBattles] = React.useState([]);
+	const [battles, setBattles] = React.useState([]);
 	const [isLoading, setIsLoading] = React.useState(true);
 	const [showBattleList, setShowBattleList] = React.useState(false);
 	const [battleID, setBattleID] = React.useState(null);
@@ -64,7 +64,7 @@ const App = () => {
 					selectBattleHandler: selectBattleHandler,
 					selectBattle: selectedBattle,
 					battleID: battleID,
-					battles: Battles,
+					battles: battles,
 				}}
 			>
 				<div className='killboardheader'>

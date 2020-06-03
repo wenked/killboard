@@ -9,8 +9,14 @@ const KillboardList = (props) => {
 
 	return (
 		<React.Fragment>
-			<Table celled color='grey' inverted='true' selectable='true' size='small'>
-				<Table.Header>
+			<Table
+				className='tableList'
+				celled
+				selectable='true'
+				size='small'
+				inverted='true'
+			>
+				<Table.Header className='tableList'>
 					<Table.Row>
 						<Table.HeaderCell>ID</Table.HeaderCell>
 						<Table.HeaderCell>Time(UTC)</Table.HeaderCell>

@@ -6,8 +6,8 @@ const WinnerPlayers = (props) => {
 	const battleContext = React.useContext(BattleContext);
 	const WinnersPlayers = battleContext.selectBattle.winners.players;
 	return (
-		<Table color='grey' inverted='true' compact='very' size='small'>
-			<Table.Header>
+		<Table className='tableList' inverted='true' compact='very' size='small'>
+			<Table.Header className='tableList'>
 				<Table.Row>
 					<Table.HeaderCell>Alliance</Table.HeaderCell>
 					<Table.HeaderCell>Guild</Table.HeaderCell>
