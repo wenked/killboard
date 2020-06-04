@@ -12,8 +12,8 @@ const NavBar = () => {
 					</Link>
 				</li>
 				<li className='myLi'>
-					<Link className='myA' to='/'>
-						Killboard
+					<Link className='myA' to='/killboards'>
+						Killboards
 					</Link>
 				</li>
 			</ul>

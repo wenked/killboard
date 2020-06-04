@@ -69,7 +69,7 @@ const App = () => {
 				<NavBar />
 				<SearchBar SubmitFunction={onFormSubmit} />
 				<Switch>
-					<Route path='/' exact component={KillboardList} />
+					<Route path='/killboards' exact component={KillboardList} />
 					<Route path={`/${battleID}`} exact component={BattleDetail} />
 					<Route path='/home' exact component={Home} />
 				</Switch>

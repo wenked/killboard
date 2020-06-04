@@ -7,11 +7,7 @@ const Home = () => {
 	console.log(battleContext);
 
 	React.useEffect(() => battleContext.loading(), []);
-	return (
-		<div>
-			<div style={{ color: 'yellow' }}>KOE</div>
-		</div>
-	);
+	return <React.Fragment />;
 };
 
 export default Home;

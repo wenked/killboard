@@ -22,25 +22,27 @@ const SearchBar = (props) => {
 
 	const myheader = {
 		'justify-content': 'center',
-		height: '100vh',
+		height: '200vh',
 		'align-items': 'center',
 		display: 'flex',
+		margin: '20px auto',
+		'max-width': '150px',
 	};
 
 	const searchfield = {
 		height: '50px',
 		padding: '10px',
 		border: 'none',
-		'border-radius': '25px',
+		'border-radius': '30px 0 0 30px',
 		outline: 'none',
 	};
 
 	const myH1 = {
 		color: '#d4d4dc',
-		'margin-bottom': '50px',
-		'margin-left': '20px',
+		'margin-bottom': '30px',
 		'font-size': '45px',
 		'letter-spacing': '2px',
+		'text-align': 'center',
 	};
 
 	console.log(SearchTerm);

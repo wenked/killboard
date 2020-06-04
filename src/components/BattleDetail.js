@@ -17,9 +17,7 @@ const BattleDetail = (props) => {
 	return (
 		<div>
 			<Container style={mystyle}>
-				<Header color='white' floated='left' size='medium'>
-					ID:{battleContext.selectBattle.id}
-				</Header>
+				<div className='idInfoFont'>ID: {battleContext.selectBattle.id}</div>
 				<div className='headerInfoFont'>
 					Total Players:{battleContext.selectBattle.totalPlayers} Total Kills:
 					{'     '}

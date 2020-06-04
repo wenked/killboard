@@ -36,6 +36,14 @@ a {
 	font-weight: bold;
 }
 
+.idInfoFont {
+	color: #ff5a09;
+	font-size: 30px;
+	padding-bottom: 1%;
+	text-align: center;
+	font-weight: bold;
+}
+
 .headerInfoFont {
 	color: #d4d4dc;
 	font-size: larger;
@@ -95,7 +103,7 @@ a {
 
 .myheader {
 	justify-content: center;
-	height: 100vh;
+	height: 100%;
 	align-items: center;
 	display: flex;
 }
@@ -110,5 +118,5 @@ a {
 }
 
 .iconclass {
-	position: relative;
+	position: fixed;
 }
