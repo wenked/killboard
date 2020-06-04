@@ -1,17 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 import { Loader, Header } from 'semantic-ui-react';
-import {
-	BrowserRouter as Router,
-	Switch,
-	Route,
-	Link,
-	withRouter,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import BattleDetail from './BattleDetail';
 import SearchBar from './SearchBar';
 import KillboardList from './KillboardList';
 import BattleContext from '../context/BattleContext';
+import Home from './Home';
 import './KillboardList.css';
 
 const App = () => {
@@ -57,6 +52,8 @@ const App = () => {
 		setSelectedBattle((e) => ({ ...e, ...battle }));
 	};
 
+	const loadingHandler = () => setIsLoading(!isLoading);
+
 	return (
 		<Router>
 			<BattleContext.Provider
@@ -65,6 +62,7 @@ const App = () => {
 					selectBattle: selectedBattle,
 					battleID: battleID,
 					battles: battles,
+					loading: loadingHandler,
 				}}
 			>
 				<div className='killboardheader'>
@@ -76,6 +74,7 @@ const App = () => {
 				<Switch>
 					<Route path='/' exact component={KillboardList} />
 					<Route path={`/${battleID}`} exact component={BattleDetail} />
+					<Route path='/home' exact component={Home} />
 				</Switch>
 				{isLoading ? (
 					<Loader size='big' active='true' inverted='true'>

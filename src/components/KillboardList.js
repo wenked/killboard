@@ -25,8 +25,8 @@ const KillboardList = (props) => {
 						<Table.HeaderCell>Kill Fame</Table.HeaderCell>
 						<Table.HeaderCell>Winning Alliance</Table.HeaderCell>
 						<Table.HeaderCell>Winning Guilds</Table.HeaderCell>
-						<Table.HeaderCell>Loosing Alliances</Table.HeaderCell>
-						<Table.HeaderCell>Loosing Guilds</Table.HeaderCell>
+						<Table.HeaderCell>Losing Alliances</Table.HeaderCell>
+						<Table.HeaderCell>Losing Guilds</Table.HeaderCell>
 					</Table.Row>
 				</Table.Header>
 				<Table.Body>

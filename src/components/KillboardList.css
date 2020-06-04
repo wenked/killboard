@@ -9,6 +9,10 @@ td {
 	background-color: #393f4d;
 	color: #d4d4dc;
 }
+
+body {
+	font-family: 'Ubuntu', sans-serif;
+}
 a {
 	color: #d4d4dc;
 }
@@ -26,7 +30,7 @@ a {
 }
 
 .headerLfont {
-	color: #8cbcd0;
+	color: #4a2c40;
 	font-size: x-large;
 	text-align: right;
 	font-weight: bold;
@@ -40,8 +44,7 @@ a {
 }
 
 .loserTable {
-	background-color: #8cbcd0;
-	color: #1d1e22;
+	background-color: #4a2c40;
 }
 
 .killboardheader {
@@ -82,9 +85,26 @@ a {
 	display: grid;
 	padding: 1% 1% 1% 1%;
 	margin: 1% 1% 1% 1%;
+	gap: 10px;
 	grid-template-columns: 3fr 3fr;
 }
 
 .gridheaders {
 	display: grid;
+}
+
+.myheader {
+	justify-content: center;
+	height: 100vh;
+	align-items: center;
+	display: flex;
+}
+
+.searchfield {
+	height: 40px;
+	padding: 10px;
+	border: none;
+	border-radius: 20px;
+	outline: none;
+	width: 400px;
 }

@@ -13,6 +13,15 @@ const BattleInfoLIst = (props) => {
 		console.log(props.selectBattle, 'teste 2');
 	};
 
+	const mystyle = {
+		'background-color': '#4A2C40',
+		'font-weight': 'bolder',
+	};
+
+	const fontstyle = {
+		'font-weight': 'bolder',
+	};
+
 	return (
 		<React.Fragment>
 			<Table.Row>
@@ -25,7 +34,7 @@ const BattleInfoLIst = (props) => {
 				<Table.Cell>{BattleInfo.totalPlayers}</Table.Cell>
 				<Table.Cell>{BattleInfo.totalKills}</Table.Cell>
 				<Table.Cell>{BattleInfo.totalFame}</Table.Cell>
-				<Table.Cell>
+				<Table.Cell style={fontstyle}>
 					{BattleInfo.winners.alliances.length > 0 &&
 						BattleInfo.winners.alliances[0].name}
 				</Table.Cell>
@@ -33,11 +42,11 @@ const BattleInfoLIst = (props) => {
 					{BattleInfo.winners.guilds.length > 0 &&
 						BattleInfo.winners.guilds[0].name}
 				</Table.Cell>
-				<Table.Cell>
+				<Table.Cell style={mystyle}>
 					{BattleInfo.losers.alliances.length > 0 &&
 						BattleInfo.losers.alliances[0].name}
 				</Table.Cell>
-				<Table.Cell>
+				<Table.Cell style={mystyle}>
 					{BattleInfo.losers.guilds.length > 0 &&
 						BattleInfo.losers.guilds[0].name}
 				</Table.Cell>
