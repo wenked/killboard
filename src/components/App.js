@@ -7,6 +7,7 @@ import SearchBar from './SearchBar';
 import KillboardList from './KillboardList';
 import BattleContext from '../context/BattleContext';
 import Home from './Home';
+import NavBar from './NavBar';
 import './KillboardList.css';
 
 const App = () => {
@@ -52,7 +53,7 @@ const App = () => {
 		setSelectedBattle((e) => ({ ...e, ...battle }));
 	};
 
-	const loadingHandler = () => setIsLoading(!isLoading);
+	const loadingHandler = () => setIsLoading(false);
 
 	return (
 		<Router>
@@ -65,11 +66,7 @@ const App = () => {
 					loading: loadingHandler,
 				}}
 			>
-				<div className='killboardheader'>
-					<Link to='/'>
-						<Header inverted='true'>Killboard</Header>
-					</Link>
-				</div>
+				<NavBar />
 				<SearchBar SubmitFunction={onFormSubmit} />
 				<Switch>
 					<Route path='/' exact component={KillboardList} />

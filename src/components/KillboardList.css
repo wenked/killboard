@@ -6,7 +6,7 @@ td {
 	table-layout: auto;
 	padding: 0.5rem;
 	text-align: left;
-	background-color: #393f4d;
+	background-color: #1d1e22;
 	color: #d4d4dc;
 }
 
@@ -18,7 +18,7 @@ a {
 }
 
 .tableList {
-	background-color: #393f4d;
+	background-color: #1d1e22;
 	color: #d4d4dc;
 }
 
@@ -30,7 +30,7 @@ a {
 }
 
 .headerLfont {
-	color: #4a2c40;
+	color: #ff5a09;
 	font-size: x-large;
 	text-align: right;
 	font-weight: bold;
@@ -44,7 +44,7 @@ a {
 }
 
 .loserTable {
-	background-color: #4a2c40;
+	background-color: #ff5a09;
 }
 
 .killboardheader {
@@ -107,4 +107,8 @@ a {
 	border-radius: 20px;
 	outline: none;
 	width: 400px;
+}
+
+.iconclass {
+	position: relative;
 }

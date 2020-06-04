@@ -1,0 +1,22 @@
+ul {
+	margin: 0;
+	padding: 0;
+	display: flex;
+}
+
+.myLi {
+	list-style-type: none;
+	margin: 0 1vw;
+	font-size: 3vh;
+	padding: 15px;
+}
+
+.myA {
+	text-decoration: none;
+	color: #d4d4dc;
+}
+
+.myA:hover {
+	background-color: #d4d4dc;
+	color: #1d1e22;
+}

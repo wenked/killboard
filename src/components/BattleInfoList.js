@@ -14,7 +14,7 @@ const BattleInfoLIst = (props) => {
 	};
 
 	const mystyle = {
-		'background-color': '#4A2C40',
+		'background-color': '#FF5A09',
 		'font-weight': 'bolder',
 	};
 

@@ -35,6 +35,14 @@ const SearchBar = (props) => {
 		outline: 'none',
 	};
 
+	const myH1 = {
+		color: '#d4d4dc',
+		'margin-bottom': '50px',
+		'margin-left': '20px',
+		'font-size': '45px',
+		'letter-spacing': '2px',
+	};
+
 	console.log(SearchTerm);
 	console.log(props.location.pathname);
 	let myHead;
@@ -56,6 +64,9 @@ const SearchBar = (props) => {
 		<div>
 			<div className={myHead}>
 				<form onSubmit={onFormSubmit} className='ui search'>
+					{props.location.pathname === '/home' && (
+						<h1 style={myH1}>KillBoard</h1>
+					)}
 					<Icon className='search-icon' name='search' size={iconSize} />
 					<input
 						className={searchF}
