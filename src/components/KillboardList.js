@@ -6,6 +6,10 @@ import BattleContext from '../context/BattleContext';
 
 const KillboardList = (props) => {
 	const battleContext = React.useContext(BattleContext);
+	const mystyle = {
+		'background-color': '#ff5a09',
+		'font-weight': 'bolder',
+	};
 
 	return (
 		<React.Fragment>
@@ -23,8 +27,10 @@ const KillboardList = (props) => {
 						<Table.HeaderCell>Players</Table.HeaderCell>
 						<Table.HeaderCell>Kills</Table.HeaderCell>
 						<Table.HeaderCell>Kill Fame</Table.HeaderCell>
-						<Table.HeaderCell>Winning Alliance</Table.HeaderCell>
-						<Table.HeaderCell>Winning Guilds</Table.HeaderCell>
+						<Table.HeaderCell style={mystyle}>
+							Winning Alliance
+						</Table.HeaderCell>
+						<Table.HeaderCell style={mystyle}>Winning Guilds</Table.HeaderCell>
 						<Table.HeaderCell>Losing Alliances</Table.HeaderCell>
 						<Table.HeaderCell>Losing Guilds</Table.HeaderCell>
 					</Table.Row>

@@ -7,7 +7,7 @@ const WinnerPlayers = (props) => {
 	const WinnersPlayers = battleContext.selectBattle.winners.players;
 	return (
 		<Table className='tableList' inverted='true' compact='very' size='small'>
-			<Table.Header className='tableList'>
+			<Table.Header className='loserTable'>
 				<Table.Row>
 					<Table.HeaderCell>Alliance</Table.HeaderCell>
 					<Table.HeaderCell>Guild</Table.HeaderCell>

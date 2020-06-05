@@ -36,8 +36,8 @@ const BattleDetail = (props) => {
 				</Container>
 			</div>
 			<div className='testegrid'>
-				<Table size='small' inverted='true' className='tableList'>
-					<Table.Header className='tableList'>
+				<Table size='small' inverted='true' className='loserTable'>
+					<Table.Header className='loserTable'>
 						<Table.Row>
 							<Table.HeaderCell>Alliance</Table.HeaderCell>
 							<Table.HeaderCell>Guild</Table.HeaderCell>
@@ -63,8 +63,8 @@ const BattleDetail = (props) => {
 					</Table.Body>
 				</Table>
 
-				<Table size='small' inverted='true' className='loserTable'>
-					<Table.Header className='loserTable'>
+				<Table size='small' inverted='true' className='tableList'>
+					<Table.Header className='tableList'>
 						<Table.Row>
 							<Table.HeaderCell>Alliance</Table.HeaderCell>
 							<Table.HeaderCell>Guild</Table.HeaderCell>

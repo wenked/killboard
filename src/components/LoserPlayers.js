@@ -8,7 +8,7 @@ const LoserPlayers = (props) => {
 
 	return (
 		<Table className='loserTable' inverted='true' compact='very' size='small'>
-			<Table.Header className='loserTable'>
+			<Table.Header className='tableList'>
 				<Table.Row>
 					<Table.HeaderCell>Alliance</Table.HeaderCell>
 					<Table.HeaderCell>Guild</Table.HeaderCell>

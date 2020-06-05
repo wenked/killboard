@@ -2,6 +2,7 @@ import React from 'react';
 import { Icon } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
 import './KillboardList.css';
+import '../styles/main.css';
 
 //import {Search} from 'semantic-ui-react';
 
@@ -37,14 +38,6 @@ const SearchBar = (props) => {
 		outline: 'none',
 	};
 
-	const myH1 = {
-		color: '#d4d4dc',
-		'margin-bottom': '30px',
-		'font-size': '45px',
-		'letter-spacing': '2px',
-		'text-align': 'center',
-	};
-
 	console.log(SearchTerm);
 	console.log(props.location.pathname);
 	let myHead;
@@ -67,7 +60,9 @@ const SearchBar = (props) => {
 			<div className={myHead}>
 				<form onSubmit={onFormSubmit} className='ui search'>
 					{props.location.pathname === '/home' && (
-						<h1 style={myH1}>KillBoard</h1>
+						<h1 className='text-gray-1000 text-5xl mb-8  tracking-normal text-center hover:text-orange-1000'>
+							KillBoard
+						</h1>
 					)}
 					<Icon className='search-icon' name='search' size={iconSize} />
 					<input

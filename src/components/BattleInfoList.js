@@ -14,7 +14,7 @@ const BattleInfoLIst = (props) => {
 	};
 
 	const mystyle = {
-		'background-color': '#FF5A09',
+		'background-color': '#ff5a09',
 		'font-weight': 'bolder',
 	};
 
@@ -34,7 +34,7 @@ const BattleInfoLIst = (props) => {
 				<Table.Cell>{BattleInfo.totalPlayers}</Table.Cell>
 				<Table.Cell>{BattleInfo.totalKills}</Table.Cell>
 				<Table.Cell>{BattleInfo.totalFame}</Table.Cell>
-				<Table.Cell style={fontstyle}>
+				<Table.Cell>
 					{BattleInfo.winners.alliances.length > 0 &&
 						BattleInfo.winners.alliances[0].name}
 				</Table.Cell>
@@ -42,11 +42,11 @@ const BattleInfoLIst = (props) => {
 					{BattleInfo.winners.guilds.length > 0 &&
 						BattleInfo.winners.guilds[0].name}
 				</Table.Cell>
-				<Table.Cell style={mystyle}>
+				<Table.Cell>
 					{BattleInfo.losers.alliances.length > 0 &&
 						BattleInfo.losers.alliances[0].name}
 				</Table.Cell>
-				<Table.Cell style={mystyle}>
+				<Table.Cell>
 					{BattleInfo.losers.guilds.length > 0 &&
 						BattleInfo.losers.guilds[0].name}
 				</Table.Cell>

@@ -16,7 +16,21 @@ ul {
 	color: #d4d4dc;
 }
 
-.myA:hover {
-	background-color: #d4d4dc;
-	color: #1d1e22;
+.myA:hover,
+.myA:active {
+	color: #ff5a09;
+}
+
+@media only screen and (max-width: 500px) {
+	ul {
+		flex-direction: column;
+	}
+
+	.myLi {
+		margin: 0;
+	}
+
+	.myA {
+		display: block;
+	}
 }
