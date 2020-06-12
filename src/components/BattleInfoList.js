@@ -2,6 +2,7 @@ import React from 'react';
 import { Table } from 'semantic-ui-react';
 import BattleContext from '../context/BattleContext';
 import { Link } from 'react-router-dom';
+import '../styles/main.css';
 
 const BattleInfoLIst = (props) => {
 	const battleContext = React.useContext(BattleContext);
@@ -9,25 +10,18 @@ const BattleInfoLIst = (props) => {
 
 	const getInfo = () => {
 		console.log(props.BattleInfo, 'estou sendo executado 1');
-		battleContext.selectBattleHandler(BattleInfo);
+		battleContext.selectBattleHandler(BattleInfo.id);
 		console.log(props.selectBattle, 'teste 2');
-	};
-
-	const mystyle = {
-		'background-color': '#ff5a09',
-		'font-weight': 'bolder',
-	};
-
-	const fontstyle = {
-		'font-weight': 'bolder',
 	};
 
 	return (
 		<React.Fragment>
 			<Table.Row>
-				<Table.Cell>
+				<Table.Cell className='hover:bg-orange-1000'>
 					<Link to={`/${BattleInfo.id}`}>
-						<a onClick={getInfo}>{BattleInfo.id}</a>
+						<a onClick={getInfo} className='hover:text-gray-1000'>
+							{BattleInfo.id}
+						</a>
 					</Link>
 				</Table.Cell>
 				<Table.Cell>{BattleInfo.endTime}</Table.Cell>

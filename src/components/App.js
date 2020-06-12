@@ -1,14 +1,14 @@
 import React from 'react';
 import axios from 'axios';
-import { Loader, Header } from 'semantic-ui-react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import BattleDetail from './BattleDetail';
+import { Loader } from 'semantic-ui-react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import SearchBar from './SearchBar';
+import Layout from './Layout';
 import KillboardList from './KillboardList';
 import BattleContext from '../context/BattleContext';
-import Home from './Home';
 import NavBar from './NavBar';
 import './KillboardList.css';
+import Routes from './Routes';
 
 const App = () => {
 	const [battles, setBattles] = React.useState([]);
@@ -34,23 +34,25 @@ const App = () => {
 
 	//https://api.kill-board.com/battles/?page=0&limit=50&search=Elevate&group=&startDate=
 
-	const onFormSubmit = async (searchterm) => {
+	const onFormSubmit = async searchterm => {
 		setIsLoading(true);
 		const cors = 'https://cors-anywhere.herokuapp.com/';
 		const response = await axios.get(
 			`${cors}https://api.kill-board.com/battles/?page=0&limit=50&search=${searchterm}&group=&startDate=`
 		);
-		console.log(response.data);
 
 		setBattles(response.data);
 		setIsLoading(false);
 		setShowBattleList(true);
 	};
 
-	const selectBattleHandler = (battle) => {
-		setBattleID(battle.id);
+	const selectBattleHandler = battleid => {
+		setBattleID(battleid);
+
 		setShowBattleList(false);
-		setSelectedBattle((e) => ({ ...e, ...battle }));
+		const selected = battles.filter(e => e.id === battleid);
+
+		setSelectedBattle(e => ({ ...e, ...selected[0] }));
 	};
 
 	const loadingHandler = () => setIsLoading(false);
@@ -66,20 +68,17 @@ const App = () => {
 					loading: loadingHandler,
 				}}
 			>
-				<NavBar />
-				<SearchBar SubmitFunction={onFormSubmit} />
-				<Switch>
-					<Route path='/killboards' exact component={KillboardList} />
-					<Route path={`/${battleID}`} exact component={BattleDetail} />
-					<Route path='/home' exact component={Home} />
-				</Switch>
-				{isLoading ? (
-					<Loader size='big' active='true' inverted='true'>
-						Loading...
-					</Loader>
-				) : showBattleList ? (
-					<KillboardList />
-				) : null}
+				<Layout>
+					<SearchBar SubmitFunction={onFormSubmit} />
+					<Routes battleid={battleID} />
+					{isLoading ? (
+						<Loader size='big' active='true' inverted='true'>
+							Loading...
+						</Loader>
+					) : showBattleList ? (
+						<KillboardList />
+					) : null}
+				</Layout>
 			</BattleContext.Provider>
 		</Router>
 	);

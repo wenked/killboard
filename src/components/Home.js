@@ -7,8 +7,8 @@ const Home = () => {
 	const battleContext = React.useContext(BattleContext);
 	console.log(battleContext);
 
-	React.useEffect(() => battleContext.loading(), []);
-	return <div className='hover:text-orange-1000'>TESTE</div>;
+	React.useEffect(() => battleContext.loading(), [battleContext]);
+	return <div></div>;
 };
 
 export default Home;

@@ -10,11 +10,6 @@ td {
 	color: #d4d4dc;
 }
 
-td:hover {
-	background-color: #ff5a09;
-	color: #d4d4dc;
-}
-
 body {
 	font-family: 'Ubuntu', sans-serif;
 }
@@ -73,6 +68,7 @@ a {
 
 .search-icon {
 	display: inline-flex;
+	color: #d4d4dc;
 }
 
 .searchbar {
@@ -92,7 +88,7 @@ a {
 	background-color: white;
 }
 
-.testegrid {
+.tablegrid {
 	display: grid;
 	padding: 1% 1% 1% 1%;
 	margin: 1% 1% 1% 1%;
@@ -118,8 +114,4 @@ a {
 	border-radius: 20px;
 	outline: none;
 	width: 400px;
-}
-
-.iconclass {
-	position: fixed;
 }
