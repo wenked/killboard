@@ -10,6 +10,108 @@ import items from './items';
 import './KillboardList.css';
 import '../styles/main.css';
 
+const Tank = [
+	'Mace',
+	'Heavy Mace',
+	'Morning Star',
+	'Bedrock Mace',
+	'Incubus Mace',
+	'Camlann Mace',
+	'Hammer',
+	'Polehammer',
+	'Great Hammer',
+	'Tombhammer',
+	'Forge Hammers',
+	'Grovekeeper',
+	'Quarterstaff',
+	'Iron-Clad Staff',
+	'Double Bladed Staff',
+	'Black Monk Stave',
+	'Soulscythe',
+	'Staff of Balance',
+];
+
+const Healer = [
+	'Great Holy Staff',
+	'Divine Staff',
+	'Lifetouch Staff',
+	'Fallen Staff',
+	'Redemption Staff',
+	'Nature Staff',
+	'Great Nature Staff',
+	'Wild Staff',
+	'Druidic Staff',
+	'Blight Staff',
+	'Rampant Staff',
+];
+
+const Support = [
+	'Arcane Staff',
+	'Great Arcane Staff',
+	'Enigmatic Staff',
+	'Witchwork Staff',
+	'Occult Staff',
+	'Malevolent Locus',
+	'Icicle Staff',
+];
+
+const RangedDps = [
+	'Permafrost Prism',
+	'Frost Staff',
+	'Great Frost Staff',
+	'Glacial Staff',
+	'Hoarfrost Staff',
+	'Cursed Staff',
+	'Great Cursed Staff',
+	'Demonic Staff',
+	'Lifecurse Staff',
+	'Cursed Skull',
+	'Damnation Staff',
+	'Fire Staff',
+	'Great Fire Staff',
+	'Infernal Staff',
+	'Wildfire Staff',
+	'Brimstone Staff',
+	'Blazing Staff',
+	'Bow',
+	'Warbow',
+	'Longbow',
+	'Whispering Bow',
+	'Wailing Bow',
+	'Bow of Badon',
+	'Heavy Crossbow',
+	'Crossbow',
+	'Light Crossbow',
+	'Weeping Repeater',
+	'Boltcasters',
+	'Siegebow',
+];
+
+const MeleeDps = [
+	'Pike',
+	'Glaive',
+	'Heron Spear',
+	'Spirithunter',
+	'Trinity Spear',
+	'Dagger',
+	'Dagger Pair',
+	'Claws',
+	'Bloodletter',
+	'Black hands',
+	'Deathgivers',
+	'Greataxe',
+	'Battleaxe',
+	'Halberd',
+	'Carrioncaller',
+	'Infernal Scythe',
+	'Bear Paws',
+	'Broadsword',
+	'Claymore',
+	'Dual Swords',
+	'Clarent Blade',
+	'Carving Sword',
+	'Galatine Pair',
+];
 const organizeItems = (obj, item) => {
 	if (item.LocalizedNames !== null) {
 		return Object.assign(obj, {
@@ -29,6 +131,25 @@ const organizePlayer = (obj, item) => {
 	return Object.assign(obj, { nada: 'nada' });
 };
 
+const getRole = string => {
+	if (Tank.includes(string) === true) {
+		return 'Tank';
+	}
+	if (Healer.includes(string) === true) {
+		return 'Healer';
+	}
+	if (Support.includes(string) === true) {
+		return 'Support';
+	}
+	if (RangedDps.includes(string) === true) {
+		return 'Ranged Dps';
+	}
+	if (MeleeDps.includes(string) === true) {
+		return 'Melee Dps';
+	}
+	return 'nda';
+};
+
 const BattleDetail = props => {
 	const battleContext = React.useContext(BattleContext);
 	const Winners = battleContext.selectBattle.winners.guilds;
@@ -39,27 +160,17 @@ const BattleDetail = props => {
 		padding: '10px',
 	};
 	const [showZergComposition, setShowZergComposition] = React.useState(false);
-	const [itemState, setItemState] = React.useState({});
+
 	const [playerWithItem, setPlayerWithItem] = React.useState({});
 	const [isLoading, setLoading] = React.useState(true);
-	const [zergs, setZergs] = React.useState([]);
+	const [zergs, setZergs] = React.useState({});
 
 	//https://albionboard.azurewebsites.net/battle/90885561?handler=BattleJson
 
-	/*
-	 items[0].LocalizationNameVariable
-	 items[0].LocalizedNames.EN-US
-
-
-	 playerWeaponInfo.weapon === items.LocalizationNameVariable
-	 {...a,weapon: items.LocalizationNameVariable}
-
-	 */
-
 	const getPlayerWeaponInfo = React.useCallback(async () => {
 		const cors = 'https://cors-anywhere.herokuapp.com/';
-		/*console.log(battleContext, 'context');
-		const response2 = await axios.get(
+
+		/*const response2 = await axios.get(
 			`${cors}https://handholdreport.com/api/killboard/${battleContext.selectBattle.id}`
 		);
 		console.log(
@@ -68,12 +179,26 @@ const BattleDetail = props => {
 				player => response2.data.players[player.id].weapon
 			)
 		);
-		console.log(response2, 'handholdreportapi');*/
-		const response = await axios.get(
-			`${cors}https://albionboard.azurewebsites.net/battle/${battleContext.selectBattle.id}?handler=BattleJson`
+		console.log(response2);
+		const hhreportplayers = response2.data.players;
+		console.log(
+			_.map(
+				battleContext.selectBattle.players,
+				player =>
+					normalNameItems[hhreportplayers[player.id].weapon.split(/[?]/)[0]]
+			)
 		);
-		console.log(response.data, 'aqui xd');
-		console.log(response.data.kills, 'aqui');
+		const HHreportPlayerRightItens = _.map(response2.data.players, players => ({
+			...players,
+			weapon: normalNameItems[players.weapon.split(/[?]/)[0]],
+		}));
+		console.log(HHreportPlayerRightItens);
+
+		console.log(response2, 'handholdreportapi');*/
+
+		const response = await axios.get(
+			`https://cors-anywhere.herokuapp.com/https://albionboard.azurewebsites.net/battle/${battleContext.selectBattle.id}?handler=BattleJson`
+		);
 
 		const killData = response.data.kills.map(eventkill =>
 			eventkill.groupMembers.map(member => {
@@ -90,15 +215,16 @@ const BattleDetail = props => {
 			})
 		);
 		const normalNameItems = items.reduce(organizeItems, {});
-		setItemState(normalNameItems);
 
 		const noFilterPlayersInfo = killData.flat();
-		//console.log(noFilterPlayersInfo);
+
 		const playersInfo = Array.from(
 			new Set(noFilterPlayersInfo.map(a => a.name))
 		).map(name => {
 			return noFilterPlayersInfo.find(a => a.name === name);
 		});
+
+		// handholdreport api with normal name itens
 
 		const playersWithRightItemsNames = playersInfo.map(a => {
 			return { ...a, weapon: normalNameItems[a.weapon] };
@@ -110,12 +236,19 @@ const BattleDetail = props => {
 				weapon:
 					a.weapon !== undefined &&
 					a.weapon.substring(a.weapon.indexOf(' ') + 1, a.weapon.length),
+				role:
+					a.weapon !== undefined &&
+					getRole(
+						a.weapon.substring(a.weapon.indexOf(' ') + 1, a.weapon.length)
+					),
 			};
 		});
+
 		const guildGroupSort = _.groupBy(noTierItems, a => a.guild);
+		console.log(guildGroupSort, 'koe');
 
-		const myGuildsKeys = Object.keys(guildGroupSort);
-
+		/*const myGuildsKeys = Object.keys(guildGroupSort);
+		console.log(myGuildsKeys, 'guild keys');
 		const weaponSort = _.map(myGuildsKeys, guild =>
 			_.groupBy(guildGroupSort[guild], a => a.weapon)
 		);
@@ -126,22 +259,25 @@ const BattleDetail = props => {
 		});
 
 		const test = _.map(myZergs, guild => Object.keys(guild));
-		console.log(test);
-		console.log(myZergs, 'finalmente');
+		console.log(test, 'meu map');
+		console.log(myZergs, 'finalmente');*/
+
 		//console.log(playersWithRightItemsNames, 'teste');
 		const playerWithitems = playersWithRightItemsNames.reduce(
 			organizePlayer,
 			{}
 		);
-		setZergs(myZergs);
+
 		setPlayerWithItem(playerWithitems);
+
+		setZergs(guildGroupSort);
 
 		setLoading(false);
 	}, [battleContext.selectBattle.id]);
 
 	React.useEffect(() => {
 		getPlayerWeaponInfo();
-	}, [battleContext, getPlayerWeaponInfo]);
+	}, [getPlayerWeaponInfo]);
 
 	return (
 		<div>
@@ -160,7 +296,7 @@ const BattleDetail = props => {
 							setShowZergComposition(!showZergComposition);
 						}}
 					>
-						Show Zerg Composition
+						Show Zergs Composition
 					</button>
 				) : (
 					<button className='bg-orange-1000 text-gray-1000 hover:bg-gray-100 hover:text-orange-1000 font-bold py-2 px-4 rounded opacity-50 flex cursor-not-allowed'>
@@ -169,7 +305,6 @@ const BattleDetail = props => {
 				)}
 				{showZergComposition ? (
 					<ZergComposition
-						items={itemState}
 						playerwithitem={playerWithItem}
 						rawplayerinfo={playerWeaponInfo}
 						guildzergs={zergs}

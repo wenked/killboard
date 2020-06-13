@@ -6,7 +6,7 @@ import SearchBar from './SearchBar';
 import Layout from './Layout';
 import KillboardList from './KillboardList';
 import BattleContext from '../context/BattleContext';
-import NavBar from './NavBar';
+
 import './KillboardList.css';
 import Routes from './Routes';
 
@@ -38,7 +38,7 @@ const App = () => {
 		setIsLoading(true);
 		const cors = 'https://cors-anywhere.herokuapp.com/';
 		const response = await axios.get(
-			`${cors}https://api.kill-board.com/battles/?page=0&limit=50&search=${searchterm}&group=&startDate=`
+			`https://cors-anywhere.herokuapp.com/https://api.kill-board.com/battles/?page=0&limit=50&search=${searchterm}&group=&startDate=`
 		);
 
 		setBattles(response.data);

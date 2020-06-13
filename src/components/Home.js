@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import SearchBar from './SearchBar';
+import React from 'react';
+
 import BattleContext from '../context/BattleContext';
 import '../styles/main.css';
 
