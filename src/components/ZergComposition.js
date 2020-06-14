@@ -1,10 +1,29 @@
 import React from 'react';
 import _ from 'lodash';
 import '../styles/main.css';
+import ZergGuildCompBox from './ZergGuildCompBox';
+
+/*{showTanks ? (
+	<div>
+		{TankArray.map(
+			weapon =>
+				zergComp[i][Object.keys(guild)][weapon] !==
+					undefined && (
+					<div>
+						{`${weapon}:${
+							zergComp[i][Object.keys(guild)][weapon]
+								.length
+						}`}
+					</div>
+				)
+		)}
+	</div>
+) : null}*/
 
 const ZergComposition = props => {
 	const [zergComp, setZergComp] = React.useState([]);
 	const [rolesComp, setRolesComp] = React.useState({});
+
 	const getZergComposition = React.useCallback(() => {
 		const guildsKeys = Object.keys(props.guildzergs);
 
@@ -36,6 +55,8 @@ const ZergComposition = props => {
 
 	React.useEffect(() => getZergComposition(), [getZergComposition]);
 
+	//zergComp[i][Object.keys(guild)]
+
 	return (
 		<React.Fragment>
 			{zergComp !== undefined && (
@@ -43,64 +64,7 @@ const ZergComposition = props => {
 					{_.map(zergComp, (guild, i) => (
 						<div className='shadow-xl py-3 px-3'>
 							<div className='text-xl'>{Object.keys(guild)}</div>
-
-							<div className='text-orange-1100 py-2 block'>
-								<div>
-									{rolesComp[i][Object.keys(guild)].Tank !== undefined && (
-										<React.Fragment>
-											Tanks: {rolesComp[i][Object.keys(guild)].Tank.length}
-										</React.Fragment>
-									)}
-								</div>
-								<div>
-									{rolesComp[i][Object.keys(guild)].Healer !== undefined && (
-										<React.Fragment>
-											Healers: {rolesComp[i][Object.keys(guild)].Healer.length}
-										</React.Fragment>
-									)}
-								</div>
-								<div>
-									{rolesComp[i][Object.keys(guild)].Support !== undefined && (
-										<React.Fragment>
-											Supports:{' '}
-											{rolesComp[i][Object.keys(guild)].Support.length}
-										</React.Fragment>
-									)}
-								</div>
-								<div>
-									{rolesComp[i][Object.keys(guild)]['Ranged Dps'] !==
-										undefined && (
-										<React.Fragment>
-											Ranged Dps:{' '}
-											{rolesComp[i][Object.keys(guild)]['Ranged Dps'].length}
-										</React.Fragment>
-									)}
-								</div>
-								<div>
-									{rolesComp[i][Object.keys(guild)]['Melee Dps'] !==
-										undefined && (
-										<React.Fragment>
-											Melee Dps:{' '}
-											{rolesComp[i][Object.keys(guild)]['Melee Dps'].length}
-										</React.Fragment>
-									)}
-								</div>
-							</div>
-							<div>
-								{_.map(guild, weapons => (
-									<div className='py-2'>
-										{'  '}
-
-										{Object.keys(weapons).map(arma => (
-											<div className='text-gray-1000'>
-												{arma}: {weapons[arma].length}
-											</div>
-										))}
-										{'  '}
-										<br />
-									</div>
-								))}
-							</div>
+							<ZergGuildCompBox guildsinfo={rolesComp[i][Object.keys(guild)]} />
 						</div>
 					))}
 				</div>
