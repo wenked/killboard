@@ -1,6 +1,8 @@
 import React from 'react';
 import _ from 'lodash';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import '../styles/main.css';
+import './transitions.css';
 import ZergGuildCompBox from './ZergGuildCompBox';
 
 /*{showTanks ? (
@@ -56,18 +58,41 @@ const ZergComposition = props => {
 	React.useEffect(() => getZergComposition(), [getZergComposition]);
 
 	//zergComp[i][Object.keys(guild)]
+	console.log(_.map(zergComp, a => a));
+	const stylediv = props => {
+		return (
+			<div className='text-orange-1000 font-bold block py-3 md:inline-grid grid-cols-3 col-gap-4 py-3 lg:inline-grid grid-cols-4 col-gap-4 py-3 xl:inline-grid grid-cols-6 col-gap-4 py-3'>
+				{props.children}
+			</div>
+		);
+	};
 
 	return (
 		<React.Fragment>
 			{zergComp !== undefined && (
-				<div className='text-orange-1000 font-bold block py-3 md:inline-grid grid-cols-3 col-gap-4 py-3 lg:inline-grid grid-cols-4 col-gap-4 py-3 xl:inline-grid grid-cols-6 col-gap-4 py-3'>
+				<TransitionGroup component={stylediv}>
 					{_.map(zergComp, (guild, i) => (
-						<div className='shadow-xl py-3 px-3'>
-							<div className='text-xl'>{Object.keys(guild)}</div>
-							<ZergGuildCompBox guildsinfo={rolesComp[i][Object.keys(guild)]} />
-						</div>
+						<CSSTransition
+							in={props.showZerg}
+							timeout={300}
+							classNames={{
+								enter: 'opacity-25 translate-x-0 -translate-y-3',
+								enterActive:
+									'opacity-100 translate-x-0 translate-y-0 transition-all duration-300 ease-in',
+								exit: 'opacity-100 translate-x-0 translate-y-0',
+								exitActive:
+									'opacity-25 translate-x-0 translate-y-3 transition-all duration-300 ease-in',
+							}}
+						>
+							<div className='shadow-xl py-3 px-3'>
+								<div className='text-xl'>{Object.keys(guild)}</div>
+								<ZergGuildCompBox
+									guildsinfo={rolesComp[i][Object.keys(guild)]}
+								/>
+							</div>
+						</CSSTransition>
 					))}
-				</div>
+				</TransitionGroup>
 			)}
 		</React.Fragment>
 	);

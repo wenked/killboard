@@ -4,7 +4,7 @@ import BattleContext from '../context/BattleContext';
 import { Link } from 'react-router-dom';
 import '../styles/main.css';
 
-const BattleInfoLIst = (props) => {
+const BattleInfoLIst = props => {
 	const battleContext = React.useContext(BattleContext);
 	const { BattleInfo } = props;
 

@@ -4,10 +4,10 @@ import KillboardList from './KillboardList';
 import BattleDetail from './BattleDetail';
 import Home from './Home';
 
-const Routes = (props) => {
+const Routes = props => {
 	return (
 		<Switch>
-			<Route path='/killboards' exact component={KillboardList} />
+			<Route path='/killboards' component={KillboardList} />
 			<Route path={`/${props.battleid}`} exact component={BattleDetail} />
 			<Route path='/' exact component={Home} />
 		</Switch>

@@ -1,4 +1,7 @@
 import React from 'react';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import '../styles/main.css';
+import './transitions.css';
 
 const TankArray = [
 	'Mace',
@@ -102,147 +105,9 @@ const MeleeDpsArray = [
 	'Carving Sword',
 	'Galatine Pair',
 ];
-
-/*
-<div className='text-orange-1100 py-2 block'>
-								<div>
-									{rolesComp[i][Object.keys(guild)].Tank !== undefined && (
-										<React.Fragment>
-											<button
-												className='font-bold'
-												onClick={() => {
-													{
-														console.log(rolesComp[i][Object.keys(guild)]);
-														setShowTanks(!showTanks);
-													}
-												}}
-											>
-												Tanks:
-												{rolesComp[i][Object.keys(guild)].Tank.length}
-											</button>
-											{showTanks ? (
-												<div>
-													{TankArray.map(weapon => {
-														const filtertanks = rolesComp[i][
-															Object.keys(guild)
-														].Tank.filter(a => a.weapon === weapon);
-														if (filtertanks.length !== 0) {
-															return (
-																<div>{`${weapon}:${filtertanks.length}`}</div>
-															);
-														}
-														return null;
-													})}
-												</div>
-											) : null}
-										</React.Fragment>
-									)}
-								</div>
-								<div>
-									{rolesComp[i][Object.keys(guild)].Healer !== undefined && (
-										<React.Fragment>
-											<button
-												className='font-bold'
-												onClick={() => setShowHealers(!showHealers)}
-											>
-												Healers:{' '}
-												{rolesComp[i][Object.keys(guild)].Healer.length}
-											</button>
-											{showHealers ? (
-												<div>
-													{HealerArray.map(weapon => {
-														const filterhealers = rolesComp[i][
-															Object.keys(guild)
-														].Healer.filter(a => a.weapon === weapon);
-														if (filterhealers.length !== 0) {
-															return (
-																<div>{`${weapon}:${filterhealers.length}`}</div>
-															);
-														}
-														return null;
-													})}
-												</div>
-											) : null}
-										</React.Fragment>
-									)}
-								</div>
-								<div>
-									{rolesComp[i][Object.keys(guild)].Support !== undefined && (
-										<React.Fragment>
-											<button
-												className='font-bold'
-												onClick={() => setShowSupports(!showSupports)}
-											>
-												Supports:{' '}
-												{rolesComp[i][Object.keys(guild)].Support.length}
-											</button>
-											{showSupports ? (
-												<div>
-													{SupportArray.map(weapon => {
-														const filtersupports = rolesComp[i][
-															Object.keys(guild)
-														].Support.filter(a => a.weapon === weapon);
-														if (filtersupports.length !== 0) {
-															return (
-																<div>{`${weapon}:${filtersupports.length}`}</div>
-															);
-														}
-														return null;
-													})}
-												</div>
-											) : null}
-										</React.Fragment>
-									)}
-								</div>
-								<div>
-									{rolesComp[i][Object.keys(guild)]['Ranged Dps'] !==
-										undefined && (
-										<React.Fragment>
-											<button
-												className='font-bold'
-												onClick={() => setShowRangedDps(!showRangedDps)}
-											>
-												Ranged Dps:{' '}
-												{rolesComp[i][Object.keys(guild)]['Ranged Dps'].length}
-											</button>
-											{showRangedDps ? (
-												<div>
-													{RangedDpsArray.map(weapon => {
-														const filterrangeddps = rolesComp[i][
-															Object.keys(guild)
-														]['Ranged Dps'].filter(a => a.weapon === weapon);
-														if (filterrangeddps.length !== 0) {
-															return (
-																<div>{`${weapon}:${filterrangeddps.length}`}</div>
-															);
-														}
-														return null;
-													})}
-												</div>
-											) : null}
-										</React.Fragment>
-									)}
-								</div>
-								<div>
-									{rolesComp[i][Object.keys(guild)]['Melee Dps'] !==
-										undefined && (
-										<React.Fragment>
-											<button
-												className='font-bold'
-												onClick={() => setShowMeleeDps(!showMeleeDps)}
-											>
-												Melee Dps:{' '}
-												{rolesComp[i][Object.keys(guild)]['Melee Dps'].length}
-											</button>
-											<ZergGuildCompBox
-												meleedps={rolesComp[i][Object.keys(guild)]['Melee Dps']}
-												showmeleedps={showMeleeDps}
-											/>
-										</React.Fragment>
-									)}
-								</div>
-							</div>
-*/
+const mystyle = props => {
+	return <div className='text-gray-1000 py-3'>{props.children}</div>;
+};
 
 const ZergGuildCompBox = props => {
 	const [showTanks, setShowTanks] = React.useState(false);
@@ -272,6 +137,7 @@ const ZergGuildCompBox = props => {
 									if (filtertanks.length !== 0) {
 										return <div>{`${weapon}: ${filtertanks.length}`}</div>;
 									}
+
 									return null;
 								})}
 							</div>

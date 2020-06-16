@@ -6,7 +6,6 @@ import SearchBar from './SearchBar';
 import Layout from './Layout';
 import KillboardList from './KillboardList';
 import BattleContext from '../context/BattleContext';
-
 import './KillboardList.css';
 import Routes from './Routes';
 
@@ -38,12 +37,12 @@ const App = () => {
 		setIsLoading(true);
 		const cors = 'https://cors-anywhere.herokuapp.com/';
 		const response = await axios.get(
-			`https://cors-anywhere.herokuapp.com/https://api.kill-board.com/battles/?page=0&limit=50&search=${searchterm}&group=&startDate=`
+			`https://cors-anywhere.herokuapp.com/https://api.kill-board.com/battles/?page=0&limit=100&search=${searchterm}&group=&startDate=`
 		);
 
 		setBattles(response.data);
 		setIsLoading(false);
-		setShowBattleList(true);
+		//setShowBattleList(true);
 	};
 
 	const selectBattleHandler = battleid => {

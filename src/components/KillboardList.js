@@ -4,7 +4,7 @@ import { Table } from 'semantic-ui-react';
 import BattleInfoList from './BattleInfoList';
 import BattleContext from '../context/BattleContext';
 
-const KillboardList = (props) => {
+const KillboardList = props => {
 	const battleContext = React.useContext(BattleContext);
 	const mystyle = {
 		'background-color': '#ff5a09',
@@ -36,7 +36,7 @@ const KillboardList = (props) => {
 					</Table.Row>
 				</Table.Header>
 				<Table.Body>
-					{battleContext.battles.map((battle) => {
+					{battleContext.battles.map(battle => {
 						return <BattleInfoList BattleInfo={battle} />;
 					})}
 				</Table.Body>

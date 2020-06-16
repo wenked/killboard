@@ -150,6 +150,13 @@ const getRole = string => {
 	return 'nda';
 };
 
+const handleguild = guild => {
+	if (guild === '') {
+		return 'No Guild';
+	}
+	return guild;
+};
+
 const BattleDetail = props => {
 	const battleContext = React.useContext(BattleContext);
 	const Winners = battleContext.selectBattle.winners.guilds;
@@ -205,11 +212,13 @@ const BattleDetail = props => {
 				if (member.equipment.MainHand === null) {
 					return {
 						name: member.name,
+						guild: handleguild(member.guildName),
+						weapon: 'no weapon',
 					};
 				}
 				return {
 					name: member.name,
-					guild: member.guildName,
+					guild: handleguild(member.guildName),
 					weapon: member.equipment.MainHand.type,
 				};
 			})
@@ -224,11 +233,12 @@ const BattleDetail = props => {
 			return noFilterPlayersInfo.find(a => a.name === name);
 		});
 
-		// handholdreport api with normal name itens
+		console.log(playersInfo);
 
 		const playersWithRightItemsNames = playersInfo.map(a => {
 			return { ...a, weapon: normalNameItems[a.weapon] };
 		});
+		console.log(playersWithRightItemsNames);
 		setplayerWeaponInfo(playersWithRightItemsNames);
 		const noTierItems = playersWithRightItemsNames.map(a => {
 			return {
@@ -247,22 +257,6 @@ const BattleDetail = props => {
 		const guildGroupSort = _.groupBy(noTierItems, a => a.guild);
 		console.log(guildGroupSort, 'koe');
 
-		/*const myGuildsKeys = Object.keys(guildGroupSort);
-		console.log(myGuildsKeys, 'guild keys');
-		const weaponSort = _.map(myGuildsKeys, guild =>
-			_.groupBy(guildGroupSort[guild], a => a.weapon)
-		);
-		console.log(weaponSort, 'weaponsort');
-
-		const myZergs = _.map(myGuildsKeys, (guild, i) => {
-			return { [guild]: weaponSort[i] };
-		});
-
-		const test = _.map(myZergs, guild => Object.keys(guild));
-		console.log(test, 'meu map');
-		console.log(myZergs, 'finalmente');*/
-
-		//console.log(playersWithRightItemsNames, 'teste');
 		const playerWithitems = playersWithRightItemsNames.reduce(
 			organizePlayer,
 			{}
@@ -283,7 +277,7 @@ const BattleDetail = props => {
 		<div>
 			<Container style={mystyle}>
 				<div className='idInfoFont'>ID: {battleContext.selectBattle.id}</div>
-				<div className='headerInfoFont'>
+				<div className='headerInfoFont pb-2'>
 					Total Players:{battleContext.selectBattle.totalPlayers} Total Kills:
 					{'     '}
 					{battleContext.selectBattle.totalKills} Total Fame:{'      '}
@@ -291,7 +285,7 @@ const BattleDetail = props => {
 				</div>
 				{!isLoading ? (
 					<button
-						className='bg-orange-1000 text-gray-1000 hover:bg-gray-100 hover:text-orange-1000 font-bold py-2 px-4 rounded flex'
+						className='bg-orange-1000 text-gray-1000 hover:bg-gray-100 hover:text-orange-1000 font-bold py-3 px-4 rounded flex'
 						onClick={() => {
 							setShowZergComposition(!showZergComposition);
 						}}
@@ -299,7 +293,7 @@ const BattleDetail = props => {
 						Show Zergs Composition
 					</button>
 				) : (
-					<button className='bg-orange-1000 text-gray-1000 hover:bg-gray-100 hover:text-orange-1000 font-bold py-2 px-4 rounded opacity-50 flex cursor-not-allowed'>
+					<button className='bg-orange-1000 text-gray-1000 hover:bg-gray-100 hover:text-orange-1000 font-bold py-3 px-4 rounded opacity-50 flex cursor-not-allowed'>
 						Loading...
 					</button>
 				)}
@@ -308,6 +302,7 @@ const BattleDetail = props => {
 						playerwithitem={playerWithItem}
 						rawplayerinfo={playerWeaponInfo}
 						guildzergs={zergs}
+						showZerg={showZergComposition}
 					/>
 				) : null}
 			</Container>
