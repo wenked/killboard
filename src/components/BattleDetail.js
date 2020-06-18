@@ -9,6 +9,7 @@ import ZergComposition from './ZergComposition';
 import items from './items';
 import './KillboardList.css';
 import '../styles/main.css';
+import { CSSTransition } from 'react-transition-group';
 
 const Tank = [
 	'Mace',
@@ -297,14 +298,20 @@ const BattleDetail = props => {
 						Loading...
 					</button>
 				)}
-				{showZergComposition ? (
+
+				<CSSTransition
+					in={showZergComposition}
+					timeout={300}
+					classNames='transition'
+					unmountOnExit={true}
+				>
 					<ZergComposition
 						playerwithitem={playerWithItem}
 						rawplayerinfo={playerWeaponInfo}
 						guildzergs={zergs}
 						showZerg={showZergComposition}
 					/>
-				) : null}
+				</CSSTransition>
 			</Container>
 			<br />
 			<br />

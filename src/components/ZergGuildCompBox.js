@@ -1,5 +1,6 @@
 import React from 'react';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { CSSTransition } from 'react-transition-group';
+import { Pie } from 'react-chartjs-2';
 import '../styles/main.css';
 import './transitions.css';
 
@@ -105,8 +106,11 @@ const MeleeDpsArray = [
 	'Carving Sword',
 	'Galatine Pair',
 ];
-const mystyle = props => {
-	return <div className='text-gray-1000 py-3'>{props.children}</div>;
+const checkUndefined = elem => {
+	if (elem === undefined) {
+		return 0;
+	}
+	return elem.length;
 };
 
 const ZergGuildCompBox = props => {
@@ -116,6 +120,42 @@ const ZergGuildCompBox = props => {
 	const [showRangedDps, setShowRangedDps] = React.useState(false);
 	const [showMeleeDps, setShowMeleeDps] = React.useState(false);
 	const guildsinfo = props.guildsinfo;
+	const [graphData, setGraphData] = React.useState([]);
+	const [showGraph, setShowGraph] = React.useState(false);
+
+	React.useEffect(() => {
+		setGraphData([
+			checkUndefined(guildsinfo.Tank),
+			checkUndefined(guildsinfo.Healer),
+			checkUndefined(guildsinfo.Support),
+			checkUndefined(guildsinfo['Ranged Dps']),
+			checkUndefined(guildsinfo['Melee Dps']),
+		]);
+	}, [guildsinfo]);
+	const data = {
+		labels: ['Tank', 'Healer', 'Support', 'Ranged Dps', 'Melee Dps'],
+		datasets: [
+			{
+				data: graphData,
+				backgroundColor: [
+					'#ff5a09',
+					'#ec7f37',
+					'#be4f0c',
+					'#fed7d7',
+					'#feb2b2',
+				],
+				hoverBackgroundColor: [
+					'#ff5a09',
+					'#ec7f37',
+					'#be4f0c',
+					'#fed7d7',
+					'#feb2b2',
+				],
+				borderColor: '#d4d4dc',
+				borderWidth: 1,
+			},
+		],
+	};
 
 	return (
 		<div className='text-orange-1100 py-2 block'>
@@ -128,7 +168,13 @@ const ZergGuildCompBox = props => {
 						>
 							Tank: {guildsinfo.Tank.length}
 						</button>
-						{showTanks ? (
+
+						<CSSTransition
+							in={showTanks}
+							timeout={300}
+							classNames='transition'
+							unmountOnExit={true}
+						>
 							<div className='text-gray-1000 py-3'>
 								{TankArray.map(weapon => {
 									const filtertanks = guildsinfo.Tank.filter(
@@ -141,7 +187,7 @@ const ZergGuildCompBox = props => {
 									return null;
 								})}
 							</div>
-						) : null}
+						</CSSTransition>
 					</React.Fragment>
 				)}
 			</div>
@@ -154,7 +200,13 @@ const ZergGuildCompBox = props => {
 						>
 							Healers: {guildsinfo.Healer.length}
 						</button>
-						{showHealers ? (
+
+						<CSSTransition
+							in={showHealers}
+							timeout={300}
+							classNames='transition'
+							unmountOnExit={true}
+						>
 							<div className='text-gray-1000 py-3'>
 								{HealerArray.map(weapon => {
 									const filterhealer = guildsinfo.Healer.filter(
@@ -166,7 +218,7 @@ const ZergGuildCompBox = props => {
 									return null;
 								})}
 							</div>
-						) : null}
+						</CSSTransition>
 					</React.Fragment>
 				)}
 			</div>
@@ -179,7 +231,13 @@ const ZergGuildCompBox = props => {
 						>
 							Supports: {guildsinfo.Support.length}
 						</button>
-						{showSupports ? (
+
+						<CSSTransition
+							in={showSupports}
+							timeout={300}
+							classNames='transition'
+							unmountOnExit={true}
+						>
 							<div className='text-gray-1000 py-3'>
 								{SupportArray.map(weapon => {
 									const filtersupport = guildsinfo.Support.filter(
@@ -191,7 +249,7 @@ const ZergGuildCompBox = props => {
 									return null;
 								})}
 							</div>
-						) : null}
+						</CSSTransition>
 					</React.Fragment>
 				)}
 			</div>
@@ -200,11 +258,19 @@ const ZergGuildCompBox = props => {
 					<React.Fragment>
 						<button
 							className='font-bold hover:text-gray-1000'
-							onClick={() => setShowRangedDps(!showRangedDps)}
+							onClick={() => {
+								setShowRangedDps(!showRangedDps);
+							}}
 						>
 							Ranged Dps: {guildsinfo['Ranged Dps'].length}
 						</button>
-						{showRangedDps ? (
+
+						<CSSTransition
+							in={showRangedDps}
+							timeout={300}
+							classNames='transition'
+							unmountOnExit={true}
+						>
 							<div className='text-gray-1000 py-3'>
 								{RangedDpsArray.map(weapon => {
 									const filterrangeddps = guildsinfo['Ranged Dps'].filter(
@@ -216,7 +282,7 @@ const ZergGuildCompBox = props => {
 									return null;
 								})}
 							</div>
-						) : null}
+						</CSSTransition>
 					</React.Fragment>
 				)}
 			</div>
@@ -229,7 +295,13 @@ const ZergGuildCompBox = props => {
 						>
 							Melee dps: {guildsinfo['Melee Dps'].length}
 						</button>
-						{showMeleeDps ? (
+
+						<CSSTransition
+							in={showMeleeDps}
+							timeout={300}
+							classNames='transition'
+							unmountOnExit={true}
+						>
 							<div className='text-gray-1000 py-3'>
 								{MeleeDpsArray.map(weapon => {
 									const filtermeleedps = guildsinfo['Melee Dps'].filter(
@@ -241,9 +313,42 @@ const ZergGuildCompBox = props => {
 									return null;
 								})}
 							</div>
-						) : null}
+						</CSSTransition>
 					</React.Fragment>
 				)}
+			</div>
+
+			<div>
+				<button
+					className='font-bold hover:text-gray-1000'
+					onClick={() => setShowGraph(!showGraph)}
+				>
+					Show Graph
+				</button>
+				<CSSTransition
+					in={showGraph}
+					timeout={300}
+					classNames='transition'
+					unmountOnExit={true}
+				>
+					<div>
+						<Pie
+							data={data}
+							style={{ height: '200px', width: '200px' }}
+							options={{
+								responsive: true,
+								maintainAspectRatio: false,
+								legend: {
+									display: true,
+									labels: {
+										fontFamily: 'Ubuntu',
+										fontColor: '#d4d4dc',
+									},
+								},
+							}}
+						/>
+					</div>
+				</CSSTransition>
 			</div>
 		</div>
 	);

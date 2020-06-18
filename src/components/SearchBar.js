@@ -34,6 +34,9 @@ const SearchBar = props => {
 		iconSize = 'small';
 	}
 
+	//display: inline-flex;
+	//color: #d4d4dc;
+
 	return (
 		<div>
 			<div className={myHead}>
@@ -51,11 +54,13 @@ const SearchBar = props => {
 						onChange={onChangeHandler}
 						placeholder='Guilds'
 					/>
-					<Icon
-						className='search-icon pl-2 hover:text-orange-1000'
-						name='search'
-						size={iconSize}
-					/>
+					<button className='inline-flex hover:text-orange-1000'>
+						<Icon
+							className='text-gray-1000 pl-2 hover:text-orange-1000'
+							name='search'
+							size={iconSize}
+						/>
+					</button>
 				</form>
 			</div>
 		</div>

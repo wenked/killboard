@@ -7,8 +7,8 @@ import BattleContext from '../context/BattleContext';
 const KillboardList = props => {
 	const battleContext = React.useContext(BattleContext);
 	const mystyle = {
-		'background-color': '#ff5a09',
-		'font-weight': 'bolder',
+		backgroundColor: '#ff5a09',
+		fontWeight: 'bolder',
 	};
 
 	return (
@@ -18,7 +18,7 @@ const KillboardList = props => {
 				celled
 				selectable='true'
 				size='small'
-				inverted='true'
+				inverted
 			>
 				<Table.Header className='tableList'>
 					<Table.Row>
@@ -36,8 +36,8 @@ const KillboardList = props => {
 					</Table.Row>
 				</Table.Header>
 				<Table.Body>
-					{battleContext.battles.map(battle => {
-						return <BattleInfoList BattleInfo={battle} />;
+					{battleContext.battles.map((battle, i) => {
+						return <BattleInfoList key={i} BattleInfo={battle} />;
 					})}
 				</Table.Body>
 			</Table>
