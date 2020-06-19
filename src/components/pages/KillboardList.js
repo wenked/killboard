@@ -1,8 +1,8 @@
 import React from 'react';
 import './KillboardList.css';
 import { Table } from 'semantic-ui-react';
-import BattleInfoList from './BattleInfoList';
-import BattleContext from '../context/BattleContext';
+import BattleInfoList from '../BattleInfoList';
+import BattleContext from '../../context/BattleContext';
 
 const KillboardList = props => {
 	const battleContext = React.useContext(BattleContext);
@@ -13,13 +13,7 @@ const KillboardList = props => {
 
 	return (
 		<React.Fragment>
-			<Table
-				className='tableList'
-				celled
-				selectable='true'
-				size='small'
-				inverted
-			>
+			<Table className='tableList' celled selectable size='small' inverted>
 				<Table.Header className='tableList'>
 					<Table.Row>
 						<Table.HeaderCell>ID</Table.HeaderCell>

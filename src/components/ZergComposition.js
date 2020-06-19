@@ -38,9 +38,12 @@ const ZergComposition = props => {
 			{zergComp !== undefined && (
 				<div className='text-orange-1000 font-bold block py-3 md:inline-grid grid-cols-3 col-gap-4 py-3 lg:inline-grid grid-cols-4 col-gap-4 py-3 xl:inline-grid grid-cols-6 col-gap-4 py-3'>
 					{_.map(zergComp, (guild, i) => (
-						<div className='shadow-xl py-3 px-3'>
+						<div key={i} className='shadow-xl py-3 px-3'>
 							<div className='text-xl'>{Object.keys(guild)}</div>
-							<ZergGuildCompBox guildsinfo={rolesComp[i][Object.keys(guild)]} />
+							<ZergGuildCompBox
+								guildsinfo={rolesComp[i][Object.keys(guild)]}
+								guildName={Object.keys(guild)}
+							/>
 						</div>
 					))}
 				</div>

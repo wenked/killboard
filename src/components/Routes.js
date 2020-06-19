@@ -1,15 +1,15 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import KillboardList from './KillboardList';
-import BattleDetail from './BattleDetail';
-import Home from './Home';
+import KillboardList from './pages/KillboardList';
+import BattleDetail from './pages/BattleDetail';
+import Home from './pages/Home';
 
-const Routes = props => {
+const Routes = () => {
 	return (
 		<Switch>
-			<Route path='/killboards' component={KillboardList} />
-			<Route path={`/${props.battleid}`} exact component={BattleDetail} />
 			<Route path='/' exact component={Home} />
+			<Route path='/killboards' exact component={KillboardList} />
+			<Route path={`/killboards/:battleId`} component={BattleDetail} />
 		</Switch>
 	);
 };

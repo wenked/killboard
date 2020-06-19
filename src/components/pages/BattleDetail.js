@@ -1,118 +1,23 @@
 import React from 'react';
 import axios from 'axios';
-import { Table, Container } from 'semantic-ui-react';
+import { Table, Container, Loader } from 'semantic-ui-react';
 import _ from 'lodash';
-import BattleContext from '../context/BattleContext';
-import WinnerPlayer from './WinnerPlayers';
-import LoserPlayers from './LoserPlayers';
-import ZergComposition from './ZergComposition';
-import items from './items';
+import BattleContext from '../../context/BattleContext';
+import Players from '../Players';
+import ZergComposition from '../ZergComposition';
+import items from '../items';
 import './KillboardList.css';
-import '../styles/main.css';
+import '../../styles/main.css';
 import { CSSTransition } from 'react-transition-group';
+import {
+	MeleeDpsArray as MeleeDps,
+	TankArray as Tank,
+	SupportArray as Support,
+	HealerArray as Healer,
+	RangedDpsArray as RangedDps,
+} from '../../utils/zergData';
+import { useParams } from 'react-router-dom';
 
-const Tank = [
-	'Mace',
-	'Heavy Mace',
-	'Morning Star',
-	'Bedrock Mace',
-	'Incubus Mace',
-	'Camlann Mace',
-	'Hammer',
-	'Polehammer',
-	'Great Hammer',
-	'Tombhammer',
-	'Forge Hammers',
-	'Grovekeeper',
-	'Quarterstaff',
-	'Iron-Clad Staff',
-	'Double Bladed Staff',
-	'Black Monk Stave',
-	'Soulscythe',
-	'Staff of Balance',
-];
-
-const Healer = [
-	'Great Holy Staff',
-	'Divine Staff',
-	'Lifetouch Staff',
-	'Fallen Staff',
-	'Redemption Staff',
-	'Nature Staff',
-	'Great Nature Staff',
-	'Wild Staff',
-	'Druidic Staff',
-	'Blight Staff',
-	'Rampant Staff',
-];
-
-const Support = [
-	'Arcane Staff',
-	'Great Arcane Staff',
-	'Enigmatic Staff',
-	'Witchwork Staff',
-	'Occult Staff',
-	'Malevolent Locus',
-	'Icicle Staff',
-];
-
-const RangedDps = [
-	'Permafrost Prism',
-	'Frost Staff',
-	'Great Frost Staff',
-	'Glacial Staff',
-	'Hoarfrost Staff',
-	'Cursed Staff',
-	'Great Cursed Staff',
-	'Demonic Staff',
-	'Lifecurse Staff',
-	'Cursed Skull',
-	'Damnation Staff',
-	'Fire Staff',
-	'Great Fire Staff',
-	'Infernal Staff',
-	'Wildfire Staff',
-	'Brimstone Staff',
-	'Blazing Staff',
-	'Bow',
-	'Warbow',
-	'Longbow',
-	'Whispering Bow',
-	'Wailing Bow',
-	'Bow of Badon',
-	'Heavy Crossbow',
-	'Crossbow',
-	'Light Crossbow',
-	'Weeping Repeater',
-	'Boltcasters',
-	'Siegebow',
-];
-
-const MeleeDps = [
-	'Pike',
-	'Glaive',
-	'Heron Spear',
-	'Spirithunter',
-	'Trinity Spear',
-	'Dagger',
-	'Dagger Pair',
-	'Claws',
-	'Bloodletter',
-	'Black hands',
-	'Deathgivers',
-	'Greataxe',
-	'Battleaxe',
-	'Halberd',
-	'Carrioncaller',
-	'Infernal Scythe',
-	'Bear Paws',
-	'Broadsword',
-	'Claymore',
-	'Dual Swords',
-	'Clarent Blade',
-	'Carving Sword',
-	'Galatine Pair',
-];
 const organizeItems = (obj, item) => {
 	if (item.LocalizedNames !== null) {
 		return Object.assign(obj, {
@@ -158,54 +63,38 @@ const handleguild = guild => {
 	return guild;
 };
 
-const BattleDetail = props => {
-	const battleContext = React.useContext(BattleContext);
-	const Winners = battleContext.selectBattle.winners.guilds;
-	const Losers = battleContext.selectBattle.losers.guilds;
-	const [playerWeaponInfo, setplayerWeaponInfo] = React.useState([]);
-	const mystyle = {
-		margin: '10px',
-		padding: '10px',
-	};
-	const [showZergComposition, setShowZergComposition] = React.useState(false);
+// https://api.kill-board.com/battles/94225686
 
+const BattleDetail = () => {
+	const { battleId } = useParams();
+	const battleContext = React.useContext(BattleContext);
+	const selectedBattleWithContext = battleContext.battles.find(
+		battle => battle.id === parseInt(battleId)
+	);
+	const [selectedBattle, setSelectedBattle] = React.useState({});
+	const [playerWeaponInfo, setplayerWeaponInfo] = React.useState([]);
+	const [showZergComposition, setShowZergComposition] = React.useState(false);
 	const [playerWithItem, setPlayerWithItem] = React.useState({});
 	const [isLoading, setLoading] = React.useState(true);
+	const [kbLoading, setKbLoading] = React.useState(true);
 	const [zergs, setZergs] = React.useState({});
 
 	//https://albionboard.azurewebsites.net/battle/90885561?handler=BattleJson
+	const getKillboardWithId = React.useCallback(
+		async id => {
+			const response = await axios.get(
+				`https://cors-anywhere.herokuapp.com/https://api.kill-board.com/battles/${id}`
+			);
+			console.log(response.data.id);
+			setSelectedBattle(response.data);
+			setKbLoading(false);
+		},
+		[setSelectedBattle, setKbLoading]
+	);
 
 	const getPlayerWeaponInfo = React.useCallback(async () => {
-		const cors = 'https://cors-anywhere.herokuapp.com/';
-
-		/*const response2 = await axios.get(
-			`${cors}https://handholdreport.com/api/killboard/${battleContext.selectBattle.id}`
-		);
-		console.log(
-			_.map(
-				battleContext.selectBattle.players,
-				player => response2.data.players[player.id].weapon
-			)
-		);
-		console.log(response2);
-		const hhreportplayers = response2.data.players;
-		console.log(
-			_.map(
-				battleContext.selectBattle.players,
-				player =>
-					normalNameItems[hhreportplayers[player.id].weapon.split(/[?]/)[0]]
-			)
-		);
-		const HHreportPlayerRightItens = _.map(response2.data.players, players => ({
-			...players,
-			weapon: normalNameItems[players.weapon.split(/[?]/)[0]],
-		}));
-		console.log(HHreportPlayerRightItens);
-
-		console.log(response2, 'handholdreportapi');*/
-
 		const response = await axios.get(
-			`https://cors-anywhere.herokuapp.com/https://albionboard.azurewebsites.net/battle/${battleContext.selectBattle.id}?handler=BattleJson`
+			`https://cors-anywhere.herokuapp.com/https://albionboard.azurewebsites.net/battle/${battleId}?handler=BattleJson`
 		);
 
 		const killData = response.data.kills.map(eventkill =>
@@ -254,35 +143,50 @@ const BattleDetail = props => {
 					),
 			};
 		});
-
 		const guildGroupSort = _.groupBy(noTierItems, a => a.guild);
-		console.log(guildGroupSort, 'koe');
-
 		const playerWithitems = playersWithRightItemsNames.reduce(
 			organizePlayer,
 			{}
 		);
-
 		setPlayerWithItem(playerWithitems);
-
 		setZergs(guildGroupSort);
-
 		setLoading(false);
-	}, [battleContext.selectBattle.id]);
+	}, [battleId]);
 
 	React.useEffect(() => {
-		getPlayerWeaponInfo();
-	}, [getPlayerWeaponInfo]);
+		if (selectedxBattle === undefined) {
+			console.log('aqui');
+			getKillboardWithId(battleId);
+			battleContext.loading();
+		} else {
+			setSelectedBattle(selectedBattleWithContext);
+			setKbLoading(false);
+		}
 
-	return (
+		getPlayerWeaponInfo();
+	}, [
+		getPlayerWeaponInfo,
+		selectedxBattle,
+		battleId,
+		getKillboardWithId,
+		battleContext,
+	]);
+
+	return kbLoading ? (
+		<Loader size='big' active inverted>
+			Loading...
+		</Loader>
+	) : (
 		<div>
-			<Container style={mystyle}>
-				<div className='idInfoFont'>ID: {battleContext.selectBattle.id}</div>
-				<div className='headerInfoFont pb-2'>
-					Total Players:{battleContext.selectBattle.totalPlayers} Total Kills:
+			<Container className='m-4 p-4'>
+				<div className='text-orange-1000 text-2xl text-center font-bold'>
+					ID: {selectedBattle.id}
+				</div>
+				<div className='text-gray-1000 text-xl text-center font-bold pb-2'>
+					Total Players:{selectedBattle.totalPlayers} Total Kills:
 					{'     '}
-					{battleContext.selectBattle.totalKills} Total Fame:{'      '}
-					{battleContext.selectBattle.totalFame}
+					{selectedBattle.totalKills} Total Fame:{'      '}
+					{selectedBattle.totalFame}
 				</div>
 				{!isLoading ? (
 					<button
@@ -315,17 +219,21 @@ const BattleDetail = props => {
 			</Container>
 			<br />
 			<br />
-			<div className='gridheaders'>
+			<div className='grid grid-cols-2 grid-rows-1 px-10'>
 				<Container>
-					<div className='headerWfont'>Winners</div>
+					<div className='text-orange-1000 text-xl text-left font-bold'>
+						Winners
+					</div>
 				</Container>
 				<Container>
-					<div className='headerLfont'>Losers</div>
+					<div className='text-gray-1000 text-xl text-right font-bold'>
+						Losers
+					</div>
 				</Container>
 			</div>
 			<div className='tablegrid'>
-				<Table size='small' inverted='true' className='loserTable'>
-					<Table.Header className='loserTable'>
+				<Table size='small' inverted className='bg-orange-1000'>
+					<Table.Header className='bg-orange-1000'>
 						<Table.Row>
 							<Table.HeaderCell>Alliance</Table.HeaderCell>
 							<Table.HeaderCell>Guild</Table.HeaderCell>
@@ -336,8 +244,8 @@ const BattleDetail = props => {
 						</Table.Row>
 					</Table.Header>
 					<Table.Body>
-						{Winners.map(winner => (
-							<React.Fragment>
+						{selectedBattle.winners.guilds.map((winner, i) => (
+							<React.Fragment key={i}>
 								<Table.Row>
 									<Table.Cell>{winner.alliance}</Table.Cell>
 									<Table.Cell>{winner.name}</Table.Cell>
@@ -351,8 +259,8 @@ const BattleDetail = props => {
 					</Table.Body>
 				</Table>
 
-				<Table size='small' inverted='true' className='tableList'>
-					<Table.Header className='tableList'>
+				<Table size='small' inverted className='bg-gray-1100 text-gray-1000'>
+					<Table.Header className='bg-gray-1100 text-gray-1000'>
 						<Table.Row>
 							<Table.HeaderCell>Alliance</Table.HeaderCell>
 							<Table.HeaderCell>Guild</Table.HeaderCell>
@@ -363,24 +271,34 @@ const BattleDetail = props => {
 						</Table.Row>
 					</Table.Header>
 					<Table.Body>
-						{Losers.map(winner => (
-							<React.Fragment>
+						{selectedBattle.losers.guilds.map((loser, i) => (
+							<React.Fragment key={i}>
 								<Table.Row>
-									<Table.Cell>{winner.alliance}</Table.Cell>
-									<Table.Cell>{winner.name}</Table.Cell>
-									<Table.Cell>{winner.totalPlayers}</Table.Cell>
-									<Table.Cell>{winner.kills}</Table.Cell>
-									<Table.Cell>{winner.deaths}</Table.Cell>
-									<Table.Cell>{winner.killFame}</Table.Cell>
+									<Table.Cell>{loser.alliance}</Table.Cell>
+									<Table.Cell>{loser.name}</Table.Cell>
+									<Table.Cell>{loser.totalPlayers}</Table.Cell>
+									<Table.Cell>{loser.kills}</Table.Cell>
+									<Table.Cell>{loser.deaths}</Table.Cell>
+									<Table.Cell>{loser.killFame}</Table.Cell>
 								</Table.Row>
 							</React.Fragment>
 						))}
 					</Table.Body>
 				</Table>
 
-				<WinnerPlayer weaponinfo={playerWithItem} loading={isLoading} />
+				<Players
+					players={selectedBattle.winners.players}
+					battleresult={'winner'}
+					weaponinfo={playerWithItem}
+					loading={isLoading}
+				/>
 
-				<LoserPlayers weaponinfo={playerWithItem} loading={isLoading} />
+				<Players
+					players={selectedBattle.losers.players}
+					weaponinfo={playerWithItem}
+					loading={isLoading}
+					battleresult={'loser'}
+				/>
 			</div>
 		</div>
 	);

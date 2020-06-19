@@ -1,28 +1,15 @@
 import React from 'react';
 import { Table } from 'semantic-ui-react';
-import BattleContext from '../context/BattleContext';
 import { Link } from 'react-router-dom';
 import '../styles/main.css';
 
 const BattleInfoLIst = props => {
-	const battleContext = React.useContext(BattleContext);
 	const { BattleInfo } = props;
-
-	const getInfo = () => {
-		console.log(props.BattleInfo, 'estou sendo executado 1');
-		battleContext.selectBattleHandler(BattleInfo.id);
-		console.log(props.selectBattle, 'teste 2');
-	};
-
 	return (
 		<React.Fragment>
 			<Table.Row>
 				<Table.Cell className='hover:bg-orange-1000'>
-					<Link to={`/${BattleInfo.id}`}>
-						<a onClick={getInfo} className='hover:text-gray-1000'>
-							{BattleInfo.id}
-						</a>
-					</Link>
+					<Link to={`/killboards/${BattleInfo.id}`}>{BattleInfo.id}</Link>
 				</Table.Cell>
 				<Table.Cell>{BattleInfo.endTime}</Table.Cell>
 				<Table.Cell>{BattleInfo.totalPlayers}</Table.Cell>

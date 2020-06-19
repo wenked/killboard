@@ -1,14 +1,18 @@
 import React from 'react';
 import { Table } from 'semantic-ui-react';
-import BattleContext from '../context/BattleContext';
+import '../styles/main.css';
 
-const LoserPlayers = props => {
-	const battleContext = React.useContext(BattleContext);
-	const LosersPlayers = battleContext.selectBattle.losers.players;
+const Players = props => {
+	let resultClass;
+	if (props.battleresult === 'winner') {
+		resultClass = 'bg-orange-1000';
+	} else {
+		resultClass = 'bg-gray-1100 text-gray-1000';
+	}
 
 	return (
-		<Table className='loserTable' inverted='true' compact='very' size='small'>
-			<Table.Header className='tableList'>
+		<Table inverted compact='very' size='small'>
+			<Table.Header className={`${resultClass}`}>
 				<Table.Row>
 					<Table.HeaderCell>Alliance</Table.HeaderCell>
 					<Table.HeaderCell>Guild</Table.HeaderCell>
@@ -21,8 +25,8 @@ const LoserPlayers = props => {
 			</Table.Header>
 
 			<Table.Body>
-				{LosersPlayers.map(player => (
-					<React.Fragment>
+				{props.players.map(player => (
+					<React.Fragment key={player.id}>
 						<Table.Row>
 							<Table.Cell>{player.allianceName}</Table.Cell>
 							<Table.Cell>{player.guildName}</Table.Cell>
@@ -45,4 +49,4 @@ const LoserPlayers = props => {
 	);
 };
 
-export default LoserPlayers;
+export default Players;

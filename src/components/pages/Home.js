@@ -1,7 +1,7 @@
 import React from 'react';
 
-import BattleContext from '../context/BattleContext';
-import '../styles/main.css';
+import BattleContext from '../../context/BattleContext';
+import '../../styles/main.css';
 
 const Home = () => {
 	const battleContext = React.useContext(BattleContext);

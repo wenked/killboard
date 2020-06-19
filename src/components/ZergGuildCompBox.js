@@ -1,111 +1,17 @@
 import React from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { Pie } from 'react-chartjs-2';
+import ModalGraph from './ModalGraph';
+import {
+	MeleeDpsArray,
+	TankArray,
+	SupportArray,
+	HealerArray,
+	RangedDpsArray,
+} from '../utils/zergData';
 import '../styles/main.css';
 import './transitions.css';
 
-const TankArray = [
-	'Mace',
-	'Heavy Mace',
-	'Morning Star',
-	'Bedrock Mace',
-	'Incubus Mace',
-	'Camlann Mace',
-	'Hammer',
-	'Polehammer',
-	'Great Hammer',
-	'Tombhammer',
-	'Forge Hammers',
-	'Grovekeeper',
-	'Quarterstaff',
-	'Iron-Clad Staff',
-	'Double Bladed Staff',
-	'Black Monk Stave',
-	'Soulscythe',
-	'Staff of Balance',
-];
-
-const HealerArray = [
-	'Great Holy Staff',
-	'Divine Staff',
-	'Lifetouch Staff',
-	'Fallen Staff',
-	'Redemption Staff',
-	'Nature Staff',
-	'Great Nature Staff',
-	'Wild Staff',
-	'Druidic Staff',
-	'Blight Staff',
-	'Rampant Staff',
-];
-
-const SupportArray = [
-	'Arcane Staff',
-	'Great Arcane Staff',
-	'Enigmatic Staff',
-	'Witchwork Staff',
-	'Occult Staff',
-	'Malevolent Locus',
-	'Icicle Staff',
-];
-
-const RangedDpsArray = [
-	'Permafrost Prism',
-	'Frost Staff',
-	'Great Frost Staff',
-	'Glacial Staff',
-	'Hoarfrost Staff',
-	'Cursed Staff',
-	'Great Cursed Staff',
-	'Demonic Staff',
-	'Lifecurse Staff',
-	'Cursed Skull',
-	'Damnation Staff',
-	'Fire Staff',
-	'Great Fire Staff',
-	'Infernal Staff',
-	'Wildfire Staff',
-	'Brimstone Staff',
-	'Blazing Staff',
-	'Bow',
-	'Warbow',
-	'Longbow',
-	'Whispering Bow',
-	'Wailing Bow',
-	'Bow of Badon',
-	'Heavy Crossbow',
-	'Crossbow',
-	'Light Crossbow',
-	'Weeping Repeater',
-	'Boltcasters',
-	'Siegebow',
-];
-
-const MeleeDpsArray = [
-	'Pike',
-	'Glaive',
-	'Heron Spear',
-	'Spirithunter',
-	'Trinity Spear',
-	'Dagger',
-	'Dagger Pair',
-	'Claws',
-	'Bloodletter',
-	'Black hands',
-	'Deathgivers',
-	'Greataxe',
-	'Battleaxe',
-	'Halberd',
-	'Carrioncaller',
-	'Infernal Scythe',
-	'Bear Paws',
-	'Broadsword',
-	'Claymore',
-	'Dual Swords',
-	'Clarent Blade',
-	'Carving Sword',
-	'Galatine Pair',
-];
 const checkUndefined = elem => {
 	if (elem === undefined) {
 		return 0;
@@ -122,6 +28,9 @@ const ZergGuildCompBox = props => {
 	const guildsinfo = props.guildsinfo;
 	const [graphData, setGraphData] = React.useState([]);
 	const [showGraph, setShowGraph] = React.useState(false);
+	const closeModalHandler = () => {
+		setShowGraph(false);
+	};
 
 	React.useEffect(() => {
 		setGraphData([
@@ -213,7 +122,11 @@ const ZergGuildCompBox = props => {
 										a => a.weapon === weapon
 									);
 									if (filterhealer.length !== 0) {
-										return <div>{`${weapon}: ${filterhealer.length}`}</div>;
+										return (
+											<div
+												key={11301890139}
+											>{`${weapon}: ${filterhealer.length}`}</div>
+										);
 									}
 									return null;
 								})}
@@ -308,7 +221,11 @@ const ZergGuildCompBox = props => {
 										a => a.weapon === weapon
 									);
 									if (filtermeleedps.length !== 0) {
-										return <div>{`${weapon}: ${filtermeleedps.length}`}</div>;
+										return (
+											<div
+												key={182712817}
+											>{`${weapon}: ${filtermeleedps.length}`}</div>
+										);
 									}
 									return null;
 								})}
@@ -321,7 +238,7 @@ const ZergGuildCompBox = props => {
 			<div>
 				<button
 					className='font-bold hover:text-gray-1000'
-					onClick={() => setShowGraph(!showGraph)}
+					onClick={() => setShowGraph(true)}
 				>
 					Show Graph
 				</button>
@@ -331,23 +248,28 @@ const ZergGuildCompBox = props => {
 					classNames='transition'
 					unmountOnExit={true}
 				>
-					<div>
-						<Pie
-							data={data}
-							style={{ height: '200px', width: '200px' }}
-							options={{
-								responsive: true,
-								maintainAspectRatio: false,
-								legend: {
-									display: true,
-									labels: {
-										fontFamily: 'Ubuntu',
-										fontColor: '#d4d4dc',
+					<ModalGraph closeModal={closeModalHandler}>
+						<div>
+							<div className='font-bold text-lg m-2 py-1'>
+								{props.guildName}
+							</div>
+							<Pie
+								data={data}
+								style={{ height: '200px', width: '200px' }}
+								options={{
+									responsive: true,
+									maintainAspectRatio: false,
+									legend: {
+										display: true,
+										labels: {
+											fontFamily: 'Ubuntu',
+											fontColor: '#d4d4dc',
+										},
 									},
-								},
-							}}
-						/>
-					</div>
+								}}
+							/>
+						</div>
+					</ModalGraph>
 				</CSSTransition>
 			</div>
 		</div>

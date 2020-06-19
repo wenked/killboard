@@ -1,7 +1,7 @@
 import React from 'react';
 import { Icon } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
-import './KillboardList.css';
+import './pages/KillboardList.css';
 import '../styles/main.css';
 
 //import {Search} from 'semantic-ui-react';
