@@ -154,7 +154,7 @@ const BattleDetail = () => {
 	}, [battleId]);
 
 	React.useEffect(() => {
-		if (selectedxBattle === undefined) {
+		if (selectedBattleWithContext === undefined) {
 			console.log('aqui');
 			getKillboardWithId(battleId);
 			battleContext.loading();
@@ -166,7 +166,7 @@ const BattleDetail = () => {
 		getPlayerWeaponInfo();
 	}, [
 		getPlayerWeaponInfo,
-		selectedxBattle,
+		selectedBattleWithContext,
 		battleId,
 		getKillboardWithId,
 		battleContext,

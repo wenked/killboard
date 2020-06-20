@@ -1,14 +1,8 @@
 import React from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { Pie } from 'react-chartjs-2';
+import RolesWeapons from './RolesWeapons';
 import ModalGraph from './ModalGraph';
-import {
-	MeleeDpsArray,
-	TankArray,
-	SupportArray,
-	HealerArray,
-	RangedDpsArray,
-} from '../utils/zergData';
 import '../styles/main.css';
 import './transitions.css';
 
@@ -84,18 +78,10 @@ const ZergGuildCompBox = props => {
 							classNames='transition'
 							unmountOnExit={true}
 						>
-							<div className='text-gray-1000 py-3'>
-								{TankArray.map(weapon => {
-									const filtertanks = guildsinfo.Tank.filter(
-										a => a.weapon === weapon
-									);
-									if (filtertanks.length !== 0) {
-										return <div>{`${weapon}: ${filtertanks.length}`}</div>;
-									}
-
-									return null;
-								})}
-							</div>
+							<RolesWeapons
+								stringRole={`Tank`}
+								roleGuildArray={guildsinfo.Tank}
+							/>
 						</CSSTransition>
 					</React.Fragment>
 				)}
@@ -116,21 +102,10 @@ const ZergGuildCompBox = props => {
 							classNames='transition'
 							unmountOnExit={true}
 						>
-							<div className='text-gray-1000 py-3'>
-								{HealerArray.map(weapon => {
-									const filterhealer = guildsinfo.Healer.filter(
-										a => a.weapon === weapon
-									);
-									if (filterhealer.length !== 0) {
-										return (
-											<div
-												key={11301890139}
-											>{`${weapon}: ${filterhealer.length}`}</div>
-										);
-									}
-									return null;
-								})}
-							</div>
+							<RolesWeapons
+								stringRole={`Healer`}
+								roleGuildArray={guildsinfo.Healer}
+							/>
 						</CSSTransition>
 					</React.Fragment>
 				)}
@@ -151,17 +126,10 @@ const ZergGuildCompBox = props => {
 							classNames='transition'
 							unmountOnExit={true}
 						>
-							<div className='text-gray-1000 py-3'>
-								{SupportArray.map(weapon => {
-									const filtersupport = guildsinfo.Support.filter(
-										a => a.weapon === weapon
-									);
-									if (filtersupport.length !== 0) {
-										return <div>{`${weapon}: ${filtersupport.length}`}</div>;
-									}
-									return null;
-								})}
-							</div>
+							<RolesWeapons
+								stringRole={`Support`}
+								roleGuildArray={guildsinfo.Support}
+							/>
 						</CSSTransition>
 					</React.Fragment>
 				)}
@@ -184,17 +152,10 @@ const ZergGuildCompBox = props => {
 							classNames='transition'
 							unmountOnExit={true}
 						>
-							<div className='text-gray-1000 py-3'>
-								{RangedDpsArray.map(weapon => {
-									const filterrangeddps = guildsinfo['Ranged Dps'].filter(
-										a => a.weapon === weapon
-									);
-									if (filterrangeddps.length !== 0) {
-										return <div>{`${weapon}: ${filterrangeddps.length}`}</div>;
-									}
-									return null;
-								})}
-							</div>
+							<RolesWeapons
+								stringRole={`Ranged Dps`}
+								roleGuildArray={guildsinfo['Ranged Dps']}
+							/>
 						</CSSTransition>
 					</React.Fragment>
 				)}
@@ -215,21 +176,10 @@ const ZergGuildCompBox = props => {
 							classNames='transition'
 							unmountOnExit={true}
 						>
-							<div className='text-gray-1000 py-3'>
-								{MeleeDpsArray.map(weapon => {
-									const filtermeleedps = guildsinfo['Melee Dps'].filter(
-										a => a.weapon === weapon
-									);
-									if (filtermeleedps.length !== 0) {
-										return (
-											<div
-												key={182712817}
-											>{`${weapon}: ${filtermeleedps.length}`}</div>
-										);
-									}
-									return null;
-								})}
-							</div>
+							<RolesWeapons
+								stringRole={`Melee Dps`}
+								roleGuildArray={guildsinfo['Melee Dps']}
+							/>
 						</CSSTransition>
 					</React.Fragment>
 				)}
