@@ -85,7 +85,7 @@ const BattleDetail = () => {
 			const response = await axios.get(
 				`https://cors-anywhere.herokuapp.com/https://api.kill-board.com/battles/${id}`
 			);
-			console.log(response.data.id);
+
 			setSelectedBattle(response.data);
 			setKbLoading(false);
 		},
@@ -123,12 +123,10 @@ const BattleDetail = () => {
 			return noFilterPlayersInfo.find(a => a.name === name);
 		});
 
-		console.log(playersInfo);
-
 		const playersWithRightItemsNames = playersInfo.map(a => {
 			return { ...a, weapon: normalNameItems[a.weapon] };
 		});
-		console.log(playersWithRightItemsNames);
+
 		setplayerWeaponInfo(playersWithRightItemsNames);
 		const noTierItems = playersWithRightItemsNames.map(a => {
 			return {
@@ -155,7 +153,6 @@ const BattleDetail = () => {
 
 	React.useEffect(() => {
 		if (selectedBattleWithContext === undefined) {
-			console.log('aqui');
 			getKillboardWithId(battleId);
 			battleContext.loading();
 		} else {
@@ -179,10 +176,10 @@ const BattleDetail = () => {
 	) : (
 		<div>
 			<Container className='m-4 p-4'>
-				<div className='text-orange-1000 text-2xl text-center font-bold'>
+				<div className='text-orange-1000 text-4xl text-center font-bold pb-3'>
 					ID: {selectedBattle.id}
 				</div>
-				<div className='text-gray-1000 text-xl text-center font-bold pb-2'>
+				<div className='text-gray-1000 text-2xl text-center font-bold pb-2'>
 					Total Players:{selectedBattle.totalPlayers} Total Kills:
 					{'     '}
 					{selectedBattle.totalKills} Total Fame:{'      '}
@@ -221,12 +218,12 @@ const BattleDetail = () => {
 			<br />
 			<div className='grid grid-cols-2 grid-rows-1 px-10'>
 				<Container>
-					<div className='text-orange-1000 text-xl text-left font-bold'>
+					<div className='text-orange-1000 text-4xl text-left font-bold'>
 						Winners
 					</div>
 				</Container>
 				<Container>
-					<div className='text-gray-1000 text-xl text-right font-bold'>
+					<div className='text-gray-1000 text-4xl text-right font-bold'>
 						Losers
 					</div>
 				</Container>

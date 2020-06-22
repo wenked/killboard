@@ -25,12 +25,13 @@ const SearchBar = props => {
 
 	//console.log(Loading);
 	if (props.location.pathname === '/') {
-		myHead = 'myheader';
-		searchF = 'searchfield';
+		myHead = 'justify-center h-full items-center flex';
+		searchF = 'h-10 p-3 border-none rounded-full outline-none w-px400';
 		iconSize = 'large';
 	} else {
-		myHead = 'wrapper';
-		searchF = 'searchbar';
+		myHead = 'relative flex m-w-100';
+		searchF =
+			'border-solid border border-black rounded-full h-6 w-full pt-1 pr-6 pb-1 pl-8 outline-none m-3 inline-flex';
 		iconSize = 'small';
 	}
 

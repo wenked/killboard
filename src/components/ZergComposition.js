@@ -29,6 +29,16 @@ const ZergComposition = props => {
 		setZergComp(myZergs);
 	}, [props.guildzergs]);
 
+	const zergCompMap = _.map(zergComp, (guild, i) => (
+		<div key={i} className='shadow-xl py-3 px-3'>
+			<div className='text-2xl'>{Object.keys(guild)}</div>
+			<ZergGuildCompBox
+				guildsinfo={rolesComp[i][Object.keys(guild)]}
+				guildName={Object.keys(guild)}
+			/>
+		</div>
+	));
+
 	React.useEffect(() => getZergComposition(), [getZergComposition]);
 	//inline-grid grid-cols-6 col-gap-4
 	//zergComp[i][Object.keys(guild)]
@@ -37,15 +47,7 @@ const ZergComposition = props => {
 		<React.Fragment>
 			{zergComp !== undefined && (
 				<div className='text-orange-1000 font-bold block py-3 md:inline-grid grid-cols-3 col-gap-4 py-3 lg:inline-grid grid-cols-4 col-gap-4 py-3 xl:inline-grid grid-cols-6 col-gap-4 py-3'>
-					{_.map(zergComp, (guild, i) => (
-						<div key={i} className='shadow-xl py-3 px-3'>
-							<div className='text-xl'>{Object.keys(guild)}</div>
-							<ZergGuildCompBox
-								guildsinfo={rolesComp[i][Object.keys(guild)]}
-								guildName={Object.keys(guild)}
-							/>
-						</div>
-					))}
+					{zergCompMap}
 				</div>
 			)}
 		</React.Fragment>

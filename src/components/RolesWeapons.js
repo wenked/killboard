@@ -10,7 +10,7 @@ import {
 
 const RolesWeapons = props => {
 	let role;
-	console.log(props);
+
 	switch (props.stringRole) {
 		case 'Tank':
 			role = TankArray;
@@ -31,10 +31,10 @@ const RolesWeapons = props => {
 			role = null;
 			break;
 	}
-	const weaponsMap = role.map(weapon => {
+	const weaponsMap = role.map((weapon, i) => {
 		const filteredRole = props.roleGuildArray.filter(a => a.weapon === weapon);
 		if (filteredRole.length !== 0) {
-			return <div>{`${weapon}: ${filteredRole.length}`}</div>;
+			return <div key={i}>{`${weapon}: ${filteredRole.length}`}</div>;
 		}
 		return null;
 	});

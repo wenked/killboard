@@ -66,7 +66,7 @@ const ZergGuildCompBox = props => {
 				{guildsinfo.Tank !== undefined && (
 					<React.Fragment>
 						<button
-							className='font-bold hover:text-gray-1000'
+							className='text-lg font-bold hover:text-gray-1000'
 							onClick={() => setShowTanks(!showTanks)}
 						>
 							Tank: {guildsinfo.Tank.length}
@@ -90,7 +90,7 @@ const ZergGuildCompBox = props => {
 				{guildsinfo.Healer !== undefined && (
 					<React.Fragment>
 						<button
-							className='font-bold hover:text-gray-1000'
+							className='text-lg font-bold hover:text-gray-1000'
 							onClick={() => setShowHealers(!showHealers)}
 						>
 							Healers: {guildsinfo.Healer.length}
@@ -114,7 +114,7 @@ const ZergGuildCompBox = props => {
 				{guildsinfo.Support !== undefined && (
 					<React.Fragment>
 						<button
-							className='font-bold hover:text-gray-1000'
+							className='text-lg font-bold hover:text-gray-1000'
 							onClick={() => setShowSupports(!showSupports)}
 						>
 							Supports: {guildsinfo.Support.length}
@@ -138,7 +138,7 @@ const ZergGuildCompBox = props => {
 				{guildsinfo['Ranged Dps'] !== undefined && (
 					<React.Fragment>
 						<button
-							className='font-bold hover:text-gray-1000'
+							className='text-lg font-bold hover:text-gray-1000'
 							onClick={() => {
 								setShowRangedDps(!showRangedDps);
 							}}
@@ -164,7 +164,7 @@ const ZergGuildCompBox = props => {
 				{guildsinfo['Melee Dps'] !== undefined && (
 					<React.Fragment>
 						<button
-							className='font-bold hover:text-gray-1000'
+							className='text-lg font-bold hover:text-gray-1000'
 							onClick={() => setShowMeleeDps(!showMeleeDps)}
 						>
 							Melee dps: {guildsinfo['Melee Dps'].length}
@@ -187,7 +187,7 @@ const ZergGuildCompBox = props => {
 
 			<div>
 				<button
-					className='font-bold hover:text-gray-1000'
+					className='text-lg font-bold hover:text-gray-1000'
 					onClick={() => setShowGraph(true)}
 				>
 					Show Graph
@@ -200,7 +200,7 @@ const ZergGuildCompBox = props => {
 				>
 					<ModalGraph closeModal={closeModalHandler}>
 						<div>
-							<div className='font-bold text-lg m-2 py-1'>
+							<div className='font-bold text-2xl  mb-8 py-1 text-center'>
 								{props.guildName}
 							</div>
 							<Pie

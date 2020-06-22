@@ -136,6 +136,7 @@ module.exports = {
 			},
 		},
 		spacing: {
+			px400: '400px',
 			px: '1px',
 			'0': '0',
 			'1': '0.25rem',
@@ -358,6 +359,7 @@ module.exports = {
 			screen: '100vh',
 		},
 		minWidth: {
+			'100': '100px',
 			'0': '0',
 			full: '100%',
 		},

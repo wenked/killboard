@@ -9,6 +9,18 @@ td {
 	background-color: #1d1e22;
 	color: #d4d4dc;
 }
+@media (max-width: 900px) {
+	table {
+		display: block;
+	}
+	tr {
+		display: block;
+	}
+	td {
+		display: inline-block;
+		width: 32%; /* to have 3 columns */
+	}
+}
 
 body {
 	font-family: 'Ubuntu', sans-serif;
