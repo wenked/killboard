@@ -7,6 +7,8 @@ import Layout from './Layout';
 import BattleContext from '../context/BattleContext';
 import './pages/KillboardList.css';
 import Routes from './Routes';
+import { ChakraProvider, CSSReset } from '@chakra-ui/core';
+import theme, { Theme } from '@chakra-ui/theme';
 
 const App = () => {
 	const [battles, setBattles] = React.useState([]);
@@ -23,24 +25,27 @@ const App = () => {
 	};
 	const loadingHandler = () => setIsLoading(false);
 	return (
-		<Router>
-			<BattleContext.Provider
-				value={{
-					battles: battles,
-					loading: loadingHandler,
-				}}
-			>
-				<Layout>
-					<SearchBar SubmitFunction={onFormSubmit} />
-					<Routes />
-					{isLoading && (
-						<Loader size='big' active inverted>
-							Loading...
-						</Loader>
-					)}
-				</Layout>
-			</BattleContext.Provider>
-		</Router>
+		<ChakraProvider theme={theme}>
+			<CSSReset />
+			<Router>
+				<BattleContext.Provider
+					value={{
+						battles: battles,
+						loading: loadingHandler,
+					}}
+				>
+					<Layout>
+						<SearchBar SubmitFunction={onFormSubmit} />
+						<Routes />
+						{isLoading && (
+							<Loader size='big' active inverted>
+								Loading...
+							</Loader>
+						)}
+					</Layout>
+				</BattleContext.Provider>
+			</Router>
+		</ChakraProvider>
 	);
 };
 

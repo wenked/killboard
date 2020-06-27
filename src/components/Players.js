@@ -1,8 +1,20 @@
 import React from 'react';
 import { Table } from 'semantic-ui-react';
 import '../styles/main.css';
+//import items from './items';
+
+/*const organizeItems = (obj, item) => {
+	if (item.LocalizedNames !== null) {
+		return Object.assign(obj, {
+			[item.UniqueName]: item.LocalizedNames['EN-US'],
+		});
+	}
+
+	return Object.assign(obj, { nada: 'nada' });
+};*/
 
 const Players = props => {
+	//const normalNameItems = items.reduce(organizeItems, {});
 	let resultClass;
 	if (props.battleresult === 'winner') {
 		resultClass = 'bg-orange-1000';
@@ -35,11 +47,13 @@ const Players = props => {
 							<Table.Cell>{player.deaths}</Table.Cell>
 							<Table.Cell>{player.killFame}</Table.Cell>
 							<Table.Cell>
-								{!props.loading ? (
-									props.weaponinfo[player.name]
-								) : (
-									<div className='text-orange-1000  font-bold'>Loading...</div>
-								)}
+								{player.equipment !== null &&
+									player.equipment.mainHand !== null && (
+										<img
+											src={`https://render.albiononline.com/v1/item/${player.equipment.mainHand.type}?size=35`}
+											alt='item img'
+										/>
+									)}
 							</Table.Cell>
 						</Table.Row>
 					</React.Fragment>

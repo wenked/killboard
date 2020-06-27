@@ -38,7 +38,7 @@ const RolesWeapons = props => {
 		}
 		return null;
 	});
-	return <div className='text-gray-1000 py-3'>{weaponsMap}</div>;
+	return <div className='font-bold text-gray-1000 py-3'>{weaponsMap}</div>;
 };
 
 export default RolesWeapons;

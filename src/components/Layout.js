@@ -1,6 +1,6 @@
-import React from "react";
-import NavBar from "./NavBar";
-import "../styles/main.css";
+import React from 'react';
+import NavBar from './NavBar';
+import '../styles/main.css';
 
 const Layout = props => {
 	return (

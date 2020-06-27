@@ -30,8 +30,7 @@ const ZergComposition = props => {
 	}, [props.guildzergs]);
 
 	const zergCompMap = _.map(zergComp, (guild, i) => (
-		<div key={i} className='shadow-xl py-3 px-3'>
-			<div className='text-2xl'>{Object.keys(guild)}</div>
+		<div key={i} className=' py-3 px-3'>
 			<ZergGuildCompBox
 				guildsinfo={rolesComp[i][Object.keys(guild)]}
 				guildName={Object.keys(guild)}
