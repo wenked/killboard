@@ -2,8 +2,17 @@ import React from 'react';
 import Guilds from './Guilds';
 import ModalGraph from './ModalGraph';
 import Team from './Team';
+import { motion } from 'framer-motion';
 
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
+const buttonVariants = {
+	visible: {
+		transition: { type: 'spring', stiffness: 300 },
+	},
+	hover: {
+		scale: 1.1,
+	},
+};
 
 const Handholding = ({ guilds }) => {
 	const [teamA, setTeamA] = React.useState([]);
@@ -15,7 +24,10 @@ const Handholding = ({ guilds }) => {
 			<div key={i} className='font-bold text-orange-1000 block'>
 				<div>
 					<div>{guild.name}</div>
-					<button
+					<motion.button
+						variants={buttonVariants}
+						whileHover='hover'
+						transition='visible'
 						onClick={() =>
 							setTeamA(guilds => {
 								if (!teamB.includes(guild) && !teamA.includes(guild)) {
@@ -27,8 +39,11 @@ const Handholding = ({ guilds }) => {
 						className='mx-2 text-gray-1000'
 					>
 						Team A
-					</button>
-					<button
+					</motion.button>
+					<motion.button
+						variants={buttonVariants}
+						whileHover='hover'
+						transition='visible'
 						onClick={() =>
 							setTeamB(guilds => {
 								if (!teamA.includes(guild) && !teamB.includes(guild)) {
@@ -40,7 +55,7 @@ const Handholding = ({ guilds }) => {
 						className='mx-2 text-gray-1000'
 					>
 						Team B
-					</button>
+					</motion.button>
 				</div>
 			</div>
 		);
@@ -58,65 +73,78 @@ const Handholding = ({ guilds }) => {
 				<div>
 					<div className='font-bold text-orange-1000'>
 						Team A: <Team team={teamA} setTeam={setTeamA} />
-						<div>
-							{teamA.length !== 0 && teamA.map(el => el.score).reduce(reducer)}
+						<div className='inline-block'>
+							Total Fame:{' '}
+							<span className='text-gray-1000'>
+								{teamA.length !== 0 &&
+									teamA.map(el => el.score).reduce(reducer)}
+							</span>
 						</div>
 					</div>
 					<div className='font-bold text-orange-1000 '>
 						Team B: <Team team={teamB} setTeam={setTeamB} />
-						<div>
-							{teamB.length !== 0 && teamB.map(el => el.score).reduce(reducer)}
+						<div className='inline-block'>
+							Total Fame:{' '}
+							<span className='text-gray-1000'>
+								{teamB.length !== 0 &&
+									teamB.map(el => el.score).reduce(reducer)}
+							</span>
 						</div>
 					</div>
-				</div>
-			</div>
-			<div>
-				<button
-					className='text-orange-1000 font-bold'
-					onClick={() => setShowTable(!showTable)}
-				>
-					HandHold Kb
-				</button>
-				{showTable ? (
-					<ModalGraph size='big' closeModal={() => setShowTable(false)}>
-						<div className='grid gap-3 grid-cols-2 py-4'>
-							<div>
-								{resultA > resultB ? (
-									<div className='text-orange-1000 font-bold text-xl'>
-										Winners
+					<div>
+						<motion.button
+							variants={buttonVariants}
+							whileHover='hover'
+							transition='visible'
+							className='text-orange-1000 font-bold'
+							onClick={() => setShowTable(!showTable)}
+						>
+							HandHold Killboard
+						</motion.button>
+						{showTable ? (
+							<ModalGraph size='big' closeModal={() => setShowTable(false)}>
+								<div className='grid gap-3 grid-cols-2 py-4'>
+									<div>
+										{resultA > resultB ? (
+											<div className='text-orange-1000 font-bold text-2xl'>
+												Winners
+											</div>
+										) : (
+											<div className='text-gray-1000 font-bold text-2xl'>
+												Losers
+											</div>
+										)}
+										<Guilds
+											result={resultA > resultB ? 'winner' : 'loser'}
+											guilds={teamA.sort(
+												(guildA, guildB) => guildB.score - guildA.score
+											)}
+										/>
 									</div>
-								) : (
-									<div className='text-gray-1000 font-bold text-xl'>Losers</div>
-								)}
-								<Guilds
-									result={resultA > resultB ? 'winner' : 'loser'}
-									guilds={teamA.sort(
-										(guildA, guildB) => guildB.score - guildA.score
-									)}
-								/>
-							</div>
-							<div>
-								<div>
-									{resultB > resultA ? (
-										<div className='text-orange-1000 font-bold text-xl'>
-											Winners
+									<div>
+										<div>
+											{resultB > resultA ? (
+												<div className='text-orange-1000 font-bold text-2xl'>
+													Winners
+												</div>
+											) : (
+												<div className='text-gray-1000 font-bold text-2xl'>
+													Losers
+												</div>
+											)}
 										</div>
-									) : (
-										<div className='text-gray-1000 font-bold text-xl'>
-											Losers
-										</div>
-									)}
+										<Guilds
+											result={resultB > resultA ? 'winner' : 'loser'}
+											guilds={teamB.sort(
+												(guildA, guildB) => guildB.score - guildA.score
+											)}
+										/>
+									</div>
 								</div>
-								<Guilds
-									result={resultB > resultA ? 'winner' : 'loser'}
-									guilds={teamB.sort(
-										(guildA, guildB) => guildB.score - guildA.score
-									)}
-								/>
-							</div>
-						</div>
-					</ModalGraph>
-				) : null}
+							</ModalGraph>
+						) : null}
+					</div>
+				</div>
 			</div>
 		</>
 	);

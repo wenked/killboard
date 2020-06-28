@@ -67,7 +67,6 @@ const containerVariants = {
 	},
 	exit: {
 		opacity: 0,
-		transition: { duration: 0.5 },
 	},
 };
 
@@ -217,13 +216,19 @@ const BattleDetail = () => {
 					>
 						Handhold Formation
 					</button>
-					{showGuilds ? (
+
+					<CSSTransition
+						in={showGuilds}
+						timeout={300}
+						classNames='transition'
+						unmountOnExit={true}
+					>
 						<Handholding
 							guilds={selectedBattle.guilds}
 							winners={selectedBattle.winners}
 							losers={selectedBattle.losers}
 						/>
-					) : null}
+					</CSSTransition>
 				</div>
 			</Container>
 			<br />
