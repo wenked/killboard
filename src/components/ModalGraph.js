@@ -10,9 +10,9 @@ const ModalGraph = props => {
 		mySize = 'w-1/5';
 	}
 	return (
-		<div className='w-full h-screen absolute top-0 left-0 z-10 bg-black bg-opacity-75 flex justify-center items-center'>
+		<div className='overflow-y-auto w-full h-screen absolute top-0 left-0 z-10 bg-black bg-opacity-75 flex justify-center items-center'>
 			<div
-				className={`bg-gray-1100 ${mySize} h-auto text-orange-1000 rounded-lg`}
+				className={`overflow-y-auto bg-gray-1100 ${mySize} h-screen text-orange-1000 rounded-lg`}
 			>
 				<button
 					className='relative top-0 right-0 h-8 w-8 mt-3 ml-3 py-1'

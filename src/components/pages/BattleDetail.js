@@ -18,7 +18,7 @@ import {
 	RangedDpsArray as RangedDps,
 } from '../../utils/zergData';
 import { useParams } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Handholding from '../Handholding';
 
 const organizeItems = (obj, item) => {
@@ -159,16 +159,18 @@ const BattleDetail = () => {
 	}, [getPlayerWeaponInfo, battleId, getKillboardWithId, battleContext]);
 
 	return kbLoading ? (
-		<motion.div
-			variants={containerVariants}
-			initial='hidden'
-			animate='visible'
-			exit='exit'
-		>
-			<Loader size='big' active inverted>
-				Loading...
-			</Loader>
-		</motion.div>
+		<AnimatePresence exitBeforeEnter>
+			<motion.div
+				variants={containerVariants}
+				initial='hidden'
+				animate='visible'
+				exit='exit'
+			>
+				<Loader size='big' active inverted>
+					Loading...
+				</Loader>
+			</motion.div>
+		</AnimatePresence>
 	) : (
 		<motion.div
 			variants={containerVariants}

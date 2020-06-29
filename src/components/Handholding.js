@@ -5,12 +5,13 @@ import Team from './Team';
 import { motion } from 'framer-motion';
 
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
+
 const buttonVariants = {
 	visible: {
 		transition: { type: 'spring', stiffness: 300 },
 	},
 	hover: {
-		scale: 1.1,
+		scale: 1.3,
 	},
 };
 
@@ -92,54 +93,66 @@ const Handholding = ({ guilds }) => {
 						</div>
 					</div>
 					<div>
-						<motion.button
-							variants={buttonVariants}
-							whileHover='hover'
-							transition='visible'
-							className='text-orange-1000 font-bold'
+						<button
+							className='bg-orange-1000 text-gray-1000 hover:bg-gray-100 hover:text-orange-1000 font-bold py-3 px-4 rounded flex'
 							onClick={() => setShowTable(!showTable)}
 						>
-							HandHold Killboard
-						</motion.button>
+							Apply
+						</button>
 						{showTable ? (
 							<ModalGraph size='big' closeModal={() => setShowTable(false)}>
 								<div className='grid gap-3 grid-cols-2 py-4'>
-									<div>
-										{resultA > resultB ? (
-											<div className='text-orange-1000 font-bold text-2xl'>
-												Winners
-											</div>
-										) : (
-											<div className='text-gray-1000 font-bold text-2xl'>
-												Losers
-											</div>
-										)}
-										<Guilds
-											result={resultA > resultB ? 'winner' : 'loser'}
-											guilds={teamA.sort(
-												(guildA, guildB) => guildB.score - guildA.score
-											)}
-										/>
-									</div>
-									<div>
-										<div>
-											{resultB > resultA ? (
+									{resultA > resultB ? (
+										<>
+											<div>
 												<div className='text-orange-1000 font-bold text-2xl'>
 													Winners
 												</div>
-											) : (
+												<Guilds
+													result='winner'
+													guilds={teamA.sort(
+														(guildA, guildB) => guildB.score - guildA.score
+													)}
+												/>
+											</div>
+											<div>
 												<div className='text-gray-1000 font-bold text-2xl'>
 													Losers
 												</div>
-											)}
-										</div>
-										<Guilds
-											result={resultB > resultA ? 'winner' : 'loser'}
-											guilds={teamB.sort(
-												(guildA, guildB) => guildB.score - guildA.score
-											)}
-										/>
-									</div>
+												<Guilds
+													result='loser'
+													guilds={teamB.sort(
+														(guildA, guildB) => guildB.score - guildA.score
+													)}
+												/>
+											</div>
+										</>
+									) : (
+										<>
+											<div>
+												<div className='text-orange-1000 font-bold text-2xl'>
+													Winners
+												</div>
+												<Guilds
+													result='winner'
+													guilds={teamB.sort(
+														(guildA, guildB) => guildB.score - guildA.score
+													)}
+												/>
+											</div>
+											<div>
+												<div className='text-gray-1000 font-bold text-2xl'>
+													Losers
+												</div>
+												<Guilds
+													result='loser'
+													guilds={teamA.sort(
+														(guildA, guildB) => guildB.score - guildA.score
+													)}
+												/>
+											</div>
+										</>
+									)}
 								</div>
 							</ModalGraph>
 						) : null}

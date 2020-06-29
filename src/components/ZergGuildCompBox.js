@@ -79,7 +79,7 @@ const ZergGuildCompBox = props => {
 				transition='visible'
 				onClick={() => setShowComp(!showComp)}
 			>
-				<div className='font-bold text-orange-1000 text-2xl hover:text-gray-1000'>
+				<div className='font-bold text-orange-1000 text-xl hover:text-gray-1000'>
 					{props.guildName}
 				</div>
 			</motion.button>
@@ -258,7 +258,7 @@ const ZergGuildCompBox = props => {
 											legend: {
 												display: true,
 												labels: {
-													fontFamily: 'Ubuntu',
+													fontFamily: 'Roboto',
 													fontColor: '#d4d4dc',
 												},
 											},
