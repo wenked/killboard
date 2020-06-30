@@ -6,6 +6,23 @@ import { motion } from 'framer-motion';
 
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
+const teamReducer = (state, action) => {
+	switch (action.type) {
+		case 'ADD_GUILD':
+			if (
+				!action.otherTeam.includes(action.team) &&
+				!state.includes(action.team)
+			) {
+				return [...state, action.team];
+			}
+			return [...state];
+		case 'REMOVE_GUILD':
+			return state.filter(selected => selected.name !== action.guildName);
+		default:
+			return state;
+	}
+};
+
 const buttonVariants = {
 	visible: {
 		transition: { type: 'spring', stiffness: 300 },
@@ -16,8 +33,9 @@ const buttonVariants = {
 };
 
 const Handholding = ({ guilds }) => {
-	const [teamA, setTeamA] = React.useState([]);
-	const [teamB, setTeamB] = React.useState([]);
+	const [teamA, dispatchA] = React.useReducer(teamReducer, []);
+	const [teamB, dispatchB] = React.useReducer(teamReducer, []);
+
 	const [showTable, setShowTable] = React.useState(false);
 
 	const guildsMap = guilds.map((guild, i) => {
@@ -30,12 +48,7 @@ const Handholding = ({ guilds }) => {
 						whileHover='hover'
 						transition='visible'
 						onClick={() =>
-							setTeamA(guilds => {
-								if (!teamB.includes(guild) && !teamA.includes(guild)) {
-									return [...guilds, guild];
-								}
-								return [...guilds];
-							})
+							dispatchA({ type: 'ADD_GUILD', otherTeam: teamB, team: guild })
 						}
 						className='mx-2 text-gray-1000'
 					>
@@ -46,12 +59,7 @@ const Handholding = ({ guilds }) => {
 						whileHover='hover'
 						transition='visible'
 						onClick={() =>
-							setTeamB(guilds => {
-								if (!teamA.includes(guild) && !teamB.includes(guild)) {
-									return [...guilds, guild];
-								}
-								return [...guilds];
-							})
+							dispatchB({ type: 'ADD_GUILD', otherTeam: teamA, team: guild })
 						}
 						className='mx-2 text-gray-1000'
 					>
@@ -73,7 +81,7 @@ const Handholding = ({ guilds }) => {
 				<div>{guildsMap}</div>
 				<div>
 					<div className='font-bold text-orange-1000'>
-						Team A: <Team team={teamA} setTeam={setTeamA} />
+						Team A: <Team team={teamA} dispatch={dispatchA} />
 						<div className='inline-block'>
 							Total Fame:{' '}
 							<span className='text-gray-1000'>
@@ -83,7 +91,7 @@ const Handholding = ({ guilds }) => {
 						</div>
 					</div>
 					<div className='font-bold text-orange-1000 '>
-						Team B: <Team team={teamB} setTeam={setTeamB} />
+						Team B: <Team team={teamB} dispatch={dispatchB} />
 						<div className='inline-block'>
 							Total Fame:{' '}
 							<span className='text-gray-1000'>

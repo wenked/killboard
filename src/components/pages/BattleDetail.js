@@ -10,52 +10,10 @@ import Guilds from '../Guilds';
 import './KillboardList.css';
 import '../../styles/main.css';
 import { CSSTransition } from 'react-transition-group';
-import {
-	MeleeDpsArray as MeleeDps,
-	TankArray as Tank,
-	SupportArray as Support,
-	HealerArray as Healer,
-	RangedDpsArray as RangedDps,
-} from '../../utils/zergData';
+import { handleguild, organizeItems, getRole } from '../../utils/zergData';
 import { useParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import Handholding from '../Handholding';
-
-const organizeItems = (obj, item) => {
-	if (item.LocalizedNames !== null) {
-		return Object.assign(obj, {
-			[item.UniqueName]: item.LocalizedNames['EN-US'],
-		});
-	}
-
-	return Object.assign(obj, { nada: 'nada' });
-};
-
-const getRole = string => {
-	if (Tank.includes(string) === true) {
-		return 'Tank';
-	}
-	if (Healer.includes(string) === true) {
-		return 'Healer';
-	}
-	if (Support.includes(string) === true) {
-		return 'Support';
-	}
-	if (RangedDps.includes(string) === true) {
-		return 'Ranged Dps';
-	}
-	if (MeleeDps.includes(string) === true) {
-		return 'Melee Dps';
-	}
-	return 'nda';
-};
-
-const handleguild = guild => {
-	if (guild === '' || null) {
-		return 'No Guild';
-	}
-	return guild;
-};
 
 const containerVariants = {
 	hidden: {

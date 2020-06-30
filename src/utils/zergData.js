@@ -101,4 +101,49 @@ const MeleeDpsArray = [
 	'Galatine Pair',
 ];
 
-export { MeleeDpsArray, TankArray, SupportArray, HealerArray, RangedDpsArray };
+const organizeItems = (obj, item) => {
+	if (item.LocalizedNames !== null) {
+		return Object.assign(obj, {
+			[item.UniqueName]: item.LocalizedNames['EN-US'],
+		});
+	}
+
+	return Object.assign(obj, { nada: 'nada' });
+};
+
+const getRole = string => {
+	if (TankArray.includes(string) === true) {
+		return 'Tank';
+	}
+	if (HealerArray.includes(string) === true) {
+		return 'Healer';
+	}
+	if (SupportArray.includes(string) === true) {
+		return 'Support';
+	}
+	if (RangedDpsArray.includes(string) === true) {
+		return 'Ranged Dps';
+	}
+	if (MeleeDpsArray.includes(string) === true) {
+		return 'Melee Dps';
+	}
+	return 'nda';
+};
+
+const handleguild = guild => {
+	if (guild === '' || null) {
+		return 'No Guild';
+	}
+	return guild;
+};
+
+export {
+	MeleeDpsArray,
+	TankArray,
+	SupportArray,
+	HealerArray,
+	RangedDpsArray,
+	handleguild,
+	organizeItems,
+	getRole,
+};

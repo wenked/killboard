@@ -11,7 +11,7 @@ const buttonVariants = {
 	},
 };
 
-const Team = ({ team, setTeam }) => {
+const Team = ({ team, dispatch }) => {
 	const teamMap = team.map(guild => (
 		<div>
 			<motion.button
@@ -19,9 +19,7 @@ const Team = ({ team, setTeam }) => {
 				whileHover='hover'
 				transition='visible'
 				onClick={() =>
-					setTeam(
-						team.filter(selectedguild => selectedguild.name !== guild.name)
-					)
+					dispatch({ type: 'REMOVE_GUILD', guildName: guild.name })
 				}
 			>
 				<div className='text-gray-1000 block'>{guild.name}</div>
