@@ -41,7 +41,7 @@ const SearchBar = props => {
 		iconCSS = 'pl-4 pb-10 pt-2';
 		divFormCSS = '';
 		numberInputCSS = 'h-10 w-40';
-		divInputNumberWrapper = 'pl-32 pt-2 md:pb-1';
+		divInputNumberWrapper = 'pl-32 pt-2 md:pl-2 pt-0 pb-4 lg:pt-0 xl:pt-0';
 	} else {
 		myHead = 'pl-8 relative inline-block m-w-100';
 		searchF =
@@ -91,7 +91,7 @@ const SearchBar = props => {
 									placeholder='Guilds'
 								/>
 							</div>
-							<div className={`pl-4 ${divInputNumberWrapper}`}>
+							<div className={`pl-2 ${divInputNumberWrapper}`}>
 								<input
 									className={`placeholder-gray-1000 placeholder-opacity-25 ${numberInputCSS} outline-none pl-4 bg-gray-800 text-gray-1000 rounded-full focus:shadow-outline`}
 									type='number'

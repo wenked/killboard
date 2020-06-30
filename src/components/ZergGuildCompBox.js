@@ -100,7 +100,7 @@ const ZergGuildCompBox = props => {
 									className='text-lg font-bold hover:text-gray-1000'
 									onClick={() => setShowTanks(!showTanks)}
 								>
-									Tank: {guildsinfo.Tank.length}
+									Tanks: {guildsinfo.Tank.length}
 								</motion.button>
 
 								<CSSTransition
