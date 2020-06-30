@@ -1,7 +1,7 @@
 import React from 'react';
 import { Icon } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
-import { Tooltip } from '@chakra-ui/core';
+
 import './pages/KillboardList.css';
 import '../styles/main.css';
 
@@ -69,18 +69,11 @@ const SearchBar = props => {
 						<div className='block md:inline-flex'>
 							<div>
 								<button className=' hover:text-orange-1000 absolute'>
-									<Tooltip
-										label='Search'
-										placement='top'
-										shouldWrapChildren
-										hasArrow
-									>
-										<Icon
-											className={`text-gray-1000  ${iconCSS} absolute hover:text-orange-1000`}
-											name='search'
-											size={iconSize}
-										/>
-									</Tooltip>
+									<Icon
+										className={`text-gray-1000  ${iconCSS} absolute hover:text-orange-1000`}
+										name='search'
+										size={iconSize}
+									/>
 								</button>
 
 								<input
