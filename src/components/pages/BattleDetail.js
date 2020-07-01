@@ -5,12 +5,12 @@ import _ from 'lodash';
 import BattleContext from '../../context/BattleContext';
 import Players from '../Players';
 import ZergComposition from '../ZergComposition';
-import items from '../items';
 import Guilds from '../Guilds';
+import objItems from '../objItems';
 import './KillboardList.css';
 import '../../styles/main.css';
 import { CSSTransition } from 'react-transition-group';
-import { handleguild, organizeItems, getRole } from '../../utils/zergData';
+import { handleguild, getRole } from '../../utils/zergData';
 import { useParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import Handholding from '../Handholding';
@@ -77,7 +77,6 @@ const BattleDetail = () => {
 				};
 			})
 		);
-		const normalNameItems = items.reduce(organizeItems, {});
 
 		const noFilterPlayersInfo = killData.flat();
 
@@ -88,7 +87,7 @@ const BattleDetail = () => {
 		});
 
 		const playersWithRightItemsNames = playersInfo.map(a => {
-			return { ...a, weapon: normalNameItems[a.weapon] };
+			return { ...a, weapon: objItems[a.weapon] };
 		});
 
 		const noTierItems = playersWithRightItemsNames.map(a => {
