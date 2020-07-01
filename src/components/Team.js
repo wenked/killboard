@@ -12,8 +12,8 @@ const buttonVariants = {
 };
 
 const Team = ({ team, dispatch }) => {
-	const teamMap = team.map(guild => (
-		<div>
+	const teamMap = team.map((guild, i) => (
+		<div key={i}>
 			<motion.button
 				variants={buttonVariants}
 				whileHover='hover'

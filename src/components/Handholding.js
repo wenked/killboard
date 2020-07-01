@@ -35,8 +35,11 @@ const buttonVariants = {
 const Handholding = ({ guilds }) => {
 	const [teamA, dispatchA] = React.useReducer(teamReducer, []);
 	const [teamB, dispatchB] = React.useReducer(teamReducer, []);
-
 	const [showTable, setShowTable] = React.useState(false);
+	const resultA =
+		teamA.length !== 0 && teamA.map(el => el.score).reduce(reducer);
+	const resultB =
+		teamB.length !== 0 && teamB.map(el => el.score).reduce(reducer);
 
 	const guildsMap = guilds.map((guild, i) => {
 		return (
@@ -69,11 +72,6 @@ const Handholding = ({ guilds }) => {
 			</div>
 		);
 	});
-
-	const resultA =
-		teamA.length !== 0 && teamA.map(el => el.score).reduce(reducer);
-	const resultB =
-		teamB.length !== 0 && teamB.map(el => el.score).reduce(reducer);
 
 	return (
 		<>

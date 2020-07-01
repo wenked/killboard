@@ -19,8 +19,6 @@ const containerVariants = {
 
 const Home = () => {
 	const battleContext = React.useContext(BattleContext);
-	console.log(battleContext);
-
 	React.useEffect(() => battleContext.loading(), [battleContext]);
 	return (
 		<motion.div

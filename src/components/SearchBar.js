@@ -1,11 +1,10 @@
 import React from 'react';
 import { Icon } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
-
+import Select from 'react-select';
 import './pages/KillboardList.css';
 import '../styles/main.css';
 
-//import {Search} from 'semantic-ui-react';
 let myHead;
 let searchF;
 let iconSize;
@@ -14,26 +13,31 @@ let divFormCSS;
 let numberInputCSS;
 let divInputNumberWrapper;
 
+const minplayersOptions = [
+	{ value: 0, label: ' > 0' },
+	{ value: 20, label: ' > 20' },
+	{ value: 50, label: ' > 50' },
+];
+
 const SearchBar = props => {
 	const [SearchTerm, setSearchTerm] = React.useState('');
-	const [minPlayerCount, setMinPlayerCount] = React.useState(null);
+	const [minPlayerCount, setMinPlayerCount] = React.useState({});
 
 	const onChangeHandler = e => {
 		setSearchTerm(e.target.value);
 	};
 
-	const onChangePlayerCount = e => {
+	/*const onChangePlayerCount = e => {
 		setMinPlayerCount(e.target.value);
-	};
+	};*/
 
 	const onFormSubmit = e => {
 		e.preventDefault();
-		props.SubmitFunction(SearchTerm, minPlayerCount);
+		props.SubmitFunction(SearchTerm, minPlayerCount.value);
 
 		props.history.push('/killboards');
 	};
 
-	//console.log(Loading);
 	if (props.location.pathname === '/') {
 		myHead = 'justify-center h-full items-center flex';
 		searchF = 'pl-16 h-10 p-3 border-none rounded-full outline-none w-px400';
@@ -41,7 +45,7 @@ const SearchBar = props => {
 		iconCSS = 'pl-4 pb-10 pt-2';
 		divFormCSS = '';
 		numberInputCSS = 'h-10 w-40';
-		divInputNumberWrapper = 'pl-32 pt-2 md:pl-2 pt-0 pb-4 lg:pt-0 xl:pt-0';
+		divInputNumberWrapper = 'w-3/5 pl-32 pt-2 md:pl-2 md:pt-2 md:pb-4';
 	} else {
 		myHead = 'pl-8 relative inline-block m-w-100';
 		searchF =
@@ -50,11 +54,8 @@ const SearchBar = props => {
 		iconCSS = 'pl-4 pt-4';
 		divFormCSS = 'pb-10';
 		numberInputCSS = 'h-8';
-		divInputNumberWrapper = 'pt-1';
+		divInputNumberWrapper = 'pt-1 w-4/5';
 	}
-
-	//display: inline-flex;
-	//color: #d4d4dc;
 
 	return (
 		<div>
@@ -84,16 +85,21 @@ const SearchBar = props => {
 									placeholder='Guilds'
 								/>
 							</div>
-							<div className={`pl-2 ${divInputNumberWrapper}`}>
-								<input
+
+							{/*	<input
 									className={`placeholder-gray-1000 placeholder-opacity-25 ${numberInputCSS} outline-none pl-4 bg-gray-800 text-gray-1000 rounded-full focus:shadow-outline`}
 									type='number'
 									value={minPlayerCount}
 									onChange={onChangePlayerCount}
 									placeholder='Min. Player Count'
-								/>
-							</div>
+								/> */}
 						</div>
+						<Select
+							options={minplayersOptions}
+							placeholder='Min players'
+							onChange={setMinPlayerCount}
+							className={`pl-2 ${divInputNumberWrapper}`}
+						/>
 					</form>
 				</div>
 			</div>
