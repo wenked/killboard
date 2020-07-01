@@ -1,8 +1,8 @@
 import React from 'react';
 import NavBar from './NavBar';
-import '../styles/main.css';
+import '../../styles/main.css';
 import Footer from './Footer';
-import BattleContext from '../context/BattleContext';
+import BattleContext from '../../context/BattleContext';
 import SearchBar from './SearchBar';
 
 const Layout = props => {

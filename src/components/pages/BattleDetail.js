@@ -6,7 +6,7 @@ import BattleContext from '../../context/BattleContext';
 import Players from '../Players';
 import ZergComposition from '../ZergComposition';
 import Guilds from '../Guilds';
-import objItems from '../objItems';
+import objItems from '../../utils/objItems';
 import './KillboardList.css';
 import '../../styles/main.css';
 import { CSSTransition } from 'react-transition-group';

@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Loader } from 'semantic-ui-react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import Layout from './Layout';
+import Layout from './layout/Layout';
 import BattleContext from '../context/BattleContext';
 import './pages/KillboardList.css';
 import Routes from './Routes';
