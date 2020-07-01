@@ -10,7 +10,7 @@ let searchF;
 let iconSize;
 let iconCSS;
 let divFormCSS;
-let numberInputCSS;
+//let numberInputCSS;
 let divInputNumberWrapper;
 
 const minplayersOptions = [
@@ -44,7 +44,7 @@ const SearchBar = props => {
 		iconSize = 'large';
 		iconCSS = 'pl-4 pb-10 pt-2';
 		divFormCSS = '';
-		numberInputCSS = 'h-10 w-40';
+		//numberInputCSS = 'h-10 w-40';
 		divInputNumberWrapper = 'w-3/5 pl-32 pt-2 md:pl-2 md:pt-2 md:pb-4';
 	} else {
 		myHead = 'pl-8 relative inline-block m-w-100';
@@ -53,7 +53,7 @@ const SearchBar = props => {
 		iconSize = 'small';
 		iconCSS = 'pl-4 pt-4';
 		divFormCSS = 'pb-10';
-		numberInputCSS = 'h-8';
+		//numberInputCSS = 'h-8';
 		divInputNumberWrapper = 'pt-1 w-4/5';
 	}
 
