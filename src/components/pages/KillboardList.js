@@ -1,6 +1,6 @@
 import React from 'react';
 import './KillboardList.css';
-import { Table } from 'semantic-ui-react';
+//import { Table } from 'semantic-ui-react';
 import BattleInfoList from '../BattleInfoList';
 import BattleContext from '../../context/BattleContext';
 import { motion } from 'framer-motion';
@@ -21,10 +21,6 @@ const containerVariants = {
 
 const KillboardList = props => {
 	const battleContext = React.useContext(BattleContext);
-	const mystyle = {
-		backgroundColor: '#ff5a09',
-		fontWeight: 'bolder',
-	};
 
 	return (
 		<React.Fragment>
@@ -34,30 +30,26 @@ const KillboardList = props => {
 				animate='visible'
 				exit='exit'
 			>
-				<Table className='tableList' celled selectable size='small' inverted>
-					<Table.Header className='tableList'>
-						<Table.Row>
-							<Table.HeaderCell>ID</Table.HeaderCell>
-							<Table.HeaderCell>Time(UTC)</Table.HeaderCell>
-							<Table.HeaderCell>Players</Table.HeaderCell>
-							<Table.HeaderCell>Kills</Table.HeaderCell>
-							<Table.HeaderCell>Kill Fame</Table.HeaderCell>
-							<Table.HeaderCell style={mystyle}>
-								Winning Alliance
-							</Table.HeaderCell>
-							<Table.HeaderCell style={mystyle}>
-								Winning Guilds
-							</Table.HeaderCell>
-							<Table.HeaderCell>Losing Alliances</Table.HeaderCell>
-							<Table.HeaderCell>Losing Guilds</Table.HeaderCell>
-						</Table.Row>
-					</Table.Header>
-					<Table.Body>
+				<table className='w-full border border-solid border-collapse border-gray-700'>
+					<thead className='tableList'>
+						<tr>
+							<th>ID</th>
+							<th>Time(UTC)</th>
+							<th>Players</th>
+							<th>Kills</th>
+							<th>Kill Fame</th>
+							<th className='bg-orange-1000 font-bold'>Winning Alliance</th>
+							<th className='bg-orange-1000 font-bold'>Winning Guilds</th>
+							<th>Losing Alliances</th>
+							<th>Losing Guilds</th>
+						</tr>
+					</thead>
+					<tbody>
 						{battleContext.battles.map((battle, i) => {
 							return <BattleInfoList key={i} BattleInfo={battle} />;
 						})}
-					</Table.Body>
-				</Table>
+					</tbody>
+				</table>
 			</motion.div>
 		</React.Fragment>
 	);

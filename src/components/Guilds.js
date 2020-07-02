@@ -1,44 +1,46 @@
 import React from 'react';
 import '../styles/main.css';
-import { Table } from 'semantic-ui-react';
+//import { Table } from 'semantic-ui-react';
+//import Table from 'react-bootstrap/Table';
 
 const Guilds = ({ result, guilds }) => {
 	let myCSS;
 	if (result === 'winner') {
-		myCSS = 'bg-orange-1000';
+		myCSS = 'font-bold bg-orange-1000 border-collapse text-left';
 	} else {
-		myCSS = 'bg-gray-1100 text-gray-1000';
+		myCSS = 'font-bold bg-gray-900 text-gray-1000 border-collapse text-left';
 	}
+	const tableCss = 'border-collapse text-left';
 
 	return (
-		<Table size='small' inverted className={`${myCSS}`}>
-			<Table.Header className={`${myCSS}`}>
-				<Table.Row>
-					<Table.HeaderCell>Alliance</Table.HeaderCell>
-					<Table.HeaderCell>Guild</Table.HeaderCell>
-					<Table.HeaderCell>Players</Table.HeaderCell>
-					<Table.HeaderCell>Kills</Table.HeaderCell>
-					<Table.HeaderCell>Deaths</Table.HeaderCell>
-					<Table.HeaderCell>Kill Fame</Table.HeaderCell>
-					<Table.HeaderCell>Average IP</Table.HeaderCell>
-				</Table.Row>
-			</Table.Header>
-			<Table.Body>
+		<table className='w-full border border-solid border-collapse border-gray-700'>
+			<thead>
+				<tr>
+					<th className={myCSS}>Alliance</th>
+					<th className={myCSS}>Guild</th>
+					<th className={myCSS}>Players</th>
+					<th className={myCSS}>Kills</th>
+					<th className={myCSS}>Deaths</th>
+					<th className={myCSS}>Kill Fame</th>
+					<th className={myCSS}>Average IP</th>
+				</tr>
+			</thead>
+			<tbody>
 				{guilds.map((guild, i) => (
 					<React.Fragment key={i}>
-						<Table.Row>
-							<Table.Cell>{guild.alliance}</Table.Cell>
-							<Table.Cell>{guild.name}</Table.Cell>
-							<Table.Cell>{guild.totalPlayers}</Table.Cell>
-							<Table.Cell>{guild.kills}</Table.Cell>
-							<Table.Cell>{guild.deaths}</Table.Cell>
-							<Table.Cell>{guild.killFame}</Table.Cell>
-							<Table.Cell>{guild.averageItemPower}</Table.Cell>
-						</Table.Row>
+						<tr>
+							<td className={tableCss}>{guild.alliance}</td>
+							<td className={tableCss}>{guild.name}</td>
+							<td className={tableCss}>{guild.totalPlayers}</td>
+							<td className={tableCss}>{guild.kills}</td>
+							<td className={tableCss}>{guild.deaths}</td>
+							<td className={tableCss}>{guild.killFame}</td>
+							<td className={tableCss}>{guild.averageItemPower}</td>
+						</tr>
 					</React.Fragment>
 				))}
-			</Table.Body>
-		</Table>
+			</tbody>
+		</table>
 	);
 };
 

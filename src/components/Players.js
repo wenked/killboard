@@ -1,52 +1,42 @@
 import React from 'react';
-import { Table } from 'semantic-ui-react';
+//import { table } from 'semantic-ui-react';
 import '../styles/main.css';
-//import items from './items';
-
-/*const organizeItems = (obj, item) => {
-	if (item.LocalizedNames !== null) {
-		return Object.assign(obj, {
-			[item.UniqueName]: item.LocalizedNames['EN-US'],
-		});
-	}
-
-	return Object.assign(obj, { nada: 'nada' });
-};*/
 
 const Players = props => {
-	//const normalNameItems = items.reduce(organizeItems, {});
 	let resultClass;
+	const tableCss = 'border-collapse text-left';
 	if (props.battleresult === 'winner') {
-		resultClass = 'bg-orange-1000';
+		resultClass = 'font-bold bg-orange-1000 border-collapse text-left';
 	} else {
-		resultClass = 'bg-gray-1100 text-gray-1000';
+		resultClass =
+			'font-bold bg-gray-900 text-gray-1000 border-collapse text-left';
 	}
 
 	return (
-		<Table inverted compact='very' size='small'>
-			<Table.Header className={`${resultClass}`}>
-				<Table.Row>
-					<Table.HeaderCell>Alliance</Table.HeaderCell>
-					<Table.HeaderCell>Guild</Table.HeaderCell>
-					<Table.HeaderCell>Player</Table.HeaderCell>
-					<Table.HeaderCell>Kills</Table.HeaderCell>
-					<Table.HeaderCell>Deaths</Table.HeaderCell>
-					<Table.HeaderCell>Kill Fame</Table.HeaderCell>
-					<Table.HeaderCell>Item</Table.HeaderCell>
-				</Table.Row>
-			</Table.Header>
+		<table className='w-full border border-solid border-collapse border-gray-700'>
+			<thead className={`${resultClass}`}>
+				<tr>
+					<th className={resultClass}>Alliance</th>
+					<th className={resultClass}>Guild</th>
+					<th className={resultClass}>Player</th>
+					<th className={resultClass}>Kills</th>
+					<th className={resultClass}>Deaths</th>
+					<th className={resultClass}>Kill Fame</th>
+					<th className={resultClass}>Item</th>
+				</tr>
+			</thead>
 
-			<Table.Body>
+			<tbody>
 				{props.players.map(player => (
 					<React.Fragment key={player.id}>
-						<Table.Row>
-							<Table.Cell>{player.allianceName}</Table.Cell>
-							<Table.Cell>{player.guildName}</Table.Cell>
-							<Table.Cell>{player.name}</Table.Cell>
-							<Table.Cell>{player.kills}</Table.Cell>
-							<Table.Cell>{player.deaths}</Table.Cell>
-							<Table.Cell>{player.killFame}</Table.Cell>
-							<Table.Cell>
+						<tr>
+							<td className={tableCss}>{player.allianceName}</td>
+							<td className={tableCss}>{player.guildName}</td>
+							<td className={tableCss}>{player.name}</td>
+							<td className={tableCss}>{player.kills}</td>
+							<td className={tableCss}>{player.deaths}</td>
+							<td className={tableCss}>{player.killFame}</td>
+							<td className={tableCss}>
 								{player.equipment !== null &&
 									player.equipment.mainHand !== null && (
 										<img
@@ -54,12 +44,12 @@ const Players = props => {
 											alt='item img'
 										/>
 									)}
-							</Table.Cell>
-						</Table.Row>
+							</td>
+						</tr>
 					</React.Fragment>
 				))}
-			</Table.Body>
-		</Table>
+			</tbody>
+		</table>
 	);
 };
 

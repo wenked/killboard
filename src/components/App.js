@@ -6,6 +6,7 @@ import Layout from './layout/Layout';
 import BattleContext from '../context/BattleContext';
 import './pages/KillboardList.css';
 import Routes from './Routes';
+
 //import { ChakraProvider, CSSReset } from '@chakra-ui/core';
 //import theme, { Theme } from '@chakra-ui/theme';
 

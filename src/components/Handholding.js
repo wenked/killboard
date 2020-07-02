@@ -53,7 +53,7 @@ const Handholding = ({ guilds }) => {
 						onClick={() =>
 							dispatchA({ type: 'ADD_GUILD', otherTeam: teamB, team: guild })
 						}
-						className='mx-2 text-gray-1000'
+						className='mx-2 text-gray-1000 font-bold'
 					>
 						Team A
 					</motion.button>
@@ -64,7 +64,7 @@ const Handholding = ({ guilds }) => {
 						onClick={() =>
 							dispatchB({ type: 'ADD_GUILD', otherTeam: teamA, team: guild })
 						}
-						className='mx-2 text-gray-1000'
+						className='mx-2 text-gray-1000 font-bold'
 					>
 						Team B
 					</motion.button>
@@ -75,7 +75,7 @@ const Handholding = ({ guilds }) => {
 
 	return (
 		<>
-			<div className='grid gap-3 grid-cols-2'>
+			<div className='grid gap-3 grid-cols-2 py-4'>
 				<div>{guildsMap}</div>
 				<div>
 					<div className='font-bold text-orange-1000'>
@@ -111,7 +111,7 @@ const Handholding = ({ guilds }) => {
 									{resultA > resultB ? (
 										<>
 											<div>
-												<div className='text-orange-1000 font-bold text-2xl'>
+												<div className='pb-4 text-orange-1000 font-bold text-2xl'>
 													Winners
 												</div>
 												<Guilds
@@ -122,7 +122,7 @@ const Handholding = ({ guilds }) => {
 												/>
 											</div>
 											<div>
-												<div className='text-gray-1000 font-bold text-2xl'>
+												<div className='pb-4 text-gray-1000 font-bold text-2xl'>
 													Losers
 												</div>
 												<Guilds
@@ -136,7 +136,7 @@ const Handholding = ({ guilds }) => {
 									) : (
 										<>
 											<div>
-												<div className='text-orange-1000 font-bold text-2xl'>
+												<div className='pb-4 text-orange-1000 font-bold text-2xl'>
 													Winners
 												</div>
 												<Guilds
@@ -147,7 +147,7 @@ const Handholding = ({ guilds }) => {
 												/>
 											</div>
 											<div>
-												<div className='text-gray-1000 font-bold text-2xl'>
+												<div className='pb-4 text-gray-1000 font-bold text-2xl'>
 													Losers
 												</div>
 												<Guilds

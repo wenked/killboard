@@ -41,7 +41,7 @@ const BattleDetail = () => {
 	const [isLoading, setLoading] = React.useState(true);
 	const [kbLoading, setKbLoading] = React.useState(true);
 	const [showGuilds, setShowGuilds] = React.useState(false);
-	const [zergs, setZergs] = React.useState({});
+	const [zergs, setZergs] = React.useState(null);
 
 	//https://albionboard.azurewebsites.net/battle/90885561?handler=BattleJson
 	const getKillboardWithId = React.useCallback(
@@ -135,7 +135,7 @@ const BattleDetail = () => {
 			animate='visible'
 			exit='exit'
 		>
-			<Container className='m-4 p-4'>
+			<Container className='m-4 p-4 shadow-2xl'>
 				<div className='text-orange-1000 text-4xl text-center font-bold pb-3'>
 					ID: {selectedBattle.id}
 				</div>
@@ -145,79 +145,74 @@ const BattleDetail = () => {
 					{selectedBattle.totalKills} Total Fame:{'      '}
 					{selectedBattle.totalFame}
 				</div>
-				{!isLoading ? (
-					<button
-						className='bg-orange-1000 text-gray-1000 hover:bg-gray-100 hover:text-orange-1000 font-bold py-3 px-4 rounded flex'
-						onClick={() => {
-							setShowZergComposition(!showZergComposition);
-						}}
-					>
-						Show Zergs Composition
-					</button>
-				) : (
-					<button className='bg-orange-1000 text-gray-1000 hover:bg-gray-100 hover:text-orange-1000 font-bold py-3 px-4 rounded opacity-50 flex cursor-not-allowed'>
-						Loading...
-					</button>
-				)}
-
-				<CSSTransition
-					in={showZergComposition}
-					timeout={300}
-					classNames='transition'
-					unmountOnExit={true}
-				>
-					<ZergComposition guildzergs={zergs} />
-				</CSSTransition>
-				<div className='py-5'>
-					<button
-						onClick={() => setShowGuilds(!showGuilds)}
-						className='bg-orange-1000 text-gray-1000 hover:bg-gray-100 hover:text-orange-1000 font-bold py-3 px-4 rounded flex'
-					>
-						Handhold Formation
-					</button>
+				<div className='pt-4'>
+					{!isLoading ? (
+						<button
+							className='bg-orange-1000 text-gray-1000 hover:bg-gray-100 hover:text-orange-1000 font-bold py-3 px-4 rounded flex'
+							onClick={() => {
+								setShowZergComposition(!showZergComposition);
+							}}
+						>
+							Show Zergs Composition
+						</button>
+					) : (
+						<button className='bg-orange-1000 text-gray-1000 hover:bg-gray-100 hover:text-orange-1000 font-bold py-3 px-4 rounded opacity-50 flex cursor-not-allowed'>
+							Loading...
+						</button>
+					)}
 
 					<CSSTransition
-						in={showGuilds}
+						in={showZergComposition}
 						timeout={300}
 						classNames='transition'
 						unmountOnExit={true}
 					>
-						<Handholding
-							guilds={selectedBattle.guilds}
-							winners={selectedBattle.winners}
-							losers={selectedBattle.losers}
-						/>
+						{zergs && <ZergComposition guildzergs={zergs} />}
 					</CSSTransition>
+					<div className='py-5'>
+						<button
+							onClick={() => setShowGuilds(!showGuilds)}
+							className='bg-orange-1000 text-gray-1000 hover:bg-gray-100 hover:text-orange-1000 font-bold py-3 px-4 rounded flex'
+						>
+							Handhold Formation
+						</button>
+
+						<CSSTransition
+							in={showGuilds}
+							timeout={300}
+							classNames='transition'
+							unmountOnExit={true}
+						>
+							<Handholding
+								guilds={selectedBattle.guilds}
+								winners={selectedBattle.winners}
+								losers={selectedBattle.losers}
+							/>
+						</CSSTransition>
+					</div>
 				</div>
 			</Container>
-			<br />
-			<br />
-			<div className='grid grid-cols-2 grid-rows-1 px-10'>
-				<Container>
-					<div className='text-orange-1000 text-4xl text-left font-bold'>
+
+			<div className='block md:grid p-2 m-2 gap-2 grid-cols-2'>
+				<div className='py-2'>
+					<div className='pb-4 text-orange-1000 text-4xl text-left font-bold'>
 						Winners
 					</div>
-				</Container>
-				<Container>
-					<div className='text-gray-1000 text-4xl text-right font-bold'>
-						Losers
-					</div>
-				</Container>
-			</div>
-			<div className='block md:grid p-2 m-2 gap-2 grid-cols-2'>
-				<div>
 					<Guilds result='winner' guilds={selectedBattle.winners.guilds} />
 				</div>
-				<div>
+				<div className='py-2'>
+					<div className='pb-4 text-gray-1000 text-4xl text-right font-bold sm:pl-8'>
+						Losers
+					</div>
 					<Guilds result='loser' guilds={selectedBattle.losers.guilds} />
 				</div>
-				<div>
+				<div className='py-2'>
 					<Players
 						players={selectedBattle.winners.players}
 						battleresult={'winner'}
 					/>
 				</div>
-				<div>
+				<div className='py-2'>
 					<Players
 						players={selectedBattle.losers.players}
 						battleresult={'loser'}
