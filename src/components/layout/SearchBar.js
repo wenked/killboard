@@ -78,7 +78,7 @@ const SearchBar = props => {
 								</button>
 
 								<input
-									className={`placeholder-gray-1000 placeholder-opacity-25 bg-gray-800 text-gray-1000 ${searchF} focus:shadow-outline `}
+									className={`placeholder-gray-1000 placeholder-opacity-25 bg-gray-1200 text-gray-1000 ${searchF} focus:shadow-outline `}
 									type='text'
 									value={SearchTerm}
 									onChange={onChangeHandler}
@@ -87,7 +87,7 @@ const SearchBar = props => {
 							</div>
 							<div className={`pl-2 ${divInputNumberWrapper}`}>
 								<input
-									className={`placeholder-gray-1000 placeholder-opacity-25 ${numberInputCSS} outline-none pl-4 bg-gray-800 text-gray-1000 rounded-full focus:shadow-outline`}
+									className={`placeholder-gray-1000 placeholder-opacity-25 ${numberInputCSS} outline-none pl-4 bg-gray-1200 text-gray-1000 rounded-full focus:shadow-outline`}
 									type='number'
 									value={minPlayerCount}
 									onChange={onChangePlayerCount}
