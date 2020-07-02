@@ -33,15 +33,15 @@ const KillboardList = props => {
 				<table className='w-full border border-solid border-collapse border-gray-700'>
 					<thead className='tableList'>
 						<tr>
-							<th>ID</th>
-							<th>Time(UTC)</th>
-							<th>Players</th>
-							<th>Kills</th>
-							<th>Kill Fame</th>
+							<th className='bg-gray-1200'>ID</th>
+							<th className='bg-gray-1200'>Time(UTC)</th>
+							<th className='bg-gray-1200'>Players</th>
+							<th className='bg-gray-1200'>Kills</th>
+							<th className='bg-gray-1200'>Kill Fame</th>
 							<th className='bg-orange-1000 font-bold'>Winning Alliance</th>
 							<th className='bg-orange-1000 font-bold'>Winning Guilds</th>
-							<th>Losing Alliances</th>
-							<th>Losing Guilds</th>
+							<th className='bg-gray-1200'>Losing Alliances</th>
+							<th className='bg-gray-1200'>Losing Guilds</th>
 						</tr>
 					</thead>
 					<tbody>

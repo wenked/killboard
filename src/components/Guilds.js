@@ -8,7 +8,7 @@ const Guilds = ({ result, guilds }) => {
 	if (result === 'winner') {
 		myCSS = 'font-bold bg-orange-1000 border-collapse text-left';
 	} else {
-		myCSS = 'font-bold bg-gray-900 text-gray-1000 border-collapse text-left';
+		myCSS = 'font-bold bg-gray-1200 text-gray-1000 border-collapse text-left';
 	}
 	const tableCss = 'border-collapse text-left';
 

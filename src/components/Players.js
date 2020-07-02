@@ -9,7 +9,7 @@ const Players = props => {
 		resultClass = 'font-bold bg-orange-1000 border-collapse text-left';
 	} else {
 		resultClass =
-			'font-bold bg-gray-900 text-gray-1000 border-collapse text-left';
+			'font-bold bg-gray-1200 text-gray-1000 border-collapse text-left';
 	}
 
 	return (
