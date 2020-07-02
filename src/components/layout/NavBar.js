@@ -6,7 +6,7 @@ import '../../styles/main.css';
 const NavBar = () => {
 	return (
 		<nav>
-			<ul className='MyUl block md:flex xl:flex'>
+			<ul className='MyUl bg-gray-1200 block md:flex xl:flex'>
 				<li className='myLi'>
 					<Link className='myA' to='/'>
 						Home

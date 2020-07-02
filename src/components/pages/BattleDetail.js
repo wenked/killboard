@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Container, Loader } from 'semantic-ui-react';
+import { Loader } from 'semantic-ui-react';
 import _ from 'lodash';
 import BattleContext from '../../context/BattleContext';
 import Players from '../Players';
@@ -135,7 +135,7 @@ const BattleDetail = () => {
 			animate='visible'
 			exit='exit'
 		>
-			<Container className='m-4 p-4 shadow-2xl'>
+			<div className='m-4 p-4 shadow-2xl w-full'>
 				<div className='text-orange-1000 text-4xl text-center font-bold pb-3'>
 					ID: {selectedBattle.id}
 				</div>
@@ -191,9 +191,9 @@ const BattleDetail = () => {
 						</CSSTransition>
 					</div>
 				</div>
-			</Container>
+			</div>
 
-			<div className='block md:grid p-2 m-2 gap-2 grid-cols-2'>
+			<div className='p-4 m-4 block md:block  lg:grid gap-2 grid-cols-2'>
 				<div className='py-2'>
 					<div className='pb-4 text-orange-1000 text-4xl text-left font-bold'>
 						Winners

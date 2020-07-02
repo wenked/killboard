@@ -12,6 +12,7 @@ let iconCSS;
 let divFormCSS;
 let numberInputCSS;
 let divInputNumberWrapper;
+let divWrapper;
 
 /*const minplayersOptions = [
 	{ value: 0, label: ' > 0' },
@@ -46,6 +47,7 @@ const SearchBar = props => {
 		divFormCSS = '';
 		numberInputCSS = 'h-10 w-40';
 		divInputNumberWrapper = 'w-3/5 pl-10 pt-2 md:pl-2 md:pt-0 md:pb-4';
+		divWrapper = 'pt-8';
 	} else {
 		myHead = 'pl-8 relative inline-block m-w-100';
 		searchF =
@@ -55,10 +57,11 @@ const SearchBar = props => {
 		divFormCSS = 'pb-10';
 		numberInputCSS = 'h-8';
 		divInputNumberWrapper = 'pt-1 w-4/5';
+		divWrapper = 'pt-4';
 	}
 
 	return (
-		<div>
+		<div className={divWrapper}>
 			<div className={myHead}>
 				<div className={divFormCSS}>
 					<form onSubmit={onFormSubmit}>
