@@ -9,7 +9,7 @@ td {
 	background-color: #1d1e22;
 	color: #d4d4dc;
 }
-@media (max-width: 900px) {
+/*@media (max-width: 900px) {
 	table {
 		display: block;
 	}
@@ -18,9 +18,9 @@ td {
 	}
 	td {
 		display: inline-block;
-		width: 32%; /* to have 3 columns */
+		width: 32%; /* to have 3 columns 
 	}
-}
+}*/
 
 body {
 	font-family: 'Ubuntu', sans-serif;
@@ -99,14 +99,6 @@ a {
 .searchbar:focus {
 	border: 1.5px solid lightblue;
 	background-color: white;
-}
-
-.tablegrid {
-	display: grid;
-	padding: 1% 1% 1% 1%;
-	margin: 1% 1% 1% 1%;
-	gap: 10px;
-	grid-template-columns: 3fr 3fr;
 }
 
 .gridheaders {

@@ -17,7 +17,7 @@ const App = () => {
 	const onFormSubmit = async (searchTerm, minPlayerCount) => {
 		setIsLoading(true);
 		let response;
-		if (minPlayerCount === 0) {
+		if (minPlayerCount === '') {
 			response = await axios.get(
 				`https://cors-anywhere.herokuapp.com/https://api.kill-board.com/battles/?page=0&limit=100&search=${searchTerm}&group=&startDate=`
 			);

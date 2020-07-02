@@ -111,6 +111,16 @@ const organizeItems = (obj, item) => {
 	return Object.assign(obj, { nada: 'nada' });
 };
 
+/*{BattleInfo.endTime
+	.replace(/T/g, ' ')
+	.substring(0, BattleInfo.endTime.replace(/T/g, ' ').indexOf('.'))}*/
+
+const convertString = string => {
+	return string
+		.replace(/T/g, ' ')
+		.substring(0, string.replace(/T/g, ' ').indexOf('.'));
+};
+
 const getRole = string => {
 	if (TankArray.includes(string) === true) {
 		return 'Tank';
@@ -146,4 +156,5 @@ export {
 	handleguild,
 	organizeItems,
 	getRole,
+	convertString,
 };

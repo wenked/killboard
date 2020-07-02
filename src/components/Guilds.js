@@ -11,8 +11,8 @@ const Guilds = ({ result, guilds }) => {
 	}
 
 	return (
-		<Table size='small' inverted className={myCSS}>
-			<Table.Header className={myCSS}>
+		<Table size='small' inverted className={`${myCSS}`}>
+			<Table.Header className={`${myCSS}`}>
 				<Table.Row>
 					<Table.HeaderCell>Alliance</Table.HeaderCell>
 					<Table.HeaderCell>Guild</Table.HeaderCell>

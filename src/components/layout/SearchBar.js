@@ -21,7 +21,7 @@ let divInputNumberWrapper;
 
 const SearchBar = props => {
 	const [SearchTerm, setSearchTerm] = React.useState('');
-	const [minPlayerCount, setMinPlayerCount] = React.useState(0);
+	const [minPlayerCount, setMinPlayerCount] = React.useState('');
 
 	const onChangeHandler = e => {
 		setSearchTerm(e.target.value);
@@ -40,12 +40,12 @@ const SearchBar = props => {
 
 	if (props.location.pathname === '/') {
 		myHead = 'justify-center h-full items-center flex';
-		searchF = 'pl-16 h-10 p-3 border-none rounded-full outline-none w-px400';
+		searchF = 'pl-16 h-10 p-3 border-none rounded-full outline-none w-full';
 		iconSize = 'large';
 		iconCSS = 'pl-4 pb-10 pt-2';
 		divFormCSS = '';
 		numberInputCSS = 'h-10 w-40';
-		divInputNumberWrapper = 'w-3/5 pl-32 pt-2 md:pl-2 md:pt-0 md:pb-4';
+		divInputNumberWrapper = 'w-3/5 pl-10 pt-2 md:pl-2 md:pt-0 md:pb-4';
 	} else {
 		myHead = 'pl-8 relative inline-block m-w-100';
 		searchF =

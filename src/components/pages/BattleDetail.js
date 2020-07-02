@@ -204,17 +204,25 @@ const BattleDetail = () => {
 					</div>
 				</Container>
 			</div>
-			<div className='tablegrid'>
-				<Guilds result='winner' guilds={selectedBattle.winners.guilds} />
-				<Guilds result='loser' guilds={selectedBattle.losers.guilds} />
-				<Players
-					players={selectedBattle.winners.players}
-					battleresult={'winner'}
-				/>
-				<Players
-					players={selectedBattle.losers.players}
-					battleresult={'loser'}
-				/>
+			<div className='block md:grid p-2 m-2 gap-2 grid-cols-2'>
+				<div>
+					<Guilds result='winner' guilds={selectedBattle.winners.guilds} />
+				</div>
+				<div>
+					<Guilds result='loser' guilds={selectedBattle.losers.guilds} />
+				</div>
+				<div>
+					<Players
+						players={selectedBattle.winners.players}
+						battleresult={'winner'}
+					/>
+				</div>
+				<div>
+					<Players
+						players={selectedBattle.losers.players}
+						battleresult={'loser'}
+					/>
+				</div>
 			</div>
 		</motion.div>
 	);

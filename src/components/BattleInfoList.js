@@ -1,6 +1,7 @@
 import React from 'react';
 import { Table } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import { convertString } from '../utils/zergData';
 import '../styles/main.css';
 
 const BattleInfoLIst = props => {
@@ -9,9 +10,14 @@ const BattleInfoLIst = props => {
 		<React.Fragment>
 			<Table.Row>
 				<Table.Cell className='hover:bg-orange-1000'>
-					<Link to={`/killboards/${BattleInfo.id}`}>{BattleInfo.id}</Link>
+					<Link
+						className='hover:text-gray-1000'
+						to={`/killboards/${BattleInfo.id}`}
+					>
+						{BattleInfo.id}
+					</Link>
 				</Table.Cell>
-				<Table.Cell>{BattleInfo.endTime}</Table.Cell>
+				<Table.Cell>{convertString(BattleInfo.endTime)}</Table.Cell>
 				<Table.Cell>{BattleInfo.totalPlayers}</Table.Cell>
 				<Table.Cell>{BattleInfo.totalKills}</Table.Cell>
 				<Table.Cell>{BattleInfo.totalFame}</Table.Cell>
