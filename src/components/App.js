@@ -56,6 +56,10 @@ const App = () => {
 						<Loader size='big' active inverted>
 							Loading...
 						</Loader>
+					) : data.length === 0 ? (
+						<div className='text-gray-1000 font-bold text-xl py-4'>
+							Invalid Guild name
+						</div>
 					) : null}{' '}
 				</Layout>
 			</BattleContext.Provider>
