@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Loader } from 'semantic-ui-react';
 import _ from 'lodash';
-import BattleContext from '../../context/BattleContext';
+//import BattleContext from '../../context/BattleContext';
 import Players from '../Players';
 import ZergComposition from '../ZergComposition';
 import Guilds from '../Guilds';
@@ -14,6 +14,7 @@ import { handleguild, getRole } from '../../utils/zergData';
 import { useParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import Handholding from '../Handholding';
+import { useQuery } from 'react-query';
 
 const containerVariants = {
 	hidden: {
@@ -30,31 +31,29 @@ const containerVariants = {
 
 // https://api.kill-board.com/battles/94225686
 
+const fetchBattle = async battleid => {
+	const response = await axios.get(
+		`https://cors-anywhere.herokuapp.com/https://api.kill-board.com/battles/${battleid}`
+	);
+
+	return response.data;
+};
+
 const BattleDetail = () => {
 	const { battleId } = useParams();
-	const battleContext = React.useContext(BattleContext);
-	/*const selectedBattleWithContext = battleContext.battles.find(
+
+	/*const dataWithContext = battleContext.battles.find(
 		battle => battle.id === parseInt(battleId)
 	);*/
-	const [selectedBattle, setSelectedBattle] = React.useState({});
+	//const [data, setdata] = React.useState({});
 	const [showZergComposition, setShowZergComposition] = React.useState(false);
-	const [isLoading, setLoading] = React.useState(true);
-	const [kbLoading, setKbLoading] = React.useState(true);
+	const [isLoadingInfo, setLoading] = React.useState(true);
 	const [showGuilds, setShowGuilds] = React.useState(false);
 	const [zergs, setZergs] = React.useState(null);
 
-	//https://albionboard.azurewebsites.net/battle/90885561?handler=BattleJson
-	const getKillboardWithId = React.useCallback(
-		async id => {
-			const response = await axios.get(
-				`https://cors-anywhere.herokuapp.com/https://api.kill-board.com/battles/${id}`
-			);
+	const { isLoading, data, error } = useQuery(battleId, fetchBattle);
 
-			setSelectedBattle(response.data);
-			setKbLoading(false);
-		},
-		[setSelectedBattle, setKbLoading]
-	);
+	//https://albionboard.azurewebsites.net/battle/90885561?handler=BattleJson
 
 	const getPlayerWeaponInfo = React.useCallback(async () => {
 		const response = await axios.get(
@@ -110,19 +109,19 @@ const BattleDetail = () => {
 	}, [battleId]);
 
 	React.useEffect(() => {
-		getKillboardWithId(battleId);
-		battleContext.loading();
-		getPlayerWeaponInfo();
-	}, [getPlayerWeaponInfo, battleId, getKillboardWithId, battleContext]);
+		//getKillboardWithId(battleId);
 
-	return kbLoading ? (
+		//battleContext.loading();
+		getPlayerWeaponInfo();
+	}, [getPlayerWeaponInfo, battleId]);
+
+	return isLoading ? (
 		<AnimatePresence exitBeforeEnter>
 			<motion.div
 				variants={containerVariants}
 				initial='hidden'
 				animate='visible'
-				exit='exit'
-			>
+				exit='exit'>
 				<Loader size='big' active inverted>
 					Loading...
 				</Loader>
@@ -133,26 +132,24 @@ const BattleDetail = () => {
 			variants={containerVariants}
 			initial='hidden'
 			animate='visible'
-			exit='exit'
-		>
+			exit='exit'>
 			<div className='m-4 p-4 shadow-2xl w-full'>
 				<div className='text-orange-1000 text-4xl text-center font-bold pb-3'>
-					ID: {selectedBattle.id}
+					ID: {data.id}
 				</div>
 				<div className='text-gray-1000 text-2xl text-center font-bold pb-2'>
-					Total Players:{selectedBattle.totalPlayers} Total Kills:
+					Total Players:{data.totalPlayers} Total Kills:
 					{'     '}
-					{selectedBattle.totalKills} Total Fame:{'      '}
-					{selectedBattle.totalFame}
+					{data.totalKills} Total Fame:{'      '}
+					{data.totalFame}
 				</div>
 				<div className='pt-4'>
-					{!isLoading ? (
+					{!isLoadingInfo ? (
 						<button
 							className='bg-orange-1000 text-gray-1000 hover:bg-gray-100 hover:text-orange-1000 font-bold py-3 px-4 rounded flex'
 							onClick={() => {
 								setShowZergComposition(!showZergComposition);
-							}}
-						>
+							}}>
 							Show Zergs Composition
 						</button>
 					) : (
@@ -165,15 +162,13 @@ const BattleDetail = () => {
 						in={showZergComposition}
 						timeout={300}
 						classNames='transition'
-						unmountOnExit={true}
-					>
+						unmountOnExit={true}>
 						{zergs && <ZergComposition guildzergs={zergs} />}
 					</CSSTransition>
 					<div className='py-5'>
 						<button
 							onClick={() => setShowGuilds(!showGuilds)}
-							className='bg-orange-1000 text-gray-1000 hover:bg-gray-100 hover:text-orange-1000 font-bold py-3 px-4 rounded flex'
-						>
+							className='bg-orange-1000 text-gray-1000 hover:bg-gray-100 hover:text-orange-1000 font-bold py-3 px-4 rounded flex'>
 							Handhold Formation
 						</button>
 
@@ -181,12 +176,11 @@ const BattleDetail = () => {
 							in={showGuilds}
 							timeout={300}
 							classNames='transition'
-							unmountOnExit={true}
-						>
+							unmountOnExit={true}>
 							<Handholding
-								guilds={selectedBattle.guilds}
-								winners={selectedBattle.winners}
-								losers={selectedBattle.losers}
+								guilds={data.guilds}
+								winners={data.winners}
+								losers={data.losers}
 							/>
 						</CSSTransition>
 					</div>
@@ -198,25 +192,19 @@ const BattleDetail = () => {
 					<div className='pb-4 text-orange-1000 text-4xl text-left font-bold'>
 						Winners
 					</div>
-					<Guilds result='winner' guilds={selectedBattle.winners.guilds} />
+					<Guilds result='winner' guilds={data.winners.guilds} />
 				</div>
 				<div className='py-2'>
 					<div className='pb-4 text-gray-1000 text-4xl text-right font-bold sm:pl-8'>
 						Losers
 					</div>
-					<Guilds result='loser' guilds={selectedBattle.losers.guilds} />
+					<Guilds result='loser' guilds={data.losers.guilds} />
 				</div>
 				<div className='py-2'>
-					<Players
-						players={selectedBattle.winners.players}
-						battleresult={'winner'}
-					/>
+					<Players players={data.winners.players} battleresult={'winner'} />
 				</div>
 				<div className='py-2'>
-					<Players
-						players={selectedBattle.losers.players}
-						battleresult={'loser'}
-					/>
+					<Players players={data.losers.players} battleresult={'loser'} />
 				</div>
 			</div>
 		</motion.div>

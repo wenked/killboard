@@ -1,6 +1,7 @@
 import React from 'react';
 import { Icon } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
+import BattleContext from '../../context/BattleContext';
 //import Select from 'react-select';
 //import './pages/KillboardList.css';
 import '../../styles/main.css';
@@ -20,26 +21,29 @@ let divWrapper;
 	{ value: 50, label: ' > 50' },
 ];*/
 
-const SearchBar = props => {
-	const [SearchTerm, setSearchTerm] = React.useState('');
-	const [minPlayerCount, setMinPlayerCount] = React.useState('');
+const SearchBar = ({ setSearchTerm, setMinPlayerCount, history, location }) => {
+	const battleContext = React.useContext(BattleContext);
+	const [localSearch, setLocalSearch] = React.useState('');
+	const [localMinPlayer, setLocalMinPlayer] = React.useState(0);
 
 	const onChangeHandler = e => {
-		setSearchTerm(e.target.value);
+		setLocalSearch(e.target.value);
 	};
 
 	const onChangePlayerCount = e => {
-		setMinPlayerCount(e.target.value);
+		setLocalMinPlayer(e.target.value);
 	};
 
 	const onFormSubmit = e => {
 		e.preventDefault();
-		props.SubmitFunction(SearchTerm, minPlayerCount);
+		setMinPlayerCount(localMinPlayer);
+		setSearchTerm(localSearch);
+		battleContext.preFetching(localSearch, localMinPlayer);
 
-		props.history.push('/killboards');
+		history.push('/killboards');
 	};
 
-	if (props.location.pathname === '/') {
+	if (location.pathname === '/') {
 		myHead = 'justify-center h-full items-center flex';
 		searchF = 'pl-16 h-10 p-3 border-none rounded-full outline-none w-full';
 		iconSize = 'large';
@@ -65,7 +69,7 @@ const SearchBar = props => {
 			<div className={myHead}>
 				<div className={divFormCSS}>
 					<form onSubmit={onFormSubmit}>
-						{props.location.pathname === '/' && (
+						{location.pathname === '/' && (
 							<h1 className='text-gray-1000 text-5xl mb-8  tracking-normal text-center hover:text-orange-1000'>
 								KillBoard
 							</h1>
@@ -83,7 +87,7 @@ const SearchBar = props => {
 								<input
 									className={`placeholder-gray-1000 placeholder-opacity-25 bg-gray-1200 text-gray-1000 ${searchF} focus:shadow-outline `}
 									type='text'
-									value={SearchTerm}
+									value={localSearch}
 									onChange={onChangeHandler}
 									placeholder='Guilds'
 								/>
@@ -92,7 +96,7 @@ const SearchBar = props => {
 								<input
 									className={`placeholder-gray-1000 placeholder-opacity-25 ${numberInputCSS} outline-none pl-4 bg-gray-1200 text-gray-1000 rounded-full focus:shadow-outline`}
 									type='number'
-									value={minPlayerCount}
+									value={localMinPlayer}
 									onChange={onChangePlayerCount}
 									placeholder='Min. Player Count'
 								/>

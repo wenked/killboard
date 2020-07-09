@@ -28,8 +28,7 @@ const KillboardList = props => {
 				variants={containerVariants}
 				initial='hidden'
 				animate='visible'
-				exit='exit'
-			>
+				exit='exit'>
 				<table className='w-full border border-solid border-collapse border-gray-700'>
 					<thead className='tableList'>
 						<tr>
@@ -45,9 +44,10 @@ const KillboardList = props => {
 						</tr>
 					</thead>
 					<tbody>
-						{battleContext.battles.map((battle, i) => {
-							return <BattleInfoList key={i} BattleInfo={battle} />;
-						})}
+						{battleContext.battles !== undefined &&
+							battleContext.battles.map((battle, i) => {
+								return <BattleInfoList key={i} BattleInfo={battle} />;
+							})}
 					</tbody>
 				</table>
 			</motion.div>

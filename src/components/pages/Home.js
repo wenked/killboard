@@ -1,5 +1,5 @@
 import React from 'react';
-import BattleContext from '../../context/BattleContext';
+//import BattleContext from '../../context/BattleContext';
 import '../../styles/main.css';
 import { motion } from 'framer-motion';
 
@@ -18,15 +18,14 @@ const containerVariants = {
 };
 
 const Home = () => {
-	const battleContext = React.useContext(BattleContext);
-	React.useEffect(() => battleContext.loading(), [battleContext]);
+	//const battleContext = React.useContext(BattleContext);
+
 	return (
 		<motion.div
 			variants={containerVariants}
 			initial='hidden'
 			animate='visible'
-			exit='exit'
-		></motion.div>
+			exit='exit'></motion.div>
 	);
 };
 
