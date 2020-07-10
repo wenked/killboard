@@ -44,13 +44,15 @@ const App = () => {
 				value={{
 					battles: data,
 					preFetching,
-				}}>
+				}}
+			>
 				<ReactQueryDevtools initialIsOpen={false} />
 				<Layout
 					setMinPlayerCount={setMinPlayerCount}
 					setSearchTerm={setSearchTerm}
 					searchTerm={searchTerm}
-					minPlayerCount={minPlayerCount}>
+					minPlayerCount={minPlayerCount}
+				>
 					<Routes />
 					{isLoading ? (
 						<Loader size='big' active inverted>

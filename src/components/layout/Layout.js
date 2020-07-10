@@ -17,14 +17,16 @@ const Layout = ({
 		<React.Fragment>
 			<div className='flex flex-col min-h-screen'>
 				<NavBar />
-				<SearchBar
-					setSearchTerm={setSearchTerm}
-					setMinPlayerCount={setMinPlayerCount}
-					SubmitFunction={battleContext.onFormSubmit}
-					searchTerm={searchTerm}
-					minPlayerCount={minPlayerCount}
-				/>
-				{children}
+				<div className='ml-4 mr-4 pb-4'>
+					<SearchBar
+						setSearchTerm={setSearchTerm}
+						setMinPlayerCount={setMinPlayerCount}
+						SubmitFunction={battleContext.onFormSubmit}
+						searchTerm={searchTerm}
+						minPlayerCount={minPlayerCount}
+					/>
+					{children}
+				</div>
 				<Footer />
 			</div>
 		</React.Fragment>
