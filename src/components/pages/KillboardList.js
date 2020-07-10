@@ -28,7 +28,8 @@ const KillboardList = props => {
 				variants={containerVariants}
 				initial='hidden'
 				animate='visible'
-				exit='exit'>
+				exit='exit'
+			>
 				<table className='w-full border border-solid border-collapse border-gray-700'>
 					<thead className='tableList'>
 						<tr>

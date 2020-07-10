@@ -121,7 +121,8 @@ const BattleDetail = () => {
 				variants={containerVariants}
 				initial='hidden'
 				animate='visible'
-				exit='exit'>
+				exit='exit'
+			>
 				<Loader size='big' active inverted>
 					Loading...
 				</Loader>
@@ -132,7 +133,8 @@ const BattleDetail = () => {
 			variants={containerVariants}
 			initial='hidden'
 			animate='visible'
-			exit='exit'>
+			exit='exit'
+		>
 			<div className='m-4 p-4 shadow-2xl w-full'>
 				<div className='text-orange-1000 text-4xl text-center font-bold pb-3'>
 					ID: {data.id}
@@ -149,7 +151,8 @@ const BattleDetail = () => {
 							className='bg-orange-1000 text-gray-1000 hover:bg-gray-100 hover:text-orange-1000 font-bold py-3 px-4 rounded flex'
 							onClick={() => {
 								setShowZergComposition(!showZergComposition);
-							}}>
+							}}
+						>
 							Show Zergs Composition
 						</button>
 					) : (
@@ -162,13 +165,15 @@ const BattleDetail = () => {
 						in={showZergComposition}
 						timeout={300}
 						classNames='transition'
-						unmountOnExit={true}>
+						unmountOnExit={true}
+					>
 						{zergs && <ZergComposition guildzergs={zergs} />}
 					</CSSTransition>
 					<div className='py-5'>
 						<button
 							onClick={() => setShowGuilds(!showGuilds)}
-							className='bg-orange-1000 text-gray-1000 hover:bg-gray-100 hover:text-orange-1000 font-bold py-3 px-4 rounded flex'>
+							className='bg-orange-1000 text-gray-1000 hover:bg-gray-100 hover:text-orange-1000 font-bold py-3 px-4 rounded flex'
+						>
 							Handhold Formation
 						</button>
 
@@ -176,7 +181,8 @@ const BattleDetail = () => {
 							in={showGuilds}
 							timeout={300}
 							classNames='transition'
-							unmountOnExit={true}>
+							unmountOnExit={true}
+						>
 							<Handholding
 								guilds={data.guilds}
 								winners={data.winners}

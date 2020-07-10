@@ -2,6 +2,11 @@ import React from 'react';
 //import { table } from 'semantic-ui-react';
 import '../styles/main.css';
 
+Number.prototype.format = function (n, x) {
+	var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+	return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
+};
+
 const Players = props => {
 	let resultClass;
 	const tableCss = 'border-collapse text-left';
@@ -35,7 +40,7 @@ const Players = props => {
 							<td className={tableCss}>{player.name}</td>
 							<td className={tableCss}>{player.kills}</td>
 							<td className={tableCss}>{player.deaths}</td>
-							<td className={tableCss}>{player.killFame}</td>
+							<td className={tableCss}>{player.killFame.format()}</td>
 							<td className={tableCss}>
 								{player.equipment !== null &&
 									player.equipment.mainHand !== null && (
