@@ -7,7 +7,7 @@ Number.prototype.format = function (n, x) {
 	return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
 };
 
-const Players = props => {
+const Players = (props) => {
 	let resultClass;
 	const tableCss = 'border-collapse text-left';
 	if (props.battleresult === 'winner') {
@@ -27,12 +27,13 @@ const Players = props => {
 					<th className={resultClass}>Kills</th>
 					<th className={resultClass}>Deaths</th>
 					<th className={resultClass}>Kill Fame</th>
+					<th className={resultClass}>Average Ip</th>
 					<th className={resultClass}>Item</th>
 				</tr>
 			</thead>
 
 			<tbody>
-				{props.players.map(player => (
+				{props.players.map((player) => (
 					<React.Fragment key={player.id}>
 						<tr>
 							<td className={tableCss}>{player.allianceName}</td>
@@ -42,13 +43,15 @@ const Players = props => {
 							<td className={tableCss}>{player.deaths}</td>
 							<td className={tableCss}>{player.killFame.format()}</td>
 							<td className={tableCss}>
-								{player.equipment !== null &&
-									player.equipment.mainHand !== null && (
-										<img
-											src={`https://render.albiononline.com/v1/item/${player.equipment.mainHand.type}?size=35`}
-											alt='item img'
-										/>
-									)}
+								{Math.floor(player.averageIp).format()}
+							</td>
+							<td className={tableCss}>
+								{player.weapon !== null && (
+									<img
+										src={`https://render.albiononline.com/v1/item/${player.weapon}?size=35`}
+										alt='item img'
+									/>
+								)}
 							</td>
 						</tr>
 					</React.Fragment>

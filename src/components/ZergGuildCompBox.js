@@ -16,21 +16,21 @@ const buttonVariants = {
 	},
 };
 
-const checkUndefined = elem => {
+const checkUndefined = (elem) => {
 	if (elem === undefined) {
 		return 0;
 	}
 	return elem.length;
 };
 
-const ZergGuildCompBox = props => {
+const ZergGuildCompBox = (props) => {
 	const [showTanks, setShowTanks] = React.useState(false);
 	const [showHealers, setShowHealers] = React.useState(false);
 	const [showSupports, setShowSupports] = React.useState(false);
 	const [showRangedDps, setShowRangedDps] = React.useState(false);
 	const [showMeleeDps, setShowMeleeDps] = React.useState(false);
 	const [showComp, setShowComp] = React.useState(false);
-	const guildsinfo = props.guildsinfo;
+	const guild = props.guild;
 	const [graphData, setGraphData] = React.useState([]);
 	const [showGraph, setShowGraph] = React.useState(false);
 	const closeModalHandler = () => {
@@ -39,13 +39,13 @@ const ZergGuildCompBox = props => {
 
 	React.useEffect(() => {
 		setGraphData([
-			checkUndefined(guildsinfo.Tank),
-			checkUndefined(guildsinfo.Healer),
-			checkUndefined(guildsinfo.Support),
-			checkUndefined(guildsinfo['Ranged Dps']),
-			checkUndefined(guildsinfo['Melee Dps']),
+			checkUndefined(guild.tanks),
+			checkUndefined(guild.healers),
+			checkUndefined(guild.supports),
+			checkUndefined(guild.rangedDps),
+			checkUndefined(guild.melees),
 		]);
-	}, [guildsinfo]);
+	}, [guild]);
 	const data = {
 		labels: ['Tank', 'Healer', 'Support', 'Ranged Dps', 'Melee Dps'],
 		datasets: [
@@ -77,102 +77,94 @@ const ZergGuildCompBox = props => {
 				variants={buttonVariants}
 				whileHover='hover'
 				transition='visible'
-				onClick={() => setShowComp(!showComp)}
-			>
+				onClick={() => setShowComp(!showComp)}>
 				<div className='font-bold text-orange-1000 text-xl hover:text-gray-1000'>
-					{props.guildName}
+					{guild.name}
 				</div>
 			</motion.button>
 			<CSSTransition
 				in={showComp}
 				timeout={300}
 				classNames='transition'
-				unmountOnExit={true}
-			>
+				unmountOnExit={true}>
 				<div>
 					<div>
-						{guildsinfo.Tank !== undefined && (
+						{guild.tanks !== undefined && (
 							<React.Fragment>
 								<motion.button
 									variants={buttonVariants}
 									whileHover='hover'
 									transition='visible'
 									className='text-lg font-bold hover:text-gray-1000'
-									onClick={() => setShowTanks(!showTanks)}
-								>
-									Tanks: {guildsinfo.Tank.length}
+									onClick={() => setShowTanks(!showTanks)}>
+									Tanks: {guild.tanks.length}
 								</motion.button>
 
 								<CSSTransition
 									in={showTanks}
 									timeout={300}
 									classNames='transition'
-									unmountOnExit={true}
-								>
+									unmountOnExit={true}>
 									<RolesWeapons
 										stringRole={`Tank`}
-										roleGuildArray={guildsinfo.Tank}
+										roleGuildArray={guild.tanks}
 									/>
 								</CSSTransition>
 							</React.Fragment>
 						)}
 					</div>
 					<div>
-						{guildsinfo.Healer !== undefined && (
+						{guild.healers !== undefined && (
 							<React.Fragment>
 								<motion.button
 									variants={buttonVariants}
 									whileHover='hover'
 									transition='visible'
 									className='text-lg font-bold hover:text-gray-1000'
-									onClick={() => setShowHealers(!showHealers)}
-								>
-									Healers: {guildsinfo.Healer.length}
+									onClick={() => setShowHealers(!showHealers)}>
+									Healers: {guild.healers.length}
 								</motion.button>
 
 								<CSSTransition
 									in={showHealers}
 									timeout={300}
 									classNames='transition'
-									unmountOnExit={true}
-								>
+									unmountOnExit={true}>
 									<RolesWeapons
 										stringRole={`Healer`}
-										roleGuildArray={guildsinfo.Healer}
+										roleGuildArray={guild.healers}
 									/>
 								</CSSTransition>
 							</React.Fragment>
 						)}
 					</div>
 					<div>
-						{guildsinfo.Support !== undefined && (
+						{guild.supports !== undefined && (
 							<React.Fragment>
 								<motion.button
 									variants={buttonVariants}
 									whileHover='hover'
 									transition='visible'
 									className='text-lg font-bold hover:text-gray-1000'
-									onClick={() => setShowSupports(!showSupports)}
-								>
-									Supports: {guildsinfo.Support.length}
+									onClick={() => setShowSupports(!showSupports)}>
+									Supports: {guild.supports.length}
 								</motion.button>
 
 								<CSSTransition
 									in={showSupports}
 									timeout={300}
 									classNames='transition'
-									unmountOnExit={true}
-								>
+									unmountOnExit={true}>
 									<RolesWeapons
 										stringRole={`Support`}
-										roleGuildArray={guildsinfo.Support}
+										roleGuildArray={guild.supports}
 									/>
 								</CSSTransition>
 							</React.Fragment>
 						)}
 					</div>
 					<div>
-						{guildsinfo['Ranged Dps'] !== undefined && (
+						{guild.rangedDps !== undefined && (
 							<React.Fragment>
 								<motion.button
 									variants={buttonVariants}
@@ -181,47 +173,43 @@ const ZergGuildCompBox = props => {
 									className='text-lg font-bold hover:text-gray-1000'
 									onClick={() => {
 										setShowRangedDps(!showRangedDps);
-									}}
-								>
-									Ranged Dps: {guildsinfo['Ranged Dps'].length}
+									}}>
+									Ranged Dps: {guild.rangedDps.length}
 								</motion.button>
 
 								<CSSTransition
 									in={showRangedDps}
 									timeout={300}
 									classNames='transition'
-									unmountOnExit={true}
-								>
+									unmountOnExit={true}>
 									<RolesWeapons
 										stringRole={`Ranged Dps`}
-										roleGuildArray={guildsinfo['Ranged Dps']}
+										roleGuildArray={guild.rangedDps}
 									/>
 								</CSSTransition>
 							</React.Fragment>
 						)}
 					</div>
 					<div>
-						{guildsinfo['Melee Dps'] !== undefined && (
+						{guild.melees !== undefined && (
 							<React.Fragment>
 								<motion.button
 									variants={buttonVariants}
 									whileHover='hover'
 									transition='visible'
 									className='text-lg font-bold hover:text-gray-1000'
-									onClick={() => setShowMeleeDps(!showMeleeDps)}
-								>
-									Melee dps: {guildsinfo['Melee Dps'].length}
+									onClick={() => setShowMeleeDps(!showMeleeDps)}>
+									Melee dps: {guild.melees.length}
 								</motion.button>
 
 								<CSSTransition
 									in={showMeleeDps}
 									timeout={300}
 									classNames='transition'
-									unmountOnExit={true}
-								>
+									unmountOnExit={true}>
 									<RolesWeapons
 										stringRole={`Melee Dps`}
-										roleGuildArray={guildsinfo['Melee Dps']}
+										roleGuildArray={guild.melees}
 									/>
 								</CSSTransition>
 							</React.Fragment>
@@ -234,20 +222,18 @@ const ZergGuildCompBox = props => {
 							whileHover='hover'
 							transition='visible'
 							className='text-lg font-bold hover:text-gray-1000'
-							onClick={() => setShowGraph(true)}
-						>
+							onClick={() => setShowGraph(true)}>
 							Show Graph
 						</motion.button>
 						<CSSTransition
 							in={showGraph}
 							timeout={300}
 							classNames='transition'
-							unmountOnExit={true}
-						>
+							unmountOnExit={true}>
 							<ModalGraph size='small' closeModal={closeModalHandler}>
 								<div>
 									<div className='font-bold text-2xl  mb-8 py-1 text-center '>
-										{props.guildName}
+										{guild.name}
 									</div>
 									<Pie
 										data={data}

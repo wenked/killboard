@@ -1,5 +1,4 @@
 import React from 'react';
-//import BattleContext from '../../context/BattleContext';
 import '../../styles/main.css';
 import { motion } from 'framer-motion';
 
@@ -18,8 +17,6 @@ const containerVariants = {
 };
 
 const Home = () => {
-	//const battleContext = React.useContext(BattleContext);
-
 	return (
 		<motion.div
 			variants={containerVariants}

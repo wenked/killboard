@@ -4,6 +4,7 @@ import './KillboardList.css';
 import BattleInfoList from '../BattleInfoList';
 import BattleContext from '../../context/BattleContext';
 import { motion } from 'framer-motion';
+import { Loader } from 'semantic-ui-react';
 
 const containerVariants = {
 	hidden: {
@@ -19,17 +20,22 @@ const containerVariants = {
 	},
 };
 
-const KillboardList = props => {
-	const battleContext = React.useContext(BattleContext);
+const KillboardList = () => {
+	const { battles, isLoading, isError } = React.useContext(BattleContext);
 
-	return (
+	return isLoading ? (
+		<Loader size='big' active inverted>
+			Loading...
+		</Loader>
+	) : isError ? (
+		<div className='text-gray-1000 font-bold'>Failed to fetch data</div>
+	) : (
 		<React.Fragment>
 			<motion.div
 				variants={containerVariants}
 				initial='hidden'
 				animate='visible'
-				exit='exit'
-			>
+				exit='exit'>
 				<table className='w-full border border-solid border-collapse border-gray-700'>
 					<thead className='tableList'>
 						<tr>
@@ -45,8 +51,8 @@ const KillboardList = props => {
 						</tr>
 					</thead>
 					<tbody>
-						{battleContext.battles !== undefined &&
-							battleContext.battles.map((battle, i) => {
+						{battles !== undefined &&
+							battles.battleList.map((battle, i) => {
 								return <BattleInfoList key={i} BattleInfo={battle} />;
 							})}
 					</tbody>

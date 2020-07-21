@@ -9,38 +9,37 @@ Number.prototype.format = function (n, x) {
 	return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
 };
 
-const BattleInfoLIst = props => {
+const BattleInfoLIst = (props) => {
 	const { BattleInfo } = props;
+
 	return (
 		<React.Fragment>
 			<tr>
-				<td className='hover:bg-orange-1000'>
+				<td className='p-1 hover:bg-orange-1000'>
 					<Link
 						className='hover:text-gray-1000'
-						to={`/killboards/${BattleInfo.id}`}
-					>
+						to={`/killboards/${BattleInfo.id}`}>
 						{BattleInfo.id}
 					</Link>
 				</td>
-				<td>{convertString(BattleInfo.endTime)}</td>
-				<td>{BattleInfo.totalPlayers}</td>
-				<td>{BattleInfo.totalKills}</td>
-				<td>{BattleInfo.totalFame.format()}</td>
-				<td>
-					{BattleInfo.winners.alliances.length > 0 &&
-						BattleInfo.winners.alliances[0].name}
+				<td className='p-1 m-1'>{convertString(BattleInfo.endTime)}</td>
+				<td className='p-1 m-1'>{BattleInfo.totalPlayers}</td>
+				<td className='p-1 m-1'>{BattleInfo.totalKills}</td>
+				<td className='p-1 m-1'>{BattleInfo.totalFame.format()}</td>
+				<td className='p-1' m-1>
+					{BattleInfo.winnerAllys !== 0 && BattleInfo.winnerAllys[0]}
 				</td>
-				<td className='font-bold'>
-					{BattleInfo.winners.guilds.length > 0 &&
-						BattleInfo.winners.guilds[0].name}
+				<td className='font-bold p-1 m-1'>
+					{BattleInfo.winnerGuilds.length !== 0 && BattleInfo.winnerGuilds[0]}
 				</td>
-				<td>
-					{BattleInfo.losers.alliances.length > 0 &&
-						BattleInfo.losers.alliances[0].name}
+				<td className='p-1 m-1'>
+					{BattleInfo.losersAllys.length !== 0 && BattleInfo.losersAllys[0]}
 				</td>
-				<td className='font-bold'>
-					{BattleInfo.losers.guilds.length > 0 &&
-						BattleInfo.losers.guilds[0].name}
+				<td className='font-bold p-1 m-1'>
+					{BattleInfo.losersGuilds !== 0 &&
+						BattleInfo.losersGuilds.map((guild, i) =>
+							i + 1 !== BattleInfo.losersGuilds.length ? `${guild}, ` : guild
+						)}
 				</td>
 			</tr>
 		</React.Fragment>

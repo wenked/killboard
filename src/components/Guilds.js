@@ -40,7 +40,7 @@ const Guilds = ({ result, guilds }) => {
 							<td className={tableCss}>{guild.kills}</td>
 							<td className={tableCss}>{guild.deaths}</td>
 							<td className={tableCss}>{guild.killFame.format()}</td>
-							<td className={tableCss}>{guild.averageItemPower}</td>
+							<td className={tableCss}>{guild.guildAverageIp}</td>
 						</tr>
 					</React.Fragment>
 				))}

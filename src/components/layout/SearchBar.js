@@ -1,9 +1,6 @@
 import React from 'react';
 import { Icon } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
-import BattleContext from '../../context/BattleContext';
-//import Select from 'react-select';
-//import './pages/KillboardList.css';
 import '../../styles/main.css';
 
 let myHead;
@@ -22,23 +19,23 @@ let divWrapper;
 ];*/
 
 const SearchBar = ({ setSearchTerm, setMinPlayerCount, history, location }) => {
-	const battleContext = React.useContext(BattleContext);
+	//const battleContext = React.useContext(BattleContext);
 	const [localSearch, setLocalSearch] = React.useState('');
 	const [localMinPlayer, setLocalMinPlayer] = React.useState(0);
 
-	const onChangeHandler = e => {
+	const onChangeHandler = (e) => {
 		setLocalSearch(e.target.value);
 	};
 
-	const onChangePlayerCount = e => {
+	const onChangePlayerCount = (e) => {
 		setLocalMinPlayer(e.target.value);
 	};
 
-	const onFormSubmit = e => {
+	const onFormSubmit = (e) => {
 		e.preventDefault();
 		setMinPlayerCount(localMinPlayer);
 		setSearchTerm(localSearch);
-		battleContext.preFetching(localSearch, localMinPlayer);
+		//battleContext.preFetching(localSearch, localMinPlayer);
 
 		history.push('/killboards');
 	};

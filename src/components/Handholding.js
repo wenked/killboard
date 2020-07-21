@@ -17,7 +17,7 @@ const teamReducer = (state, action) => {
 			}
 			return [...state];
 		case 'REMOVE_GUILD':
-			return state.filter(selected => selected.name !== action.guildName);
+			return state.filter((selected) => selected.name !== action.guildName);
 		default:
 			return state;
 	}
@@ -37,9 +37,9 @@ const Handholding = ({ guilds }) => {
 	const [teamB, dispatchB] = React.useReducer(teamReducer, []);
 	const [showTable, setShowTable] = React.useState(false);
 	const resultA =
-		teamA.length !== 0 && teamA.map(el => el.score).reduce(reducer);
+		teamA.length !== 0 && teamA.map((el) => el.killFame).reduce(reducer);
 	const resultB =
-		teamB.length !== 0 && teamB.map(el => el.score).reduce(reducer);
+		teamB.length !== 0 && teamB.map((el) => el.killFame).reduce(reducer);
 
 	const guildsMap = guilds.map((guild, i) => {
 		return (
@@ -53,8 +53,7 @@ const Handholding = ({ guilds }) => {
 						onClick={() =>
 							dispatchA({ type: 'ADD_GUILD', otherTeam: teamB, team: guild })
 						}
-						className='mx-2 text-gray-1000 font-bold'
-					>
+						className='mx-2 text-gray-1000 font-bold'>
 						Team A
 					</motion.button>
 					<motion.button
@@ -64,8 +63,7 @@ const Handholding = ({ guilds }) => {
 						onClick={() =>
 							dispatchB({ type: 'ADD_GUILD', otherTeam: teamA, team: guild })
 						}
-						className='mx-2 text-gray-1000 font-bold'
-					>
+						className='mx-2 text-gray-1000 font-bold'>
 						Team B
 					</motion.button>
 				</div>
@@ -84,7 +82,7 @@ const Handholding = ({ guilds }) => {
 							Total Fame:{' '}
 							<span className='text-gray-1000'>
 								{teamA.length !== 0 &&
-									teamA.map(el => el.score).reduce(reducer)}
+									teamA.map((el) => el.killFame).reduce(reducer)}
 							</span>
 						</div>
 					</div>
@@ -94,15 +92,14 @@ const Handholding = ({ guilds }) => {
 							Total Fame:{' '}
 							<span className='text-gray-1000'>
 								{teamB.length !== 0 &&
-									teamB.map(el => el.score).reduce(reducer)}
+									teamB.map((el) => el.killFame).reduce(reducer)}
 							</span>
 						</div>
 					</div>
 					<div>
 						<button
 							className='bg-orange-1000 text-gray-1000 hover:bg-gray-100 hover:text-orange-1000 font-bold py-3 px-4 rounded flex'
-							onClick={() => setShowTable(!showTable)}
-						>
+							onClick={() => setShowTable(!showTable)}>
 							Apply
 						</button>
 						{showTable ? (
@@ -117,7 +114,8 @@ const Handholding = ({ guilds }) => {
 												<Guilds
 													result='winner'
 													guilds={teamA.sort(
-														(guildA, guildB) => guildB.score - guildA.score
+														(guildA, guildB) =>
+															guildB.killFame - guildA.killFame
 													)}
 												/>
 											</div>
@@ -128,7 +126,8 @@ const Handholding = ({ guilds }) => {
 												<Guilds
 													result='loser'
 													guilds={teamB.sort(
-														(guildA, guildB) => guildB.score - guildA.score
+														(guildA, guildB) =>
+															guildB.killFame - guildA.killFame
 													)}
 												/>
 											</div>
@@ -142,7 +141,8 @@ const Handholding = ({ guilds }) => {
 												<Guilds
 													result='winner'
 													guilds={teamB.sort(
-														(guildA, guildB) => guildB.score - guildA.score
+														(guildA, guildB) =>
+															guildB.killFame - guildA.killFame
 													)}
 												/>
 											</div>
@@ -153,7 +153,8 @@ const Handholding = ({ guilds }) => {
 												<Guilds
 													result='loser'
 													guilds={teamA.sort(
-														(guildA, guildB) => guildB.score - guildA.score
+														(guildA, guildB) =>
+															guildB.killFame - guildA.killFame
 													)}
 												/>
 											</div>

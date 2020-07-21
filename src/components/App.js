@@ -1,6 +1,4 @@
 import React from 'react';
-import axios from 'axios';
-import { Loader } from 'semantic-ui-react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Layout from './layout/Layout';
 import BattleContext from '../context/BattleContext';
@@ -8,61 +6,60 @@ import './pages/KillboardList.css';
 import Routes from './Routes';
 import '../styles/main.css';
 import { ReactQueryDevtools } from 'react-query-devtools';
-import { useQuery, queryCache } from 'react-query';
+import { useQuery } from 'react-query';
+import { request } from 'graphql-request';
 
 //import { ChakraProvider, CSSReset } from '@chakra-ui/core';
 //import theme, { Theme } from '@chakra-ui/theme';
 
-const fetchBattles = async (searchTerm, minPlayerCount) => {
-	const response = await axios.get(
-		`https://cors-anywhere.herokuapp.com/https://api.kill-board.com/battles/?page=0&limit=100&search=${searchTerm}&group=&startDate=&minPlayersCount=${minPlayerCount}`
-	);
+const query = `query Battles($guildName: String!){
+	battleList(guildName: $guildName){
+		endTime
+		totalFame
+		totalKills
+		totalPlayers
+		id
+		winnerGuilds
+		losersGuilds
+		winnerAllys
+		losersAllys
+	}
+}`;
 
-	return response.data;
+const fetcher = async (query, variables) => {
+	const fetch = await request(
+		'https://ablionapigraphql.herokuapp.com/graphql',
+		query,
+		variables
+	);
+	return fetch;
 };
 
 const App = () => {
 	const [searchTerm, setSearchTerm] = React.useState('');
 	const [minPlayerCount, setMinPlayerCount] = React.useState(0);
 	//https://api.kill-board.com/battles/?page=0&limit=50&search=Elevate&group=&startDate=
-	const { isLoading, error, data } = useQuery(
-		[searchTerm, minPlayerCount],
-		fetchBattles
-	);
-
-	const preFetching = async (search, min) => {
-		const queryData = await queryCache.prefetchQuery(
-			[search, min],
-			fetchBattles
-		);
+	const variables = {
+		guildName: searchTerm,
 	};
 
-	//const loadingHandler = () => setIsLoading(false);
+	const { isLoading, data, isError } = useQuery([query, variables], fetcher);
+
 	return (
 		<Router>
 			<BattleContext.Provider
 				value={{
 					battles: data,
-					preFetching,
-				}}
-			>
+					isLoading,
+					isError,
+				}}>
 				<ReactQueryDevtools initialIsOpen={false} />
 				<Layout
 					setMinPlayerCount={setMinPlayerCount}
 					setSearchTerm={setSearchTerm}
 					searchTerm={searchTerm}
-					minPlayerCount={minPlayerCount}
-				>
+					minPlayerCount={minPlayerCount}>
 					<Routes />
-					{isLoading ? (
-						<Loader size='big' active inverted>
-							Loading...
-						</Loader>
-					) : data.length === 0 ? (
-						<div className='text-gray-1000 font-bold text-xl py-4'>
-							Invalid Guild name
-						</div>
-					) : null}{' '}
 				</Layout>
 			</BattleContext.Provider>
 		</Router>

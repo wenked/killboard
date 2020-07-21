@@ -1,40 +1,23 @@
 import React from 'react';
 import '../styles/main.css';
-import {
-	MeleeDpsArray,
-	TankArray,
-	SupportArray,
-	HealerArray,
-	RangedDpsArray,
-} from '../utils/zergData';
 
-const RolesWeapons = props => {
-	let role;
-
-	switch (props.stringRole) {
-		case 'Tank':
-			role = TankArray;
-			break;
-		case 'Support':
-			role = SupportArray;
-			break;
-		case 'Healer':
-			role = HealerArray;
-			break;
-		case 'Ranged Dps':
-			role = RangedDpsArray;
-			break;
-		case 'Melee Dps':
-			role = MeleeDpsArray;
-			break;
-		default:
-			role = null;
-			break;
-	}
-	const weaponsMap = role.map((weapon, i) => {
-		const filteredRole = props.roleGuildArray.filter(a => a.weapon === weapon);
+const RolesWeapons = (props) => {
+	const weaponsMap = props.roleGuildArray.map((player, i) => {
+		const filteredRole = props.roleGuildArray.filter(
+			(a) => a.weapon === player.weapon
+		);
 		if (filteredRole.length !== 0) {
-			return <div key={i}>{`${weapon}: ${filteredRole.length}`}</div>;
+			return (
+				<div className='inline-flex' key={i}>
+					{player.weapon !== null && (
+						<img
+							src={`https://render.albiononline.com/v1/item/${player.weapon}?size=35`}
+							alt='item img'
+						/>
+					)}
+					:<div>{filteredRole.length}</div>
+				</div>
+			);
 		}
 		return null;
 	});
@@ -42,6 +25,3 @@ const RolesWeapons = props => {
 };
 
 export default RolesWeapons;
-
-//TankArray
-//guildsinfo.Tank
