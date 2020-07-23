@@ -8,23 +8,9 @@ import '../styles/main.css';
 import { ReactQueryDevtools } from 'react-query-devtools';
 import { useQuery } from 'react-query';
 import { request } from 'graphql-request';
-
+import { queryBattleList } from '../utils/queries';
 //import { ChakraProvider, CSSReset } from '@chakra-ui/core';
 //import theme, { Theme } from '@chakra-ui/theme';
-
-const query = `query Battles($guildName: String!){
-	battleList(guildName: $guildName){
-		endTime
-		totalFame
-		totalKills
-		totalPlayers
-		id
-		winnerGuilds
-		losersGuilds
-		winnerAllys
-		losersAllys
-	}
-}`;
 
 const fetcher = async (query, variables) => {
 	const fetch = await request(
@@ -43,7 +29,10 @@ const App = () => {
 		guildName: searchTerm,
 	};
 
-	const { isLoading, data, isError } = useQuery([query, variables], fetcher);
+	const { isLoading, data, isError } = useQuery(
+		[queryBattleList, variables],
+		fetcher
+	);
 
 	return (
 		<Router>

@@ -8,8 +8,8 @@ let searchF;
 let iconSize;
 let iconCSS;
 let divFormCSS;
-let numberInputCSS;
-let divInputNumberWrapper;
+//let numberInputCSS;
+//let divInputNumberWrapper;
 let divWrapper;
 
 /*const minplayersOptions = [
@@ -21,19 +21,19 @@ let divWrapper;
 const SearchBar = ({ setSearchTerm, setMinPlayerCount, history, location }) => {
 	//const battleContext = React.useContext(BattleContext);
 	const [localSearch, setLocalSearch] = React.useState('');
-	const [localMinPlayer, setLocalMinPlayer] = React.useState(0);
+	//const [localMinPlayer, setLocalMinPlayer] = React.useState(0);
 
 	const onChangeHandler = (e) => {
 		setLocalSearch(e.target.value);
 	};
 
-	const onChangePlayerCount = (e) => {
+	/*const onChangePlayerCount = (e) => {
 		setLocalMinPlayer(e.target.value);
-	};
+	};*/
 
 	const onFormSubmit = (e) => {
 		e.preventDefault();
-		setMinPlayerCount(localMinPlayer);
+		//setMinPlayerCount(localMinPlayer);
 		setSearchTerm(localSearch);
 		//battleContext.preFetching(localSearch, localMinPlayer);
 
@@ -42,22 +42,22 @@ const SearchBar = ({ setSearchTerm, setMinPlayerCount, history, location }) => {
 
 	if (location.pathname === '/') {
 		myHead = 'justify-center h-full items-center flex';
-		searchF = 'pl-16 h-10 p-3 border-none rounded-full outline-none w-full';
+		searchF = 'pl-16 h-10 p-3 border-none rounded-md outline-none w-px400';
 		iconSize = 'large';
 		iconCSS = 'pl-4 pb-10 pt-2';
 		divFormCSS = '';
-		numberInputCSS = 'h-10 w-40';
-		divInputNumberWrapper = 'w-3/5 pl-10 pt-2 md:pl-2 md:pt-0 md:pb-4';
+		//numberInputCSS = 'h-10 w-40';
+		//divInputNumberWrapper = 'w-3/5 pl-10 pt-2 md:pl-2 md:pt-0 md:pb-4';
 		divWrapper = 'pt-8';
 	} else {
 		myHead = 'pl-8 relative inline-block m-w-100';
 		searchF =
-			'border-none border border-black rounded-full h-8 w-full pt-1 pr-6 pb-1 pl-8 outline-none m-1 inline-flex';
+			'border-none border border-black rounded-md h-8 w-full pt-1 pr-6 pb-1 pl-8 outline-none m-1 inline-flex';
 		iconSize = 'small';
 		iconCSS = 'pl-4 pt-4';
 		divFormCSS = 'pb-10';
-		numberInputCSS = 'h-8';
-		divInputNumberWrapper = 'pt-1 w-4/5';
+		//numberInputCSS = 'h-8';
+		//divInputNumberWrapper = 'pt-1 w-4/5';
 		divWrapper = 'pt-4';
 	}
 
@@ -86,10 +86,10 @@ const SearchBar = ({ setSearchTerm, setMinPlayerCount, history, location }) => {
 									type='text'
 									value={localSearch}
 									onChange={onChangeHandler}
-									placeholder='Guilds'
+									placeholder='Search guilds'
 								/>
 							</div>
-							<div className={`pl-2 ${divInputNumberWrapper}`}>
+							{/*	<div className={`pl-2 ${divInputNumberWrapper}`}>
 								<input
 									className={`placeholder-gray-1000 placeholder-opacity-25 ${numberInputCSS} outline-none pl-4 bg-gray-1200 text-gray-1000 rounded-full focus:shadow-outline`}
 									type='number'
@@ -97,7 +97,7 @@ const SearchBar = ({ setSearchTerm, setMinPlayerCount, history, location }) => {
 									onChange={onChangePlayerCount}
 									placeholder='Min. Player Count'
 								/>
-							</div>
+							</div> */}
 						</div>
 						{/*<Select
 							options={minplayersOptions}

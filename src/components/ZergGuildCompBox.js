@@ -87,7 +87,7 @@ const ZergGuildCompBox = (props) => {
 				timeout={300}
 				classNames='transition'
 				unmountOnExit={true}>
-				<div>
+				<div className='pt-2'>
 					<div>
 						{guild.tanks !== undefined && (
 							<React.Fragment>

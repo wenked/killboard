@@ -11,95 +11,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Handholding from '../Handholding';
 import { useQuery } from 'react-query';
 import { request } from 'graphql-request';
-
-const query = `
-query Battle($id: Int!) {
-	battleById(id: $id) {
-	  battleId
-	  totalKills
-	  totalFame
-	  totalPlayers
-	  guilds {
-		alliance
-		deaths
-		totalPlayers
-		kills
-		name
-		guildAverageIp
-		killFame
-		tanks {
-			weapon
-			role	
-		}
-		healers	{
-			weapon
-			role	
-		}
-		supports {
-			weapon
-			role	
-		}
-		rangedDps{
-			weapon
-			role	
-		}
-		melees{
-			weapon
-			role	
-		}
-
-	  }
-	  winners {
-		players{
-			id
-			name
-			kills
-			deaths
-			guildName
-			allianceName
-			weapon
-			averageIp
-			killFame
-		  }
-		guilds {
-		  alliance
-		  deaths
-		  totalPlayers
-		  kills
-		  name
-		  guildAverageIp
-		  killFame
-		  
-		}
-	  }
-	  losers {
-		players{
-			id
-			name
-			kills
-			deaths
-			guildName
-			allianceName
-			weapon
-			averageIp
-			killFame
-			
-		  }
-		guilds {
-		  alliance
-		  deaths
-		  totalPlayers
-		  kills
-		  name
-		  guildAverageIp
-		  killFame
-		  
-		}
-	  }
-	}
-  }
-
-`;
+import { queryBattleDetail } from '../../utils/queries';
 
 const containerVariants = {
 	hidden: {
@@ -126,7 +38,10 @@ const fetcher = async (query, variables) => {
 const BattleDetail = () => {
 	const { battleId } = useParams();
 	const variables = { id: parseInt(battleId) };
-	const { data, isLoading, isError } = useQuery([query, variables], fetcher);
+	const { data, isLoading, isError } = useQuery(
+		[queryBattleDetail, variables],
+		fetcher
+	);
 	const [showZergComposition, setShowZergComposition] = React.useState(false);
 	const [showGuilds, setShowGuilds] = React.useState(false);
 
