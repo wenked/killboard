@@ -9,12 +9,10 @@ import { ReactQueryDevtools } from 'react-query-devtools';
 import { useQuery } from 'react-query';
 import { request } from 'graphql-request';
 import { queryBattleList } from '../utils/queries';
-//import { ChakraProvider, CSSReset } from '@chakra-ui/core';
-//import theme, { Theme } from '@chakra-ui/theme';
 
 const fetcher = async (query, variables) => {
 	const fetch = await request(
-		'https://ablionapigraphql.herokuapp.com/graphql',
+		'http://localhost:4000/graphql',
 		query,
 		variables
 	);

@@ -1,14 +1,14 @@
 import React from 'react';
 import { Loader } from 'semantic-ui-react';
-import Players from '../Players';
-import ZergComposition from '../ZergComposition';
-import Guilds from '../Guilds';
+import Players from '../battleDetail/Players';
+import ZergComposition from '../battleDetail/ZergComposition';
+import Guilds from '../battleDetail/Guilds';
 import './KillboardList.css';
 import '../../styles/main.css';
 import { CSSTransition } from 'react-transition-group';
 import { useParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import Handholding from '../Handholding';
+import Handholding from '../battleDetail/Handholding';
 import { useQuery } from 'react-query';
 import { request } from 'graphql-request';
 import { queryBattleDetail } from '../../utils/queries';
@@ -28,7 +28,7 @@ const containerVariants = {
 
 const fetcher = async (query, variables) => {
 	const fetch = await request(
-		'https://ablionapigraphql.herokuapp.com/graphql',
+		'http://localhost:4000/graphql',
 		query,
 		variables
 	);
