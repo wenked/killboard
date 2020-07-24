@@ -10,9 +10,10 @@ import { useQuery } from 'react-query';
 import { request } from 'graphql-request';
 import { queryBattleList } from '../utils/queries';
 
+// 'https://ablionapigraphql.herokuapp.com/graphql'
 const fetcher = async (query, variables) => {
 	const fetch = await request(
-		'http://localhost:4000/graphql',
+		'https://ablionapigraphql.herokuapp.com/graphql',
 		query,
 		variables
 	);
@@ -22,7 +23,6 @@ const fetcher = async (query, variables) => {
 const App = () => {
 	const [searchTerm, setSearchTerm] = React.useState('');
 	const [minPlayerCount, setMinPlayerCount] = React.useState(0);
-	//https://api.kill-board.com/battles/?page=0&limit=50&search=Elevate&group=&startDate=
 	const variables = {
 		guildName: searchTerm,
 	};

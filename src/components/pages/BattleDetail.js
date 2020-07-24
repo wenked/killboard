@@ -26,9 +26,11 @@ const containerVariants = {
 	},
 };
 
+// 'https://ablionapigraphql.herokuapp.com/graphql'
+
 const fetcher = async (query, variables) => {
 	const fetch = await request(
-		'http://localhost:4000/graphql',
+		'https://ablionapigraphql.herokuapp.com/graphql',
 		query,
 		variables
 	);
