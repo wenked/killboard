@@ -6,7 +6,7 @@ import './pages/KillboardList.css';
 import Routes from './Routes';
 import '../styles/main.css';
 import { ReactQueryDevtools } from 'react-query-devtools';
-import { useQuery } from 'react-query';
+import { usePaginatedQuery } from 'react-query';
 import { request } from 'graphql-request';
 import { queryBattleList } from '../utils/queries';
 
@@ -21,13 +21,15 @@ const fetcher = async (query, variables) => {
 };
 
 const App = () => {
+	const [offset, setOffSet] = React.useState(0);
 	const [searchTerm, setSearchTerm] = React.useState('');
 	const [minPlayerCount, setMinPlayerCount] = React.useState(0);
 	const variables = {
 		guildName: searchTerm,
+		offSet: offset,
 	};
 
-	const { isLoading, data, isError } = useQuery(
+	const { isLoading, isFetching, resolvedData, isError } = usePaginatedQuery(
 		[queryBattleList, variables],
 		fetcher
 	);
@@ -36,9 +38,12 @@ const App = () => {
 		<Router>
 			<BattleContext.Provider
 				value={{
-					battles: data,
+					battles: resolvedData,
 					isLoading,
 					isError,
+					setOffSet,
+					offset,
+					isFetching,
 				}}>
 				<ReactQueryDevtools initialIsOpen={false} />
 				<Layout

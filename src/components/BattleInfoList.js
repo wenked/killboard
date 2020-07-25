@@ -26,7 +26,7 @@ const BattleInfoLIst = (props) => {
 				<td className='p-1 m-1'>{BattleInfo.totalPlayers}</td>
 				<td className='p-1 m-1'>{BattleInfo.totalKills}</td>
 				<td className='p-1 m-1'>{BattleInfo.totalFame.format()}</td>
-				<td className='p-1' m-1>
+				<td className='p-1 m-1'>
 					{BattleInfo.winnerAllys !== 0 && BattleInfo.winnerAllys[0]}
 				</td>
 				<td className='font-bold p-1 m-1'>

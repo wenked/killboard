@@ -21,7 +21,14 @@ const containerVariants = {
 };
 
 const KillboardList = () => {
-	const { battles, isLoading, isError } = React.useContext(BattleContext);
+	const {
+		battles,
+		isLoading,
+		isError,
+		offset,
+		setOffSet,
+		isFetching,
+	} = React.useContext(BattleContext);
 
 	return isLoading ? (
 		<Loader size='big' active inverted>
@@ -58,6 +65,21 @@ const KillboardList = () => {
 					</tbody>
 				</table>
 			</motion.div>
+			<div className='inline-flex'>
+				<button
+					className='m-2 bg-orange-1000 text-gray-1000 hover:bg-gray-100 hover:text-orange-1000 font-bold py-3 px-4 rounded flex'
+					onClick={() => (offset > 0 ? setOffSet(offset - 50) : null)}>
+					Prev
+				</button>
+				<button
+					className='m-2 bg-orange-1000 text-gray-1000 hover:bg-gray-100 hover:text-orange-1000 font-bold py-3 px-4 rounded flex'
+					onClick={() => setOffSet(offset + 50)}>
+					Next
+				</button>
+				{isFetching ? (
+					<Loader size='small' active inverted inline></Loader>
+				) : null}
+			</div>
 		</React.Fragment>
 	);
 };

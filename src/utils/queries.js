@@ -1,5 +1,5 @@
-export const queryBattleList = `query Battles($guildName: String!){
-	battleList(guildName: $guildName){
+export const queryBattleList = `query Battles($guildName: String!,$offSet: Int!){
+	battleList(guildName: $guildName, offSet: $offSet){
 		endTime
 		totalFame
 		totalKills
