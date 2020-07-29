@@ -3,11 +3,6 @@ import '../../styles/main.css';
 //import { Table } from 'semantic-ui-react';
 //import Table from 'react-bootstrap/Table';
 
-Number.prototype.format = function (n, x) {
-	var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
-	return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
-};
-
 const Guilds = ({ result, guilds }) => {
 	let myCSS;
 	if (result === 'winner') {
@@ -39,8 +34,10 @@ const Guilds = ({ result, guilds }) => {
 							<td className={tableCss}>{guild.totalPlayers}</td>
 							<td className={tableCss}>{guild.kills}</td>
 							<td className={tableCss}>{guild.deaths}</td>
-							<td className={tableCss}>{guild.killFame.format()}</td>
-							<td className={tableCss}>{guild.guildAverageIp}</td>
+							<td className={tableCss}>{guild.killFame.toLocaleString()}</td>
+							<td className={tableCss}>
+								{guild.guildAverageIp.toLocaleString()}
+							</td>
 						</tr>
 					</React.Fragment>
 				))}

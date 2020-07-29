@@ -9,6 +9,7 @@ import { ReactQueryDevtools } from 'react-query-devtools';
 import { usePaginatedQuery } from 'react-query';
 import { request } from 'graphql-request';
 import { queryBattleList } from '../utils/queries';
+import SearchBar from './layout/SearchBar';
 
 // 'https://ablionapigraphql.herokuapp.com/graphql'
 const fetcher = async (query, variables) => {
@@ -46,11 +47,13 @@ const App = () => {
 					isFetching,
 				}}>
 				<ReactQueryDevtools initialIsOpen={false} />
-				<Layout
-					setMinPlayerCount={setMinPlayerCount}
-					setSearchTerm={setSearchTerm}
-					searchTerm={searchTerm}
-					minPlayerCount={minPlayerCount}>
+				<Layout>
+					<SearchBar
+						setSearchTerm={setSearchTerm}
+						setMinPlayerCount={setMinPlayerCount}
+						searchTerm={searchTerm}
+						minPlayerCount={minPlayerCount}
+					/>
 					<Routes />
 				</Layout>
 			</BattleContext.Provider>

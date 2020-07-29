@@ -18,7 +18,7 @@ let divWrapper;
 	{ value: 50, label: ' > 50' },
 ];*/
 
-const SearchBar = ({ setSearchTerm, setMinPlayerCount, history, location }) => {
+const SearchBar = ({ setSearchTerm, history, location }) => {
 	//const battleContext = React.useContext(BattleContext);
 	const [localSearch, setLocalSearch] = React.useState('');
 	//const [localMinPlayer, setLocalMinPlayer] = React.useState(0);

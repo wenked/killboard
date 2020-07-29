@@ -4,11 +4,6 @@ import { Link } from 'react-router-dom';
 import { convertString } from '../utils/zergData';
 import '../styles/main.css';
 
-Number.prototype.format = function (n, x) {
-	var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
-	return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
-};
-
 const BattleInfoLIst = (props) => {
 	const { BattleInfo } = props;
 
@@ -25,7 +20,7 @@ const BattleInfoLIst = (props) => {
 				<td className='p-1 m-1'>{convertString(BattleInfo.endTime)}</td>
 				<td className='p-1 m-1'>{BattleInfo.totalPlayers}</td>
 				<td className='p-1 m-1'>{BattleInfo.totalKills}</td>
-				<td className='p-1 m-1'>{BattleInfo.totalFame.format()}</td>
+				<td className='p-1 m-1'>{BattleInfo.totalFame.toLocaleString()}</td>
 				<td className='p-1 m-1'>
 					{BattleInfo.winnerAllys !== 0 && BattleInfo.winnerAllys[0]}
 				</td>
