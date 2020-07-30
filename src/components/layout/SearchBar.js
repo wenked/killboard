@@ -42,7 +42,8 @@ const SearchBar = ({ setSearchTerm, history, location }) => {
 
 	if (location.pathname === '/') {
 		myHead = 'justify-center h-full items-center flex';
-		searchF = 'pl-16 h-10 p-3 border-none rounded-md outline-none w-px400';
+		searchF =
+			'sm: w-full md:w-px400 pl-16 h-10 p-3 border-none rounded-md outline-none w-px400 ';
 		iconSize = 'large';
 		iconCSS = 'pl-4 pb-10 pt-2';
 		divFormCSS = '';
