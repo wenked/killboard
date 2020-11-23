@@ -44,6 +44,7 @@ const SupportArray = [
 ];
 
 const RangedDpsArray = [
+	'Mistpiercer',
 	'Permafrost Prism',
 	'Frost Staff',
 	'Great Frost Staff',
