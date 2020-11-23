@@ -19,7 +19,7 @@ const objItems = {
 'T5_2H_BOW_AVALON ' : "Expert's Mistpiercer",
 'T5_2H_BOW_AVALON@1': "Expert's Mistpiercer",
 'T5_2H_BOW_AVALON@2':" Expert's Mistpiercer",
-'T5_2H_BOW_AVALON@' : "Expert's Mistpiercer",                                                                                 
+'T5_2H_BOW_AVALON@3' : "Expert's Mistpiercer",                                                                                 
  'T7_2H_BOW_AVALON:' :"Grandmaster's Mistpiercer ",
  'T7_2H_BOW_AVALON@1': "Grandmaster's Mistpiercer",
  'T7_2H_BOW_AVALON@3': "Grandmaster's Mistpiercer", 
