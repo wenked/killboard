@@ -17,6 +17,7 @@ const TankArray = [
 	'Black Monk Stave',
 	'Soulscythe',
 	'Staff of Balance',
+	'Massive Metallic Hand'
 ];
 
 const HealerArray = [
