@@ -87,7 +87,7 @@ const SearchBar = ({ setSearchTerm, history, location }) => {
 									type='text'
 									value={localSearch}
 									onChange={onChangeHandler}
-									placeholder='Search guilds'
+									placeholder='Search guilds Ex:Blue Army'
 								/>
 							</div>
 							{/*	<div className={`pl-2 ${divInputNumberWrapper}`}>
