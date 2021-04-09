@@ -45,6 +45,7 @@ const App = () => {
 					setOffSet,
 					offset,
 					isFetching,
+					setSearchTerm,
 				}}>
 				<ReactQueryDevtools initialIsOpen={false} />
 				<Layout>

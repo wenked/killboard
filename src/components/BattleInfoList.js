@@ -3,9 +3,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { convertString } from '../utils/zergData';
 import '../styles/main.css';
+import BattleContext from '../context/BattleContext';
 
 const BattleInfoLIst = (props) => {
 	const { BattleInfo } = props;
+	const { setSearchTerm } = React.useContext(BattleContext);
 
 	return (
 		<React.Fragment>
@@ -24,8 +26,13 @@ const BattleInfoLIst = (props) => {
 				<td className='p-1 m-1'>
 					{BattleInfo.winnerAllys !== 0 && BattleInfo.winnerAllys[0]}
 				</td>
-				<td className='font-bold p-1 m-1'>
-					{BattleInfo.winnerGuilds.length !== 0 && BattleInfo.winnerGuilds[0]}
+
+				<td className='p-1 hover:bg-orange-1000'>
+					<Link
+						className='hover:text-gray-1000'
+						onClick={() => setSearchTerm(BattleInfo.winnerGuilds[0])}>
+						{BattleInfo.winnerGuilds.length !== 0 && BattleInfo.winnerGuilds[0]}
+					</Link>
 				</td>
 				<td className='p-1 m-1'>
 					{BattleInfo.losersAllys.length !== 0 && BattleInfo.losersAllys[0]}

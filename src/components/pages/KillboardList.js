@@ -35,7 +35,9 @@ const KillboardList = () => {
 			Loading...
 		</Loader>
 	) : isError ? (
-		<div className='text-gray-1000 font-bold'>Failed to fetch data</div>
+		<div className='flex justify-center items-center text-gray-1000 font-bold'>
+			Failed to fetch data
+		</div>
 	) : (
 		<React.Fragment>
 			<motion.div
@@ -43,6 +45,15 @@ const KillboardList = () => {
 				initial='hidden'
 				animate='visible'
 				exit='exit'>
+				{isFetching ? (
+					isError ? (
+						<div className='font-bold p-1 m-1 text-gray-100'>
+							Failed to fetch data !
+						</div>
+					) : (
+						<div className='font-bold p-1 m-1 text-gray-100'>Loading...</div>
+					)
+				) : null}
 				<table className='w-full border border-solid border-collapse border-gray-700'>
 					<thead className='tableList'>
 						<tr>
