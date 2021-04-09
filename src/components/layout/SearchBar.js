@@ -68,7 +68,7 @@ const SearchBar = ({ setSearchTerm, history, location }) => {
 				<div className={divFormCSS}>
 					<form onSubmit={onFormSubmit}>
 						{location.pathname === '/' && (
-							<h1 className='text-gray-1000 text-5xl mb-8  tracking-normal text-center hover:text-orange-1000'>
+							<h1 className='text-gray-1000 cursor-pointer text-5xl mb-8  tracking-normal text-center hover:text-orange-1000 '>
 								KillBoard
 							</h1>
 						)}

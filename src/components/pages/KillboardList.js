@@ -35,7 +35,7 @@ const KillboardList = () => {
 			Loading...
 		</Loader>
 	) : isError ? (
-		<div className='flex justify-center items-center text-gray-1000 font-bold'>
+		<div className='p-1 m-1 flex justify-center items-center text-gray-1000 font-bold'>
 			Failed to fetch data
 		</div>
 	) : (
