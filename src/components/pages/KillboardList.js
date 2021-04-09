@@ -88,7 +88,7 @@ const KillboardList = () => {
 					Next
 				</button>
 				{isFetching ? (
-					<Loader size='small' active inverted inline></Loader>
+					<div className='font-bold p-1 m-1 text-gray-100'>Loading...</div>
 				) : null}
 			</div>
 		</React.Fragment>
